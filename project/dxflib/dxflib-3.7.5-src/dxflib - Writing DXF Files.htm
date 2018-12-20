@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)https://www.ribbonsoft.com/doc/dxflib/2.5/reference/writing.html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN" ""><HTML><HEAD><META 
+content="IE=5.0000" http-equiv="X-UA-Compatible">
+   <TITLE>dxflib - Writing DXF Files</TITLE>   
+<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META name="GENERATOR" content="MSHTML 11.00.9600.17801">   
+<META name="author" content="$Author: andrew $">   <LINK href="dxflib%20-%20Writing%20DXF%20Files_files/styles.css" 
+rel="stylesheet"> </HEAD> 
+<BODY>
+<TABLE width="500" border="0" cellspacing="0" cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD width="5"><IMG width="5" height="1" src="dxflib%20-%20Writing%20DXF%20Files_files/space.png" 
+      border="0">	 </TD>
+    <TD width="105"><IMG width="105" height="1" src="dxflib%20-%20Writing%20DXF%20Files_files/space.png" 
+      border="0">	 </TD>
+    <TD width="15"><IMG width="15" height="1" src="dxflib%20-%20Writing%20DXF%20Files_files/space.png" 
+      border="0">	 </TD>
+    <TD width="460"><IMG width="460" height="1" src="dxflib%20-%20Writing%20DXF%20Files_files/space.png" 
+      border="0">	 </TD></TR>
+  <TR>
+    <TD bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD valign="top" bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD></TD>
+    <TD align="center">
+      <TABLE width="460" border="0" cellspacing="0" cellpadding="0">
+        <TBODY>
+        <TR>
+          <TD width="460" align="center" valign="top">
+            <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+              <TBODY>
+              <TR>
+                <TD align="left" bgcolor="#626993">				  &nbsp;				</TD>
+                <TD align="right" bgcolor="#626993"><A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/contents.html" 
+                  alt="Contents"><IMG alt="Contents" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_cont.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index.html" 
+                  alt="First"><IMG alt="First" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_first.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/reading.html" 
+                  alt="Prev"><IMG alt="Prev" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_prev.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index.html" 
+                  alt="Home"><IMG alt="Home" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_home.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/appendix_bib.html" 
+                  alt="Next"><IMG alt="Next" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_next.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index2.html" 
+                  alt="Last"><IMG alt="Last" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_last.png" 
+                  border="0"></A>			     </TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD align="center" valign="top">
+            <CENTER>dxflib Programmer's Guide<BR><IMG src="dxflib%20-%20Writing%20DXF%20Files_files/separator.png"></CENTER></TD></TR>
+        <TR>
+          <TD align="center" valign="top">            &nbsp;          
+        </TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD valign="top" bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD></TD>
+    <TD><A name="Writing"></A> <A name="Output"></A> <A name="DL_Codes"></A> 
+      <A name="DXF 2000"></A> <A name="DXF 2002"></A> <A name="R12"></A> <A 
+      name="4"></A>
+      <H1>4 Writing DXF Files</H1>
+      <P>  To write a DXF file, you need to wrap the entities, layers, blocks, 
+      ..  you have into the wrapper classes of dxflib. Since dxflib does not  
+      store any entities, you need to iterate through your entities and  call 
+      the write functions for each of them. Please note that you   have to stick 
+      to the exact order in which you call the write  functions of dxflib. 
+      Otherwise your DXF file will not be standard  conform.   </P><A 
+      name="4_1"></A>
+      <H2>Creating the Writer Object</H2>
+      <P>  To create a DXF writer object you need to specify the file name  as 
+      well as the DXF version you want to produce. At the time of  writing only 
+      two DXF versions were supported: R12 and   DXF 2000/2002. The dxflib codes 
+      for DXF version R12 is  DL_Codes::AC1009 and for DXF 2000/2002 
+      DL_Codes::AC1015.   </P>
+      <P>  There are two APIs you will need to write a DXF file. The  API in 
+      DL_WriterA offers low level functions to write basic   key/value tuples on 
+      which a DXF file is based.   Creating a valid DXF file using only these 
+      functions would  be very difficult and inconvenient. Therefore, there is  
+      a higher level API in the DL_Dxf class which allows you  to write for 
+      example a whole line without knowing the  key/value tuples that are needed 
+      for it.   </P>
+      <P>  The following code creates and opens a file for a DXF 2000/2002  
+      drawing:    </P>
+      <P class="code">DL_Dxf dxf;<BR>DL_Codes::version exportVersion = 
+      DL_Codes::AC1015;<BR>DL_WriterA* dw = dxf.out("myfile.dxf", 
+      exportVersion);<BR>if (dw==NULL) 
+      {<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("Cannot open file 'myfile.dxf' 
+      \<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for 
+      writing.");<BR>&nbsp;&nbsp;&nbsp;&nbsp;// abort function e.g. with 
+      return<BR>}</P><A name="Header"></A> <A name="4_2"></A>
+      <H2>  Writing the DXF Header   </H2><A name="4_2_1"></A>
+      <H3>  Opening the DXF Header   </H3>
+      <P>  The DXF header contains information about the DXF version. It has  to 
+      be written before anything else with    </P>
+      <P class="code">dxf.writeHeader(*dw);</P>
+      <P>  The following list shows how a DXF header typically looks like:   
+</P>
+      <P class="code">999<BR>dxflib 
+      2.0.4.8<BR>&nbsp;&nbsp;0<BR>SECTION<BR>&nbsp;&nbsp;2<BR>HEADER<BR>&nbsp;&nbsp;9<BR>$ACADVER<BR>&nbsp;&nbsp;1<BR>AC1015<BR>&nbsp;&nbsp;9<BR>$HANDSEED<BR>&nbsp;&nbsp;5<BR>FFFF</P>
+      <P>  As you can see, the writeHeader() function does not close  the 
+      header. This is because you might want to store a set of  variables into 
+      it. If you have to store variables, you have to   do it now. If not, 
+      proceed with "Closing the Header".   </P><A name="Variables"></A> <A name="4_2_2"></A>
+      <H3>  Storing Additional Variables   </H3>
+      <P>  Variables in the DXF header are used to store meta data for   the 
+      drawing contained in the file. For a description of  all supported 
+      variables, please refer to the DXF documentation   <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/appendix_bib.html#dxf">[DXF]</A>. 
+        </P>
+      <P>  The following code snippet shows examples for storing variables of   
+      different types. You can store as many variables as you need but  you have 
+      to stick to the supported variable names and types in order  to create a 
+      valid DXF file.   </P>
+      <P class="code">// int variable:<BR>dw-&gt;dxfString(9, 
+      "$INSUNITS");<BR>dw-&gt;dxfInt(70, 4);<BR>// real (double, float) 
+      variable:<BR>dw-&gt;dxfString(9, "$DIMEXE");<BR>dw-&gt;dxfReal(40, 
+      1.25);<BR>// string variable:<BR>dw-&gt;dxfString(9, 
+      "$TEXTSTYLE");<BR>dw-&gt;dxfString(7, "Standard");<BR>// vector 
+      variable:<BR>dw-&gt;dxfString(9, "$LIMMIN");<BR>dw-&gt;dxfReal(10, 
+      0.0);<BR>dw-&gt;dxfReal(20, 0.0);</P><A name="4_2_3"></A>
+      <H3>  Closing the Header   </H3>
+      <P>  Use the following code to close the DXF header (end the current 
+      section):   </P>
+      <P class="code">dw-&gt;sectionEnd();</P><A name="Tables"></A> <A name="4_3"></A>
+      <H2>  Writing the Tables Section   </H2><A name="4_3_1"></A>
+      <H3>  Opening the Tables Section   </H3>
+      <P>  The tables section of a DXF file contains some tables defining   
+      viewports, linestyles, layers, etc.   </P>
+      <P>  Open the tables section with the function:   </P>
+      <P class="code">dw-&gt;sectionTables();</P><A name="Viewports"></A> <A 
+      name="4_3_2"></A>
+      <H3>  Writing the Viewports   </H3>
+      <P>  Viewports are not directly supported by dxflib. However, they   still 
+      need to be there in a valid DXF file. You can write the  standard 
+      viewports using the function:   </P>
+      <P class="code">dxf.writeVPort(*dw);</P><A name="Linetypes"></A> <A name="4_3_3"></A>
+      <H3>  Writing the Linetypes   </H3>
+      <P>  Only linetypes that are actually used need to be defined in the   DXF 
+      file. For simplification, you might want to store all   linetypes 
+      supported by dxflib as shown below.   </P>
+      <P class="code">dw-&gt;tableLineTypes(25);<BR>dxf.writeLineType(*dw, 
+      DL_LineTypeData("BYBLOCK", 0));<BR>dxf.writeLineType(*dw, 
+      DL_LineTypeData("BYLAYER", 
+      0));<BR>dxf.writeLineType(*dw,<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("CONTINUOUS", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("ACAD_ISO02W100", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("ACAD_ISO03W100", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("ACAD_ISO04W100", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("ACAD_ISO05W100", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("BORDER", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("BORDER2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("BORDERX2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("CENTER", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("CENTER2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("CENTERX2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DASHDOT", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DASHDOT2", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("DASHDOTX2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DASHED", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DASHED2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DASHEDX2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DIVIDE", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DIVIDE2", 
+      0));<BR>dxf.writeLineType(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineTypeData("DIVIDEX2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DOT", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DOT2", 
+      0));<BR>dxf.writeLineType(*dw, DL_LineTypeData("DOTX2", 
+      0));<BR>dw-&gt;tableEnd();</P><A name="Layers"></A> <A name="4_3_4"></A>
+      <H3>  Writing the Layers   </H3>
+      <P>  Layers are a substantial part of most DXF drawings. All layers  that 
+      are used in the drawing need to be defined in this   table section. The 
+      following example code writes three layers  with names "0", "mainlayer" 
+      and "anotherlayer" to the DXF file.  Note that before writing the layers, 
+      you need to specify   how many layers there are in total. Layer "0" is the 
+      default  layer. It cannot be omitted.   </P>
+      <P class="code">int numberOfLayers = 
+      3;<BR>dw-&gt;tableLayers(numberOfLayers);<BR><BR>dxf.writeLayer(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LayerData("0", 0), 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_Attributes(<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string(""),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+      leave 
+      empty<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL_Codes::black,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+      default 
+      color<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+      default 
+      width<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"CONTINUOUS"));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      // default line style<BR><BR>dxf.writeLayer(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LayerData("mainlayer", 0), 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_Attributes(<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string(""),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL_Codes::red,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"CONTINUOUS"));<BR><BR>dxf.writeLayer(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LayerData("anotherlayer", 0), 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_Attributes(<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::string(""),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DL_Codes::black,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"CONTINUOUS"));<BR><BR>dw-&gt;tableEnd();</P>
+      <P>  The default line width is given in 1/100mm. The color enum  in 
+      namespace DL_Codes defines the most common colors.   </P><A 
+      name="4_3_5"></A>
+      <H3>  Writing Various Other Tables   </H3>
+      <P>  These tables are also needed. For more information, please refer  to 
+      the DXF documentation <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/appendix_bib.html#dxf">[DXF]</A>. 
+        </P>
+      <P class="code">
+      dxf.writeStyle(*dw);<BR>dxf.writeView(*dw);<BR>dxf.writeUcs(*dw);<BR><BR>dw-&gt;tableAppid(1);<BR>dw-&gt;tableAppidEntry(0x12);<BR>dw-&gt;dxfString(2, 
+      "ACAD");<BR>dw-&gt;dxfInt(70, 0);<BR>dw-&gt;tableEnd();</P><A name="Dimension Styles"></A> 
+      <A name="4_3_6"></A>
+      <H3>  Writing Dimension Styles   </H3>
+      <P>  Dimension Styles define the look of dimensions.   </P>
+      <P class="code">dxf.writeDimStyle(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;arrowSize, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;extensionLineExtension, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;extensionLineOffset, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;dimensionGap, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;dimensionTextSize);</P><A 
+      name="Block Records"></A> <A name="4_3_7"></A>
+      <H3>  Writing Block Records   </H3>
+      <P>  Block records define the names of available blocks in the DXF  file. 
+      The following example declares the existence of two blocks   with names 
+      "myblock1" and "myblock2". Note that the first  call is also needed. It 
+      opens the blocks table and writes   some standard blocks that might be 
+      required by the DXF   version.   </P>
+      <P class="code">dxf.writeBlockRecord(*dw);<BR>dxf.writeBlockRecord(*dw, 
+      "myblock1");<BR>dxf.writeBlockRecord(*dw, 
+      "myblock2");<BR>dw-&gt;tableEnd();</P><A name="4_3_8"></A>
+      <H3>  Ending the Tables Section   </H3>
+      <P class="code">dw-&gt;sectionEnd();</P><A name="Blocks"></A> <A name="4_4"></A>
+      <H2>  Writing the Blocks Section   </H2>
+      <P>  The blocks section defines the entities of each block.   </P>
+      <P class="code">dw-&gt;sectionBlocks();<BR><BR>dxf.writeBlock(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_BlockData("*Model_Space", 0, 0.0, 0.0, 
+      0.0));<BR>dxf.writeEndBlock(*dw, 
+      "*Model_Space");<BR><BR>dxf.writeBlock(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_BlockData("*Paper_Space", 0, 0.0, 0.0, 
+      0.0));<BR>dxf.writeEndBlock(*dw, 
+      "*Paper_Space");<BR><BR>dxf.writeBlock(*dw, 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_BlockData("*Paper_Space0", 0, 0.0, 0.0, 
+      0.0));<BR>dxf.writeEndBlock(*dw, 
+      "*Paper_Space0");<BR><BR>dxf.writeBlock(*dw,<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_BlockData("myblock1", 
+      0, 0.0, 0.0, 0.0));<BR>// ...<BR>// write block entities e.g. with 
+      dxf.writeLine(), ..<BR>// ...<BR>dxf.writeEndBlock(*dw, 
+      "myblock1");<BR><BR>dxf.writeBlock(*dw,<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_BlockData("myblock2", 
+      0, 0.0, 0.0, 0.0));<BR>// ...<BR>// write block entities e.g. with 
+      dxf.writeLine(), ..<BR>// ...<BR>dxf.writeEndBlock(*dw, 
+      "myblock2");<BR><BR>dw-&gt;sectionEnd();</P><A name="Entities"></A> <A 
+      name="4_5"></A>
+      <H2>  Writing the Entities Section   </H2>
+      <P>  The entities section defines the entities of the drawing. The   two 
+      entities in the following example use the attributes  of their layer (256 
+      = color by layer, -1 = line width by layer,   "BYLAYER" = line style by 
+      layer).    </P>
+      <P class="code">dw-&gt;sectionEntities();<BR><BR>// write all your 
+      entities..<BR>dxf.writePoint(<BR>&nbsp;&nbsp;&nbsp;&nbsp;*dw,<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_PointData(10.0,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      45.0,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0),<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_Attributes("mainlayer", 
+      256, -1, 
+      "BYLAYER"));<BR><BR>dxf.writeLine(<BR>&nbsp;&nbsp;&nbsp;&nbsp;*dw,<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_LineData(25.0,&nbsp;&nbsp; 
+      // start 
+      point<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30.0,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      0.0,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      100.0,&nbsp;&nbsp; // end 
+      point<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      120.0,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      0.0),<BR>&nbsp;&nbsp;&nbsp;&nbsp;DL_Attributes("mainlayer", 256, -1, 
+      "BYLAYER"));<BR><BR>dw-&gt;sectionEnd();</P><A name="4_6"></A>
+      <H2>  Writing the Objects Section   </H2>
+      <P class="code">dxf.writeObjects(*dw);<BR>dxf.writeObjectsEnd(*dw);</P><A 
+      name="4_7"></A>
+      <H2>  Ending and Closing the File   </H2>
+      <P class="code">dw-&gt;dxfEOF();<BR>dw-&gt;close();<BR>delete 
+dw;</P></TD></TR>
+  <TR>
+    <TD bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD bgcolor="#e6e8f2">&nbsp;</TD>
+    <TD></TD>
+    <TD valign="top"><BR>
+      <TABLE width="460" border="0" cellspacing="0" cellpadding="0">
+        <TBODY>
+        <TR>
+          <TD width="460" align="center" valign="top">
+            <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+              <TBODY>
+              <TR>
+                <TD align="left" bgcolor="#626993">				  &nbsp;				</TD>
+                <TD align="right" bgcolor="#626993"><A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/contents.html" 
+                  alt="Contents"><IMG alt="Contents" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_cont.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index.html" 
+                  alt="First"><IMG alt="First" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_first.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/reading.html" 
+                  alt="Prev"><IMG alt="Prev" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_prev.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index.html" 
+                  alt="Home"><IMG alt="Home" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_home.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/appendix_bib.html" 
+                  alt="Next"><IMG alt="Next" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_next.png" 
+                  border="0"></A>				 <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index2.html" 
+                  alt="Last"><IMG alt="Last" src="dxflib%20-%20Writing%20DXF%20Files_files/toolbar_last.png" 
+                  border="0"></A>			     
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+      <P class="footer">       [ <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index.html">Home</A> 
+      | 	      <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/contents.html">Contents</A> 
+      |		  <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index2.html">Index</A> 
+      ]<BR>       [ <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/overview.html">1</A> 
+      | <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/compiling.html">2</A> 
+      | <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/reading.html">3</A> 
+      | <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/writing.html">4</A> 
+      | <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/appendix_bib.html">5</A> 
+      | <A href="https://www.ribbonsoft.com/doc/dxflib/2.5/reference/index2.html">6</A> 
+      ]</P>
+      <P class="footer2">	   Copyright  2004-2005 <A href="http://www.ribbonsoft.com/">RibbonSoft</A>, 
+      Inc.<BR>All Rights Reserved.<BR>       This Manual was created with <A 
+      href="http://www.ribbonsoft.com/manstyle.html">ManStyle</A>.        
+  </P></TD></TR></TBODY></TABLE></BODY></HTML>

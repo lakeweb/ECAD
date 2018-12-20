@@ -1,0 +1,3 @@
+This is happening consistently when an MFC project is open. Also 'The diagnostic tool failed unexpectedly' is also constant now. When I was using the trial version, 'Enterprise', non of this was an issue.
+
+Visual Studio is busy waiting for an internal...

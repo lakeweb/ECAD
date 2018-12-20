@@ -1,0 +1,10 @@
+
+
+Bézier Splines
+
+https://www.particleincell.com/2012/bezier-splines/
+
+http://www.codeproject.com/Articles/31859/Draw-a-Smooth-Curve-through-a-Set-of-2D-Points-wit
+
+https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+

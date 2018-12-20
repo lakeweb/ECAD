@@ -1,6 +1,1 @@
-echo "# ECAD" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/lakeweb/ECAD.git
-git push -u origin master
+ECAD - Edit Schematics and PC Boards as well as manage projects and libraries from other CAD software.

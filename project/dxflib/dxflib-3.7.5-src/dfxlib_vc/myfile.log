@@ -1,0 +1,19 @@
+FROM FILE: myfile.dxf
+LAYER: 0 flags: 0
+  -ATR Lyr: 0 color: 250 width: 100 type: CONTINUOUS
+LAYER: mainlayer flags: 0
+  -ATR Lyr: 0 color: 1 width: 100 type: CONTINUOUS
+LAYER: anotherlayer flags: 0
+  -ATR Lyr: 0 color: 250 width: 100 type: CONTINUOUS
+BLOCK: *Model_Space
+  -ATR Lyr: 0 color: BYLAYER width: BYLAYER type: BYLAYER
+BLOCK: *Paper_Space
+  -ATR Lyr: 0 color: BYLAYER width: BYLAYER type: BYLAYER
+BLOCK: myblock1
+  -ATR Lyr: 0 color: BYLAYER width: BYLAYER type: BYLAYER
+BLOCK: myblock2
+  -ATR Lyr: 0 color: BYLAYER width: BYLAYER type: BYLAYER
+POINT x: 10 y: 45 z: 0
+  -ATR Lyr: mainlayer color: BYLAYER width: BYLAYER type: BYLAYER
+LINE x: 25 y: 30 z: 0 -to- x: 100 y: 120 z: 0
+  -ATR Lyr: mainlayer color: BYLAYER width: BYLAYER type: BYLAYER

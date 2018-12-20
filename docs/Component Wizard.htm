@@ -1,0 +1,1685 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <meta name="ProgId" content="Word.Document">
+  <meta name="Generator" content="Microsoft Word 9">
+  <meta name="Originator" content="Microsoft Word 9">
+  <link rel="File-List" href="http://www.accelerated-designs.com/help/ComponentWizard_files/filelist.xml">
+  <title>Component Wizard</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Frank Frank</o:Author>
+  <o:LastAuthor>Frank Frank</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2004-08-03T19:55:00Z</o:Created>
+  <o:LastSaved>2004-08-30T19:48:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>272</o:Words>
+  <o:Characters>1553</o:Characters>
+  <o:Company>Accelerated Designs Inc.</o:Company>
+  <o:Lines>12</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>1907</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+  <style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+  </style>
+  <meta name="Author" content="Garian Nobinger">
+</head>
+<body style="" vlink="blue" link="blue" lang="EN-US">
+<div style="font-family: trebuchet ms;" class="Section1">
+<span style="font-weight: bold;"></span>
+<div style="text-align: center;"><big style="font-style: italic; color: rgb(0, 0, 153);"><big>XLR Format</big></big><span style="font-weight: bold;"></span><br>
+<span style="font-weight: bold;"></span></div>
+<p style="font-family: trebuchet ms;"><span style="font-weight: bold;"></span>&nbsp;&nbsp;
+This document is designed to give the user a clearer
+understanding of the ASCII XLR format used by Accelerated
+Designs.&nbsp;
+This introduction is not a specification but is designed to explain the
+main flow of the document, what is contained in the different sections,
+how they are related and some of the syntax requirements.&nbsp;
+Normally
+this file is modified and added to as new capabilities are required of
+the Ultra Librarian.&nbsp; So any use of this file must take&nbsp; into
+account
+the possibility of additional information in the same format.<br>
+</p>
+<p><span style="font-family: trebuchet ms;">By default all units in the
+file are assumed to be English
+mils.&nbsp; Other
+units are
+possible, and will have :"mm", "cn", "in", etc after the size.&nbsp;
+Also,
+numbers are noted without quotes and all text is surrounded with quotes
+so that we can tell the difference.</span><br>
+</p>
+<div style="text-align: center;">Each section of the code is described
+in the table below: <br>
+</div>
+<br>
+<div align="center">
+<table style="width: 95%;" cols="2" cellpadding="0" border="1">
+  <tbody>
+    <tr>
+      <td style="padding: 0.75pt; width: 20%; font-family: trebuchet ms; font-weight: bold; color: rgb(0, 0, 0);" width="20%">Step</td>
+      <td style="padding: 0.75pt; font-family: trebuchet ms; font-weight: bold; color: rgb(0, 0, 0);">Sample</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Header
+information</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><span style="color: rgb(255, 0, 0);">#&nbsp;&nbsp;
+Ultra Librarian Gold 2.0.344 database file</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">#&nbsp;&nbsp; Copyright
+© 1999-2005 Accelerated Designs, Inc.</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(0, 153, 0);"><span style="color: rgb(255, 0, 0);">#&nbsp;&nbsp;
+http://www.Accelerated-Designs.com</span><br style="color: rgb(255, 0, 0);">
+      <br>
+      <span style="color: rgb(0, 0, 0);">Notice that comments are
+preceded by the pound sign.&nbsp; Anything following is ignored by the
+code.</span><br>
+      </span></td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Layer
+information</span><br>
+      </td>
+      <td style="padding: 0.75pt; color: rgb(255, 0, 0);">#Layer Data<br>
+LayerData : 62<br>
+&nbsp;&nbsp;&nbsp; Layer : 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_ASSEMBLY<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_SILKSCREEN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_SOLDER_PASTE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_SOLDER_MASK<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 987<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CONTACT_AREA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 5<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType Signal<br>
+&nbsp;&nbsp;&nbsp; Layer : 12<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_PLACE_BOUND<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType Signal<br>
+&nbsp;&nbsp;&nbsp; Layer : 13<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_PLACE_BOUND<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType Signal<br>
+&nbsp;&nbsp;&nbsp; Layer : 8<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_SOLDER_MASK<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 9<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_SOLDER_PASTE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_SILKSCREEN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 11<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_ASSEMBLY<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 977<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3D_DXF<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 978<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIN1MARKER<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 979<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PINTEST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 980<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_BGA_PLACE_BOARD<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 981<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ATTRIBUTE4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 982<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ATTRIBUTE3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 983<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ATTRIBUTE2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 984<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ATTRIBUTE1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 985<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIN_NUMBER<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 986<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CONSTRAINT_AREA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 988<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INPUTDIMENSIONS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 989<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ROUTE_KEEPOUT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 990<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIA_KEEPOUT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 991<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DRILL_FIGURE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 992<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_COMP_BOUND<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 993<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_COMP_BOUND<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 994<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOP_NO-PROBE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 995<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOTTOM_NO-PROBE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 996<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PRO_E<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 997<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIN_DETAIL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 998<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DIMENSION<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 999<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BOARD<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 14<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 15<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 17<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 18<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL5<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 19<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 20<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 21<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL8<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 22<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL9<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 23<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 24<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL11<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 25<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL12<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 26<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL13<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 27<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL14<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 28<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL15<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 30<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTERNAL16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 31<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 33<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 34<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 35<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER5<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 36<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 37<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 38<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER8<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 39<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER9<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+&nbsp;&nbsp;&nbsp; Layer : 40<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LayerType <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">Each layer is
+documented.&nbsp; Each layer is required to have a number between 1 and
+1000, and the number must be unique.&nbsp; Each number is associated
+with a layer name, which again must be unique.&nbsp; All of the data in
+our code will refer to the layers by number, but will display the
+associated name to the users.&nbsp; The "UltraLibrarian\Layers.ini"
+file contains the list of default layer names and numbers.<br>
+      <br>
+Layertypes can be blank, Signal, NonSignal and Plane.&nbsp; Capitals or
+lower case are acceptable.&nbsp; If Layertype is left blank, it is
+assumed to be NonSignal.&nbsp;&nbsp; Signal and Power layer types are
+used primarily in PadStack descriptions.<br>
+      </span></td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">TextStyle
+Section</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><span style="color: rgb(255, 0, 0);">#TextStyles</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">TextStyles : 3</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; TextStyle
+"H50S3" (FontWidth 3) (FontHeight 50) (FontCharWidth 13) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; TextStyle
+"h125s6" (FontWidth 6) (FontHeight 125) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; TextStyle
+"H80s4" (FontWidth 4) (FontHeight 80) </span><br style="color: rgb(255, 0, 0);">
+      <br>
+Each text style used in either a footprint or a symbol will have a name
+and at least the FontWidth and FontHeight keywords.&nbsp; <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">PadStyles</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><span style="color: rgb(255, 0, 0);">#PadStyles</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">PadStacks : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; PadStack
+"RX63Y14D0T" (HoleDiam 0) (Surface True) (Plated False)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Shapes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadShape "Rectangle" (Width 63) (Height 14) (PadType 0) (Layer TOP) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;
+EndPadStack</span><br>
+      <br>
+Usually made up of a name (in quote marks) and then a list of shapes,
+with the specified attributes for each shape.&nbsp; Again, not all
+entities or descriptors will be used with each shape description.....<br>
+      <br>
+Possible shapes are: "Rectangle, Circle, Oblong. Rounded Rectangle,
+Diamond, Rounded Diamond, Thermal, Thermalx and Polygon..&nbsp;
+Additional shape descriptors include Layer (with the layer always in
+CAPs), Wide, High, SpokeWidth, Shape in quotes as above.&nbsp; PadTypes
+are 0 by default. Other descriptors include OffsetX, OffsetY rotation,
+and Points (an array of points, each containing an X and Y
+location.&nbsp; Used only with Polygonal pads shapes)..<br>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Pattern
+Section</span><br>
+      </td>
+      <td style="padding: 0.75pt;">By far the most complex by far is
+the pattern.&nbsp; We are going to break this one up into sections to
+help you understand it better.<br>
+      <br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">#Patterns</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">Patterns : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; Pattern
+"so8-p30-a98"</span><br>
+      <br>
+The name of the pattern in quotes.&nbsp; The name can not contain
+quotes, or we will get confused.<br>
+      <br>
+&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OriginPoint (0, 0)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PickPoint&nbsp;&nbsp; (0, 0)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+GluePoint&nbsp;&nbsp; (0, 0)</span><br style="color: rgb(255, 0, 0);">
+      <br>
+The above data is available on all parts, and refers to the location
+within the part of the centroid.&nbsp; These numbers are all all stored
+as long numbers in the code,&nbsp; The origin in particular is an
+offset from the dimension a part was built in to where its placement
+point is.&nbsp; This is normally 0,0 since the part is usually built
+from its placement point, but it could be located to the side of the
+part or at some other location if this was appropriate for some
+reason.&nbsp; Not all tools will support or use the pickpoint and the
+gluedot.&nbsp; The section below, Data, is in each part.&nbsp; It
+contains some form of data&nbsp; that could be displayed or stored
+about the part.&nbsp; We will detail some of the lines of this code for
+you.&nbsp; <br>
+      <br>
+&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 332</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer TOP_ASSEMBLY) (Origin -67.5, 87) (Text "*") (IsVisible
+True) (Justify UPPERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer TOP_SILKSCREEN) (Origin -67.5, 87) (Text "*") (IsVisible
+True) (Justify UPPERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 1) (PinName "1") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin -57.5, 45) (OriginalPinNumber 1) </span><br style="color: rgb(255, 0, 0);">
+      <br>
+Each line in the data set contains a new entity for the part, and the
+properties that make these entities up.&nbsp; The data lines can and
+often do use the same information as other forms of data.&nbsp; So for
+example a line may use the Origin ( x,y) property just as the Text
+entity may use this same property.&nbsp; Many of the possible
+properties can and are shared across the data types.&nbsp; Some of the
+common ones you will see ini use is Rotation, Flipped, Origin,
+Etc.&nbsp; Note that the text before the first bracket delineates the
+type of entity available.&nbsp; There are only a few permissible types
+at this point:&nbsp; &nbsp;&nbsp; pad, line, arc, circle, attribute,
+pickpoint, poly, polykeepout, polykeepout_via, polykeepout_comp,
+polykeepin_comp, text, wizard.<br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, 39) (EndPoint -49, 51) <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">Lines will always require at
+least an origin EndPoint and layer property.&nbsp; If they do not
+include the width property, they will be assigned a default width in
+our code.&nbsp; The default width is user assignable in the
+configuration screen.</span><br style="color: rgb(0, 0, 0);">
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, 51) (EndPoint -75, 51) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, 51) (EndPoint -75,
+38.9999999999999) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, 38.9999999999999) (EndPoint -49,
+39) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (-49, 39) (-49, 51) (-75, 51) (-75, 38.9999999999999)<br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">A polygon requires a layer, an
+Origin and at least two additional points to be valid.&nbsp; It can
+also
+contain width, flipped, and several other properties.</span><br>
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 2) (PinName "2") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin -57.5, 15) (OriginalPinNumber 2) <br style="color: rgb(0, 0, 0);">
+      <br style="color: rgb(0, 0, 0);">
+      <span style="color: rgb(0, 0, 0);">A pad must contain a name and
+a number.&nbsp; The name is what most users will see when referencing
+the footprint.&nbsp; The number is arbitrarily assigned based.&nbsp;
+Each footprint must have its pads numbered one to the amount of pads
+contained with no gaps or duplicates in numbering.&nbsp; Also required
+are the Origin and Padstyle properties.&nbsp; Other properties might be
+visible, such as rotation and flipped.</span><br>
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 3) (PinName "3") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin -57.5, -15) (OriginalPinNumber 3) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 4) (PinName "4") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin -57.5, -45) (OriginalPinNumber 4) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, 9) (EndPoint -49, 21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, 21) (EndPoint -75, 21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, 21) (EndPoint -75,
+8.99999999999993) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, 8.99999999999993) (EndPoint -49,
+9) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (-49, 9) (-49, 21) (-75, 21) (-75, 8.99999999999993)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, -21) (EndPoint -49, -9) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, -9) (EndPoint -75,
+-9.00000000000005) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, -9.00000000000005) (EndPoint
+-75, -21.0000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, -21.0000000000001) (EndPoint
+-49, -21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (-49, -21) (-49, -9) (-75, -9.00000000000005) (-75,
+-21.0000000000001)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -48.9999999999999, -51) (EndPoint
+-49, -39) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, -39) (EndPoint -75,
+-39.0000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -75, -39.0000000000001) (EndPoint
+-74.9999999999999, -51.0000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -74.9999999999999, -51.0000000000001)
+(EndPoint -48.9999999999999, -51) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (-48.9999999999999, -51) (-49, -39) (-75,
+-39.0000000000001) (-74.9999999999999, -51.0000000000001)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 5) (PinName "5") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin 57.5, -45) (OriginalPinNumber 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 6) (PinName "6") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin 57.5, -15) (OriginalPinNumber 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 7) (PinName "7") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin 57.5, 15) (OriginalPinNumber 7) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad (Number 8) (PinName "8") (PadStyle "RX63Y14D0T") (OriginalPadStyle
+"RX63Y14D0T") (Origin 57.5, 45) (OriginalPinNumber 8) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, -39) (EndPoint 49, -51) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, -51) (EndPoint 75, -51) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, -51) (EndPoint 75,
+-38.9999999999999) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, -38.9999999999999) (EndPoint 49,
+-39) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (49, -39) (49, -51) (75, -51) (75, -38.9999999999999)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, -9) (EndPoint 49, -21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, -21) (EndPoint 75, -21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, -21) (EndPoint 75,
+-8.99999999999993) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, -8.99999999999993) (EndPoint 49,
+-9) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (49, -9) (49, -21) (75, -21) (75, -8.99999999999993)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, 21) (EndPoint 49, 9) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, 9) (EndPoint 75,
+9.00000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, 9.00000000000001) (EndPoint 75,
+21.0000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, 21.0000000000001) (EndPoint 49,
+21) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (49, 21) (49, 9) (75, 9.00000000000001) (75,
+21.0000000000001)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, 51) (EndPoint 49, 39) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, 39) (EndPoint 75, 39) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 75, 39) (EndPoint 74.9999999999999,
+51.0000000000001) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 74.9999999999999, 51.0000000000001)
+(EndPoint 49, 51) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=100,50")
+(Width 6)&nbsp; (49, 51) (49, 39) (75, 39) (74.9999999999999,
+51.0000000000001)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (-75, 51) (-75, 39) (-40,
+39) (-40, 51)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (-75, 21) (-75, 9) (-40,
+9) (-40, 21)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (-75, -9) (-75, -21)
+(-40, -21) (-40, -9)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (-75, -39) (-75, -51)
+(-40, -51) (-40, -39)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (40, -39) (40, -51) (75,
+-51) (75, -39)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (40, -9) (40, -21) (75,
+-21) (75, -9)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (40, 21) (40, 9) (75, 9)
+(75, 21)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer CONTACT_AREA) (Origin 0, 0)&nbsp; (40, 51) (40, 39) (75,
+39) (75, 51)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer TOP_NO-PROBE) (Origin 0, 0) (Width 6)&nbsp; (-104, -95)
+(-104, 95) (104, 95) (104, -95)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_PLACE_BOUND) (Origin -89, -80) (EndPoint -89, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_PLACE_BOUND) (Origin -89, 80) (EndPoint 89, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_PLACE_BOUND) (Origin 89, 80) (EndPoint 89, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_PLACE_BOUND) (Origin 89, -80) (EndPoint -89, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer TOP_PLACE_BOUND) (Origin 0, 0) (Width 6)&nbsp; (-89, -80)
+(-89, 80) (89, 80) (89, -80)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer PRO_E) (Origin 0, 0) (Attr "Height" "100") (Justify
+CENTER) (TextStyle "H50S3") <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">Attributes must contain a
+layer, an Origin, and a text style.&nbsp; Attributes without a
+justification will be justified "CENTER".&nbsp; It must&nbsp; also
+contain the attribute prompt as well as value.&nbsp; In the example
+above the prompt is "Height" and the value is "100".&nbsp; Note that
+the value is always considered a string.&nbsp; Always.</span><br>
+      </span><br>
+Justification is used on text and attributes.&nbsp; Its available
+justifications are: UPPERLEFT, UPPERCENTER, UPPERRIGHT, LEFT, CENTER,
+RIGHT, LOWERLEFT, LOWERCENTER, LOWERRIGHT.<br>
+      <br>
+      <span style="color: rgb(255, 0, 0);"></span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer PRO_E) (Origin 0, 0) (Attr "MINHEIGHT" "10") (Justify
+CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PRO_E) (Origin -49, 80) (EndPoint -49, -80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PRO_E) (Origin -49, -80) (EndPoint 49, -80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PRO_E) (Origin 49, -80) (EndPoint 49, 80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PRO_E) (Origin 49, 80) (EndPoint -49, 80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Arc (Layer PRO_E) (Origin 0, 80) (Radius 8.166667) (StartAngle 180)
+(SweepAngle 180) (Width 6) <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">An Arc needs all of the fields
+above except the width field.&nbsp; However it might have quite a few
+additional fields like rotation and flipped.</span><br>
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin 0, -230) (Text "Default Padstyle:
+RX63Y14D0T") (IsVisible True) (Justify UPPERCENTER) (TextStyle "H50S3")
+      <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">Text has the same requirements
+as an Attribute, except that rather than a prompt and a value, it just
+has a string representing what will show up as text.&nbsp; In this case
+the string is"</span></span><span style="color: rgb(0, 0, 0);">Default
+Padstyle: RX63Y14D0T".&nbsp; It is always string information.&nbsp; Yes
+always.</span><br style="color: rgb(0, 0, 0);">
+      <span style="color: rgb(255, 0, 0);"><br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -49, 0) (EndPoint -49, 170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 49, 0) (EndPoint 49, 170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -49, 155) (EndPoint -99, 155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 49, 155) (EndPoint 99, 155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -49, 155) (EndPoint -59, 160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -49, 155) (EndPoint -59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -59, 160) (EndPoint -59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 49, 155) (EndPoint 59, 160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 49, 155) (EndPoint 59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 59, 160) (EndPoint 59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer INPUTDIMENSIONS) (Origin 0, 175) (Text "A") (Justify
+LOWERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, 0) (EndPoint -75, 245) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 75, 0) (EndPoint 75, 245) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, 230) (EndPoint 75, 230) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, 230) (EndPoint -65, 235) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, 230) (EndPoint -65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -65, 235) (EndPoint -65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 75, 230) (EndPoint 65, 235) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 75, 230) (EndPoint 65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 65, 235) (EndPoint 65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer INPUTDIMENSIONS) (Origin 0, 250) (Text "L") (Justify
+LOWERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 0, 80) (EndPoint 164, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 0, -80) (EndPoint 164, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 149, 80) (EndPoint 149, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 149, 80) (EndPoint 144, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 149, 80) (EndPoint 154, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 144, 70) (EndPoint 154, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 149, -80) (EndPoint 144, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 149, -80) (EndPoint 154, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin 144, -70) (EndPoint 154, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer INPUTDIMENSIONS) (Origin 169, 0) (Text "B") (Justify LEFT)
+(TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -57.5, 45) (EndPoint -172.5, 45) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -57.5, 15) (EndPoint -172.5, 15) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 45) (EndPoint -157.5, 95) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 15) (EndPoint -157.5, -35)
+      </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 45) (EndPoint -162.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 45) (EndPoint -152.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -162.5, 55) (EndPoint -152.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 15) (EndPoint -162.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -157.5, 15) (EndPoint -152.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -162.5, 5) (EndPoint -152.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer INPUTDIMENSIONS) (Origin -177.5, 30) (Text "P") (Justify
+RIGHT) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, 0) (EndPoint -75, -170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -40, 0) (EndPoint -40, -170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, -155) (EndPoint -125, -155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -40, -155) (EndPoint 10, -155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, -155) (EndPoint -85, -150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -75, -155) (EndPoint -85, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -85, -150) (EndPoint -85, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -40, -155) (EndPoint -30, -150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -40, -155) (EndPoint -30, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer INPUTDIMENSIONS) (Origin -30, -150) (EndPoint -30, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer INPUTDIMENSIONS) (Origin -57.5, -175) (Text "T") (Justify
+UPPERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -49, 0) (EndPoint -49, 170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 49, 0) (EndPoint 49, 170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -49, 155) (EndPoint -99, 155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 49, 155) (EndPoint 99, 155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -49, 155) (EndPoint -59, 160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -49, 155) (EndPoint -59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -59, 160) (EndPoint -59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 49, 155) (EndPoint 59, 160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 49, 155) (EndPoint 59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 59, 160) (EndPoint 59, 150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin 0, 175) (Text "98") (Justify
+LOWERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, 0) (EndPoint -75, 245) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 75, 0) (EndPoint 75, 245) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, 230) (EndPoint 75, 230) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, 230) (EndPoint -65, 235) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, 230) (EndPoint -65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -65, 235) (EndPoint -65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 75, 230) (EndPoint 65, 235) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 75, 230) (EndPoint 65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 65, 235) (EndPoint 65, 225) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin 0, 250) (Text "150") (Justify
+LOWERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 0, 80) (EndPoint 164, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 0, -80) (EndPoint 164, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 149, 80) (EndPoint 149, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 149, 80) (EndPoint 144, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 149, 80) (EndPoint 154, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 144, 70) (EndPoint 154, 70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 149, -80) (EndPoint 144, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 149, -80) (EndPoint 154, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin 144, -70) (EndPoint 154, -70) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin 169, 0) (Text "160") (Justify LEFT)
+(TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -57.5, 45) (EndPoint -172.5, 45) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -57.5, 15) (EndPoint -172.5, 15) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 45) (EndPoint -157.5, 95) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 15) (EndPoint -157.5, -35) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 45) (EndPoint -162.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 45) (EndPoint -152.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -162.5, 55) (EndPoint -152.5, 55) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 15) (EndPoint -162.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -157.5, 15) (EndPoint -152.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -162.5, 5) (EndPoint -152.5, 5) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin -177.5, 30) (Text "30") (Justify RIGHT)
+(TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, 0) (EndPoint -75, -170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -40, 0) (EndPoint -40, -170) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, -155) (EndPoint -125, -155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -40, -155) (EndPoint 10, -155) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, -155) (EndPoint -85, -150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -75, -155) (EndPoint -85, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -85, -150) (EndPoint -85, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -40, -155) (EndPoint -30, -150) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -40, -155) (EndPoint -30, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer DIMENSION) (Origin -30, -150) (EndPoint -30, -160) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer DIMENSION) (Origin -57.5, -175) (Text "35") (Justify
+UPPERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "RefDes" "RefDes")
+(IsVisible True) (Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "Type" "DEV")
+(Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "PN" "PN")
+(Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "DEV" "DEV")
+(Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "VAL" "VAL")
+(Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_SILKSCREEN) (Origin 0, 0) (Attr "TOL" "TOL")
+(Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer TOP_ASSEMBLY) (Origin 0, 0) (Attr "RefDes2" "RefDes2")
+(IsVisible True) (Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer USER1) (Origin 0, 0) (Attr "UserDefined1"
+"SYM_REV=A0") (IsVisible True) (Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer USER1) (Origin 0, 0) (Attr "UserDefined2"
+"CREATED_DATE") (IsVisible True) (Justify CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Layer USER1) (Origin 0, 0) (Attr "UserDefined3"
+"ULTEMPLATE=Unknown") (IsVisible True) (Justify CENTER) (TextStyle
+"H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 366, 670) (EndPoint 266, 670) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 266, 670) (EndPoint 216, 570) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 216, 570) (EndPoint 266, 470) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 266, 470) (EndPoint 366, 470) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 216, 570) (EndPoint 166, 570) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 166, 570) (EndPoint 136, 450) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 430) (EndPoint 180, 550) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 180, 550) (EndPoint 226, 550) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 363, 443) (EndPoint 394, 579) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 394, 579) (EndPoint 350, 610) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 350, 610) (EndPoint 383, 708) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 430) (EndPoint 80, 430) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 80, 430) (EndPoint 80, 450) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 136, 450) (EndPoint 80, 450) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 178, 430) (EndPoint 52, 430) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 52, 430) (EndPoint 52, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 52, 420) (EndPoint 178, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 178, 420) (EndPoint 178, 430) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 420) (EndPoint 150, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 178, 420) (EndPoint 178, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 405) (EndPoint 178, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin 164, 395) (Text "14") (Justify
+UPPERLEFT) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 405) (EndPoint 160, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 160, 400) (EndPoint 160, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 160, 410) (EndPoint 150, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 178, 405) (EndPoint 168, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 168, 410) (EndPoint 168, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 168, 400) (EndPoint 178, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 52, 420) (EndPoint 52, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 80, 420) (EndPoint 80, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 52, 405) (EndPoint 80, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin 66, 395) (Text "14") (Justify
+UPPERRIGHT) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 52, 405) (EndPoint 62, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 62, 410) (EndPoint 62, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 62, 400) (EndPoint 52, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 80, 405) (EndPoint 70, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 70, 400) (EndPoint 70, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 70, 410) (EndPoint 80, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 385) (EndPoint 80, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin 115, 380) (Text "35") (Justify
+UPPERCENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 80, 385) (EndPoint 90, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 90, 380) (EndPoint 90, 390) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 90, 390) (EndPoint 80, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 150, 385) (EndPoint 140, 390) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 140, 390) (EndPoint 140, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin 140, 380) (EndPoint 150, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 430) (EndPoint -238, 430) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -238, 430) (EndPoint -238, 570) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 430) (EndPoint -262, 570) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 450) (EndPoint -238, 450) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -292, 570) (EndPoint -208, 570) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 470) (EndPoint -292, 470) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -238, 470) (EndPoint -208, 470) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -292, 670) (EndPoint -208, 670) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -198, 700) (EndPoint -228, 600) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -228, 600) (EndPoint -188, 540) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -188, 540) (EndPoint -215, 441) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -282, 700) (EndPoint -312, 600) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -312, 600) (EndPoint -272, 540) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -272, 540) (EndPoint -299, 441) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 430) (EndPoint -237, 430) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 420) (EndPoint -237, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 430) (EndPoint -263, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -237, 430) (EndPoint -237, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 400) (EndPoint -263, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -237, 400) (EndPoint -237, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 405) (EndPoint -293, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -263, 405) (EndPoint -273, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -273, 410) (EndPoint -273, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -273, 400) (EndPoint -263, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -237, 405) (EndPoint -207, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -237, 405) (EndPoint -227, 410) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -227, 410) (EndPoint -227, 400) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -227, 400) (EndPoint -237, 405) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin -197, 385) (Text "14") (Justify
+LOWERLEFT) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 380) (EndPoint -262, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -238, 380) (EndPoint -238, 420) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 385) (EndPoint -292, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -262, 385) (EndPoint -272, 390) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -272, 390) (EndPoint -272, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -272, 380) (EndPoint -262, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -238, 385) (EndPoint -208, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -238, 385) (EndPoint -228, 390) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -228, 390) (EndPoint -228, 380) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer PIN_DETAIL) (Origin -228, 380) (EndPoint -238, 385) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin -198, 385) (Text "12") (Justify
+UPPERLEFT) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Text (Layer PIN_DETAIL) (Origin -50, 570) (Text "(2x Scale)") (Justify
+CENTER) (TextStyle "H50S3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin -49, 80) (EndPoint -49,
+65.1000003814697) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin -49, -80) (EndPoint 49, -80) (Width
+6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin 49, -80) (EndPoint 49,
+-65.1000003814697) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin 49, 80) (EndPoint -49, 80) (Width
+6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Poly (Layer 3D_DXF) (Origin 0, 0) (Property "HEIGHTRANGE=10,100")
+(Width 6)&nbsp; (-49, 80) (-49, -80) (49, -80) (49, 80)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Arc (Layer TOP_SILKSCREEN) (Origin 0, 80) (Radius 12) (StartAngle 180)
+(SweepAngle 180) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, 80) (EndPoint -49, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin -49, -80) (EndPoint 49, -80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, -80) (EndPoint 49, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_ASSEMBLY) (Origin 49, 80) (EndPoint -49, 80) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Arc (Layer TOP_ASSEMBLY) (Origin 0, 80) (Radius 12) (StartAngle 180)
+(SweepAngle 180) <br>
+      </span><br>
+Below, the "Wizard" entity type is considered a system variable.&nbsp;
+This variable will always represent some user entered field that was
+used on calculating or creating your footprint.<br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "TEMPLATE") (VarData "ADI_SO_C2.adt") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "NAME") (VarData "") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "N") (VarData "8") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A") (VarData "98") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "L") (VarData "150") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "LM") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "P") (VarData "30") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "B") (VarData "160") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "T") (VarData "35") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "W") (VarData "12") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "NT") (VarData "Arc") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "TT") (VarData "Normal Material") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "UTOE") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "UHEEL") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "USIDE") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "KO") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "KOW") (VarData "78.74") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "KOH") (VarData "78.74") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "HTT") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "HTW") (VarData "82.677") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "HTH") (VarData "82.677") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A1_PSH") (VarData "Oblong") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A1_PADW") (VarData "60") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A1_PADH") (VarData "90") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A1_DRL") (VarData "30") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A2_PSH") (VarData "Oblong") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A2_PADW") (VarData "90") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A2_PADH") (VarData "60") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "A2_DRL") (VarData "30") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPCK") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPPSH") (VarData "Round") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPPSZ") (VarData "60") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPDS") (VarData "35") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPGC") (VarData "2") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPGR") (VarData "2") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PPGP") (VarData "100") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "MWA") (VarData "4") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "RSMB") (VarData "2") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "ISML") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "CHGT") (VarData "100") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "CMHGT") (VarData "10") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "PROT") (VarData "0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "REVLEVEL") (VarData "A0") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (VarName "OriginalPinCount") (VarData "8") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin -49, -65.1000003814697) (EndPoint
+-49, -80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Layer TOP_SILKSCREEN) (Origin 49, 65.1000003814697) (EndPoint 49,
+80) (Width 6) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndData</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; EndPattern</span><br style="color: rgb(255, 0, 0);">
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Schematic
+symbols</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><br>
+The symbol is laid out similar to the footprint.&nbsp; Only details not
+defined above will be commented on.<br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">#Symbols</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">Symbols : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; Symbol
+"so8-p30-a98"</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OriginPoint&nbsp; (0, 0)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OriginalName ""</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 14</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 1) (Origin -400, 200) (PinLength 100) (Rotate 180) (Width
+8) (IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "1" (-420, 250) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "1" (-380, 200) (TextStyleRef "H80s4") (Justify Left)
+(IsVisible True) </span><br>
+      <br>
+The pin is equivalent in many ways to the footprint pad.&nbsp; It must
+have a number and a designator.&nbsp; Each symbol must have all of its
+pins assigned a number between one and the total number of pins with no
+gaps or duplicates in the numbers used.&nbsp; Each pin requires an
+Origin, PinLength attribute as well as the PinDes (pin designator) that
+will appear to the user.&nbsp; The designator is ALWAYS&nbsp;
+text.&nbsp; Yes, always, even when it looks like a number.&nbsp; The
+PinName is the text field that will be filled out with the pins
+function name.&nbsp; <br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 2) (Origin -400, 100) (PinLength 100) (Rotate 180) (Width
+8) (IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "2" (-420, 150) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "2" (-380, 100) (TextStyleRef "H80s4") (Justify Left)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 3) (Origin -400, 0) (PinLength 100) (Rotate 180) (Width 8)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "3" (-420, 50) (TextStyleRef "H80s4") (Justify Right) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "3" (-380, 0) (TextStyleRef "H80s4") (Justify Left) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 4) (Origin -400, -100) (PinLength 100) (Rotate 180) (Width
+8) (IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "4" (-420, -50) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "4" (-380, -100) (TextStyleRef "H80s4") (Justify Left)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 5) (Origin 400, 200) (PinLength 100) (Width 8) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "5" (420, 150) (TextStyleRef "H80s4") (Justify Left) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "5" (380, 200) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 6) (Origin 400, 100) (PinLength 100) (Width 8) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "6" (420, 50) (TextStyleRef "H80s4") (Justify Left) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "6" (380, 100) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 7) (Origin 400, 0) (PinLength 100) (Width 8) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "7" (420, -50) (TextStyleRef "H80s4") (Justify Left) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "7" (380, 0) (TextStyleRef "H80s4") (Justify Right) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pin (PinNum 8) (Origin 400, -100) (PinLength 100) (Width 8) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinDes "8" (420, -150) (TextStyleRef "H80s4") (Justify Left) (IsVisible
+True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinName "8" (380, -100) (TextStyleRef "H80s4") (Justify Right)
+(IsVisible True) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Origin -400, 300) (EndPoint -400, -200) (Width 10) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Origin 400, -200) (EndPoint -400, -200) (Width 10) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Origin 400, -200) (EndPoint 400, 300) (Width 10) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Line (Origin 400, 300) (EndPoint -400, 300) (Width 10) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Origin 0, 350) (Attr "RefDes" "RefDes") (IsVisible True)
+(Justify Center) (TextStyleRef "h125s6") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Attribute (Origin 0, -275) (Attr "Type" "Type") (IsVisible True)
+(Justify Center) (TextStyleRef "h125s6") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndData</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; EndSymbol</span><br style="color: rgb(255, 0, 0);">
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Component
+Section</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><br>
+A component is what ties the footprint and symbol together in our
+tool.&nbsp; It contains a pointer to the footprint and the symbols that
+are used, as well as defining what pins can be swapped or which symbols
+can be swapped.<br>
+      <br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">#Components</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">Components : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp; Component
+"so8-p30-a98"</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PatternName&nbsp;&nbsp; "so8-p30-a98"</span><br>
+      <br>
+Currently only one footprint can be assigned to a component.&nbsp; This
+area may be enhanced in the future to have an array available for
+alternate footprints.<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;
+OriginalName&nbsp; "so8-p30-a98"</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SourceLibrary ""</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RefDesPrefix&nbsp; "U"</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+NumberofPins&nbsp; 8</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+NumParts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</span><br>
+      <br>
+This refers to how many schematic symbols are required to completely
+represent this component.&nbsp; That could be one symbol, as in this
+case, or it could be 10 different symbols, or it could be four
+identical symbols.<br>
+      <br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Composition&nbsp;&nbsp; Heterogeneous</span><br style="color: rgb(255, 0, 0);">
+      <br>
+This can be heterogeneous, as in each symbol is distinctly different,
+or
+homogeneous, as in each symbol is a duplicate of the other (like a 7400
+which has 4 identical symbols or gates).<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;
+AltIEEE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; False</span><br>
+      <br>
+Is there also an alternate symbol in IEEE format available?<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;
+AltDeMorgan&nbsp;&nbsp; False</span><br>
+      <br>
+Is there a Demorgan view of the symbol?<br>
+      <br>
+&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PatternPins&nbsp;&nbsp; 8</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Revision Level </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Revision Note&nbsp; </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPins&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 8</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 1 "1" (PartNum 1) (SymPinNum 1) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Left) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <br>
+The CompPin number refers to the arbitrarily numbered one to pin count
+no gaps no duplicates numbering assigned.&nbsp; It is typically the
+same as the numbering of a numbered part, but does not have to
+be.&nbsp; This number is used later in the PinMap to define the
+pad number used in the footprint.&nbsp; In the PinMap area this is
+called the CompPinRef.&nbsp; Next to the CompPin is the Pin Designator
+that the user will see in almost all instances.&nbsp; This is ALWAYS a
+string (yes always), and it can contain alpha numerics.&nbsp; It should
+also be the same as what the designator is on the symbol and the
+footprint, but if not, this will ALWAYS take presidency.<br>
+      <br>
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 2 "2" (PartNum 1) (SymPinNum 2) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Left) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <br>
+The PartNum property refers to which symbol in the collection of
+symbols for this component.&nbsp; This component only has one symbol
+used, so all of the references to PartNum will be one.&nbsp; SymPinNum
+is the number of the pin in the symbol that is being mapped.&nbsp; It
+will always be a number, and will always be less than or equal to the
+number of pins carried on a symbol.<br>
+      <br>
+Gate eq and pin eq refer to gate (symbol) and pin swapability.&nbsp;
+These can be 0, in which case they swap with no one, or they can be a
+whole number that matches those pins and or gates that are swappable.<br>
+      <br>
+PinType can be any of the following:&nbsp; Input, OutPut,
+Bi-Directional, Any,&nbsp; Power, TriState, Analog<br>
+      <br>
+Sides can be Top, Bottom, Left and Right, <br>
+      <br>
+Grouping will deal with the placement of the pins in the symbol.&nbsp;
+Groupings with the same number will be grouped on the symbol together
+irregardless of how they appear in the spreadsheet.<br>
+      <br>
+&nbsp;&nbsp;<span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 3 "3" (PartNum 1) (SymPinNum 3) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Left) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 4 "4" (PartNum 1) (SymPinNum 4) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Left) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 5 "5" (PartNum 1) (SymPinNum 5) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Right) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 6 "6" (PartNum 1) (SymPinNum 6) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Right) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 7 "7" (PartNum 1) (SymPinNum 7) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Right) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompPin 8 "8" (PartNum 1) (SymPinNum 8) (GateEq 0) (PinEq 0) (PinType
+Any) (Side Right) (Group 1) </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndCompPins</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+CompData&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 7</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "TEMPLATE") (VarData
+"TableSymbol_Dual.ads") <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">This information, similar to
+what was in the footprint, is input into the wizard for rebuilding a
+symbol.&nbsp; In each case, the VarName is the name of the variable in
+the template to be filled in, and is enclosed in quotes and always
+text.&nbsp; Yes always.&nbsp; The VarData is the actual value of the
+variable.</span><br>
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "NAME") (VarData
+"so8-p30-a98") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "PL") (VarData "100") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "OV") (VarData "1") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "NST") (VarData "Top Down") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "PD") (VarData "100") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wizard (Origin 0, 0) (Number 1) (VarName "PN") (VarData "300") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndCompData</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+AttachedSymbols&nbsp; : 1</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+AttachedSymbol (PartNum 1) (AltType Normal) (SymbolName "so8-p30-a98") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndAttachedSymbols</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PinMap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 8</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 1 (CompPinRef "1") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 2 (CompPinRef "2") <br>
+      <br>
+      <span style="color: rgb(0, 0, 0);">The PinMap is designed to
+identify the CompPin (in the section above) with the PadNum in the
+footprint.&nbsp; This section is not available if there is no footprint.</span><br style="color: rgb(0, 0, 0);">
+      <br style="color: rgb(255, 0, 0);">
+      </span><span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 3 (CompPinRef "3") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 4 (CompPinRef "4") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 5 (CompPinRef "5") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 6 (CompPinRef "6") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 7 (CompPinRef "7") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PadNum 8 (CompPinRef "8") </span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndPinMap</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;
+EndComponent</span><br style="color: rgb(255, 0, 0);">
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%;"><span style="font-weight: bold;">Future
+Expansion</span><br>
+      </td>
+      <td style="padding: 0.75pt;"><span style="color: rgb(255, 0, 0);">#WorkSpace</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">&nbsp;&nbsp;&nbsp;
+WorkSpaceSize (LowerLeft 0, 0)(UpperRight 0, 0)</span><br style="color: rgb(255, 0, 0);">
+      <span style="color: rgb(255, 0, 0);">#EndWorkSpace</span><br style="color: rgb(255, 0, 0);">
+      <br>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%; font-weight: bold;">Future
+Expansion</td>
+      <td style="padding: 0.75pt; color: rgb(255, 0, 0);">Component
+Instances<br>
+ComponentInstances : 0<br>
+#EndComponentInstances<br>
+      <br>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.75pt; vertical-align: top; width: 20%; font-weight: bold;">Future
+Expansion</td>
+      <td style="padding: 0.75pt; color: rgb(255, 0, 0); font-family: trebuchet ms;">
+      <p class="MsoNormal"><span style="font-family: trebuchet ms;">#Via
+Instances</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">ViaInstances : 0</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndViaInstances</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#NetListInfo</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">Nets : 0</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndNets</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#Schematic</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">SchematicData : </span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">&nbsp;&nbsp;&nbsp; Units
+"mil"</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">&nbsp;&nbsp;&nbsp;
+WorkSpace (LL 0,0) (UR 0,0) (Grid 0)</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndSchematic</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#SchematicSheets</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">Sheets : 0</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndSchematicSheets</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#LayerData</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">Layers : 0</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndLayerData</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#LayerTechnicalData</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">LayerTechnicalData : 0</span><br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">#EndLayerTechnicalData</span><br style="font-family: trebuchet ms;">
+      <br style="font-family: trebuchet ms;">
+      <span style="font-family: trebuchet ms;">End of File</span><br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><a style="font-family: trebuchet ms;" href="javascript:history.back(1)">Previous . . .</a><span style="font-family: trebuchet ms;"> </span><a style="font-family: trebuchet ms;" href="http://www.accelerated-designs.com/help/index.html">Main
+Menu . . .</a><span style="font-family: trebuchet ms;"> </span><br style="font-family: trebuchet ms;">
+<span style="font-family: trebuchet ms;">Copyright © 1999-2007
+Accelerated Designs, Inc.&nbsp; All Rights
+Reserved.</span> </p>
+</div>
+
+
+</body></html>

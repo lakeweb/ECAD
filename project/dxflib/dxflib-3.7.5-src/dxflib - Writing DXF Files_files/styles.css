@@ -1,0 +1,90 @@
+body {
+	background-color: white;
+}
+p {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+center {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+b {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+li {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+table {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+tr {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+td {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+th {
+	color: rgb(80, 80, 80); font-family: Arial,Helvetica,Geneva,sans-serif; font-size: 10pt;
+}
+th {
+	background-color: rgb(230, 232, 242);
+}
+p {
+	margin-top: 0.2cm; margin-bottom: 0cm; margin-left: 0.5cm;
+}
+li {
+	margin-top: 0cm; margin-bottom: 0cm; margin-left: 0cm;
+}
+a {
+	color: rgb(82, 101, 139); text-decoration: none;
+}
+p.figure {
+	text-align: center; margin-top: 0.8cm; margin-bottom: 0.3cm;
+}
+p.figure_label {
+	text-align: center; margin-top: 0cm; margin-bottom: 0.8cm;
+}
+h1 {
+	font-family: Arial,Helvetica,Geneva,sans-serif; margin-bottom: 0cm;
+}
+h2 {
+	font-family: Arial,Helvetica,Geneva,sans-serif; margin-bottom: 0cm;
+}
+h3 {
+	font-family: Arial,Helvetica,Geneva,sans-serif; margin-bottom: 0cm;
+}
+h4 {
+	font-family: Arial,Helvetica,Geneva,sans-serif; margin-bottom: 0cm;
+}
+h1 {
+	color: rgb(128, 128, 128); font-size: 18pt; font-weight: bold; margin-top: 0.5cm; margin-left: 0cm; background-color: rgb(230, 232, 242);
+}
+h2 {
+	color: rgb(82, 101, 139); font-size: 14pt; margin-top: 0.5cm; margin-left: 0cm;
+}
+h3 {
+	color: rgb(82, 101, 139); font-size: 12pt; margin-top: 0.3cm; margin-left: 0.25cm;
+}
+p.code {
+	background: rgb(241, 243, 254); color: rgb(85, 85, 85); font-family: Courier,sans-serif; margin-top: 0.4cm; margin-bottom: 0.2cm; margin-left: 0.5cm;
+}
+p.cont1 {
+	color: rgb(128, 128, 128); font-size: 16pt; font-weight: bold; margin-top: 0.5cm; margin-left: 0cm;
+}
+p.cont2 {
+	color: rgb(82, 101, 139); font-size: 12pt; margin-top: 0.2cm; margin-left: 0.5cm;
+}
+p.cont3 {
+	color: rgb(82, 101, 139); font-size: 10pt; margin-top: 0.2cm; margin-left: 1cm;
+}
+p.footer {
+	text-align: center; color: rgb(128, 128, 128); font-size: 9pt; margin-top: 0cm; margin-bottom: 0cm;
+}
+p.footer2 {
+	text-align: center; color: rgb(128, 128, 128); font-size: 7pt; margin-top: 0cm; margin-bottom: 0cm;
+}
+p.indexletter {
+	color: rgb(128, 128, 128); font-size: 16pt; font-weight: bold; margin-top: 0.5cm; margin-left: 0cm;
+}
+p.indexentry {
+	margin-top: 0cm; margin-bottom: 0cm;
+}

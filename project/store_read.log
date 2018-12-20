@@ -1,0 +1,693 @@
+OpenXML: .\AppData\settings.xml Root
+RecentFileList ---close
+
+makepath: /Root/Workspace
+ REG Open /Root/Workspace ro: true
+        found: Workspace
+
+  int name: ApplicationLook 	val: 0
+  DWORD name: ApplicationLook 	val: 210
+makepath: /Root/Workspace/MFCToolBarParameters
+ REG Open /Root/Workspace/MFCToolBarParameters ro: true
+        found: MFCToolBarParameters
+
+  int name: LargeIcons 	val: 0
+  DWORD name: LargeIcons 	val: 0
+makepath: /Root/Workspace/WindowPlacement
+ REG Open /Root/Workspace/WindowPlacement ro: true
+        found: WindowPlacement
+
+Rect name: MainWindowRect 	 val: 200 200 1050 1640
+  int name: Flags 	val: 0
+  DWORD name: Flags 	val: 0
+  int name: ShowCmd 	val: 1
+  DWORD name: ShowCmd 	val: 1
+makepath: /Root/Workspace
+Workspace ---close
+
+makepath: /Root/Workspace/ControlBarVersion
+ REG Open /Root/Workspace/ControlBarVersion ro: true
+        found: ControlBarVersion
+
+  int name: Major 	val: -1
+  DWORD name: Major 	val: 14
+  int name: Minor 	val: -1
+  DWORD name: Minor 	val: 15
+makepath: /Root/Workspace/MFCToolBarParameters
+ REG Open /Root/Workspace/MFCToolBarParameters ro: true
+        found: MFCToolBarParameters
+
+  int name: Tooltips 	val: 1
+  DWORD name: Tooltips 	val: 1
+  int name: ShortcutKeys 	val: 1
+  DWORD name: ShortcutKeys 	val: 1
+  int name: LargeIcons 	val: 0
+  DWORD name: LargeIcons 	val: 0
+  int name: MenuAnimation 	val: 0
+  DWORD name: MenuAnimation 	val: 0
+  int name: RecentlyUsedMenus 	val: 1
+  DWORD name: RecentlyUsedMenus 	val: 1
+  int name: MenuShadows 	val: 1
+  DWORD name: MenuShadows 	val: 1
+  int name: ShowAllMenusAfterDelay 	val: 1
+  DWORD name: ShowAllMenusAfterDelay 	val: 1
+  BYTE name: CommandsUsage 	CNT: 22 tf: true loc: 0xa41550
+  Object name: CommandsUsage 	SIZE: 16
+makepath: /Root/Workspace/CommandManager
+ REG Open /Root/Workspace/CommandManager ro: true
+        found: CommandManager
+
+  BYTE name: CommandsWithoutImages 	CNT: 2 tf: true loc: 0x9fa2f0
+  Object name: CommandsWithoutImages 	SIZE: 2
+  BYTE name: MenuUserImages 	CNT: 2 tf: true loc: 0x9fa2f0
+  Object name: MenuUserImages 	SIZE: 2
+makepath: /Root/Workspace/MFCToolBar-5939880
+ REG Open /Root/Workspace/MFCToolBar-5939880 ro: true
+        found: MFCToolBar-5939880
+
+  BYTE name: Buttons 	CNT: c4f tf: true loc: 0xa90240
+read object, return false
+  BYTE name: OriginalItems 	CNT: c2b tf: true loc: 0xa90240
+  Object name: OriginalItems 	SIZE: c2b
+makepath: /Root/Workspace/Pane-5939880
+ REG Open /Root/Workspace/Pane-5939880 ro: true
+        found: Pane-5939880
+
+  int name: ID 	val: e806
+  DWORD name: ID 	val: e806
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 0 0 17 590
+  DWORD name: RecentFrameAlignment 	val: 2000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-5939880
+ REG Open /Root/Workspace/BasePane-5939880 ro: true
+        found: BasePane-5939880
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-593980
+ REG Open /Root/Workspace/MFCToolBar-593980 ro: true
+        found: MFCToolBar-593980
+
+  BYTE name: Buttons 	CNT: c4f tf: true loc: 0xa98fe8
+read object, return false
+  BYTE name: OriginalItems 	CNT: c2b tf: true loc: 0xa98fe8
+  Object name: OriginalItems 	SIZE: c2b
+makepath: /Root/Workspace/Pane-593980
+ REG Open /Root/Workspace/Pane-593980 ro: true
+        found: Pane-593980
+
+  int name: ID 	val: e806
+  DWORD name: ID 	val: e806
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 0 0 17 590
+  DWORD name: RecentFrameAlignment 	val: 2000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: bd
+  DWORD name: MRUWidth 	val: bd
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-593980
+ REG Open /Root/Workspace/BasePane-593980 ro: true
+        found: BasePane-593980
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-59392
+ REG Open /Root/Workspace/MFCToolBar-59392 ro: true
+        found: MFCToolBar-59392
+
+  BYTE name: Buttons 	CNT: 1b7 tf: true loc: 0xa6b468
+  BYTE name: OrigResetItems 	CNT: 193 tf: true loc: 0xa6b468
+  Object name: OrigResetItems 	SIZE: 193
+  BYTE name: OriginalItems 	CNT: 193 tf: true loc: 0x334e98
+  Object name: OriginalItems 	SIZE: 193
+makepath: /Root/Workspace/Pane-59392
+ REG Open /Root/Workspace/Pane-59392 ro: true
+        found: Pane-59392
+
+  int name: ID 	val: e800
+  DWORD name: ID 	val: e800
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 17 0 30 d7
+  DWORD name: RecentFrameAlignment 	val: 2000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 1
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: c1
+  DWORD name: MRUWidth 	val: c1
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-59392
+ REG Open /Root/Workspace/BasePane-59392 ro: true
+        found: BasePane-59392
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-169
+ REG Open /Root/Workspace/MFCToolBar-169 ro: true
+        found: MFCToolBar-169
+
+  BYTE name: Buttons 	CNT: 8 tf: true loc: 0xa946d0
+  BYTE name: OrigResetItems 	CNT: 3d tf: true loc: 0xa89d08
+  Object name: OrigResetItems 	SIZE: 3d
+  BYTE name: OriginalItems 	CNT: 3d tf: true loc: 0xa89d08
+  Object name: OriginalItems 	SIZE: 3d
+makepath: /Root/Workspace/Pane-169
+ REG Open /Root/Workspace/Pane-169 ro: true
+        found: Pane-169
+
+  int name: ID 	val: a9
+  DWORD name: ID 	val: a9
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 48 4 5f c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-169
+ REG Open /Root/Workspace/BasePane-169 ro: true
+        found: BasePane-169
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-171
+ REG Open /Root/Workspace/MFCToolBar-171 ro: true
+        found: MFCToolBar-171
+
+  BYTE name: Buttons 	CNT: 8 tf: true loc: 0xa946d0
+  BYTE name: OrigResetItems 	CNT: 63 tf: true loc: 0x2d0a08
+  Object name: OrigResetItems 	SIZE: 63
+  BYTE name: OriginalItems 	CNT: 63 tf: true loc: 0x2d0a08
+  Object name: OriginalItems 	SIZE: 63
+makepath: /Root/Workspace/Pane-171
+ REG Open /Root/Workspace/Pane-171 ro: true
+        found: Pane-171
+
+  int name: ID 	val: ab
+  DWORD name: ID 	val: ab
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 48 4 5f c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-171
+ REG Open /Root/Workspace/BasePane-171 ro: true
+        found: BasePane-171
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-169
+ REG Open /Root/Workspace/MFCToolBar-169 ro: true
+        found: MFCToolBar-169
+
+  BYTE name: Buttons 	CNT: 8 tf: true loc: 0xa946d0
+  BYTE name: OrigResetItems 	CNT: 3d tf: true loc: 0xa89d08
+  Object name: OrigResetItems 	SIZE: 3d
+  BYTE name: OriginalItems 	CNT: 3d tf: true loc: 0xa89d08
+  Object name: OriginalItems 	SIZE: 3d
+makepath: /Root/Workspace/Pane-169
+ REG Open /Root/Workspace/Pane-169 ro: true
+        found: Pane-169
+
+  int name: ID 	val: a9
+  DWORD name: ID 	val: a9
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 48 4 5f c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-169
+ REG Open /Root/Workspace/BasePane-169 ro: true
+        found: BasePane-169
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-183
+ REG Open /Root/Workspace/MFCToolBar-183 ro: true
+        found: MFCToolBar-183
+
+  BYTE name: Buttons 	CNT: 8 tf: true loc: 0xa946d0
+  BYTE name: OrigResetItems 	CNT: af tf: true loc: 0xa68b80
+  Object name: OrigResetItems 	SIZE: af
+  BYTE name: OriginalItems 	CNT: af tf: true loc: 0xa68b80
+  Object name: OriginalItems 	SIZE: af
+makepath: /Root/Workspace/Pane-183
+ REG Open /Root/Workspace/Pane-183 ro: true
+        found: Pane-183
+
+  int name: ID 	val: b7
+  DWORD name: ID 	val: b7
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 5b 4c8 72 590
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-183
+ REG Open /Root/Workspace/BasePane-183 ro: true
+        found: BasePane-183
+
+  int name: IsVisible 	val: 1
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/MFCToolBar-59432
+ REG Open /Root/Workspace/MFCToolBar-59432 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59433
+ REG Open /Root/Workspace/MFCToolBar-59433 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59434
+ REG Open /Root/Workspace/MFCToolBar-59434 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59435
+ REG Open /Root/Workspace/MFCToolBar-59435 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59436
+ REG Open /Root/Workspace/MFCToolBar-59436 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59437
+ REG Open /Root/Workspace/MFCToolBar-59437 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59438
+ REG Open /Root/Workspace/MFCToolBar-59438 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59439
+ REG Open /Root/Workspace/MFCToolBar-59439 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59440
+ REG Open /Root/Workspace/MFCToolBar-59440 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-59441
+ REG Open /Root/Workspace/MFCToolBar-59441 ro: true
+        found: 
+
+makepath: /Root/Workspace/ControlBars-TearOff-0
+ REG Open /Root/Workspace/ControlBars-TearOff-0 ro: true
+        found: 
+
+makepath: /Root/Workspace/Pane-59393
+ REG Open /Root/Workspace/Pane-59393 ro: true
+        found: Pane-59393
+
+  int name: ID 	val: 0
+  DWORD name: ID 	val: 0
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 319 0 32c 590
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-59393
+ REG Open /Root/Workspace/BasePane-59393 ro: true
+        found: BasePane-59393
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane--1
+ REG Open /Root/Workspace/Pane--1 ro: true
+        found: Pane--1
+
+  int name: ID 	val: ffffffff
+  DWORD name: ID 	val: ffffffff
+Rect name: RectRecentFloat 	 val: 116 d0 3ff 198
+Rect name: RectRecentDocked 	 val: 30 0 319 c8
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane--1
+ REG Open /Root/Workspace/BasePane--1 ro: true
+        found: BasePane--1
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-133
+ REG Open /Root/Workspace/Pane-133 ro: true
+        found: Pane-133
+
+  int name: ID 	val: 85
+  DWORD name: ID 	val: 85
+Rect name: RectRecentFloat 	 val: e6 d0 1ae 198
+Rect name: RectRecentDocked 	 val: 48 4 2ff c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-133
+ REG Open /Root/Workspace/BasePane-133 ro: true
+        found: BasePane-133
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-134
+ REG Open /Root/Workspace/Pane-134 ro: true
+        found: Pane-134
+
+  int name: ID 	val: 86
+  DWORD name: ID 	val: 86
+Rect name: RectRecentFloat 	 val: e6 d0 1ae 198
+Rect name: RectRecentDocked 	 val: 48 4 2ff c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-134
+ REG Open /Root/Workspace/BasePane-134 ro: true
+        found: BasePane-134
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-134
+ REG Open /Root/Workspace/Pane-134 ro: true
+        found: Pane-134
+
+  int name: ID 	val: 86
+  DWORD name: ID 	val: 86
+Rect name: RectRecentFloat 	 val: e6 d0 1ae 198
+Rect name: RectRecentDocked 	 val: 48 4 2ff c4
+  DWORD name: RecentFrameAlignment 	val: 1000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-134
+ REG Open /Root/Workspace/BasePane-134 ro: true
+        found: BasePane-134
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-149
+ REG Open /Root/Workspace/Pane-149 ro: true
+        found: Pane-149
+
+  int name: ID 	val: 95
+  DWORD name: ID 	val: 95
+Rect name: RectRecentFloat 	 val: e6 d0 14a 134
+Rect name: RectRecentDocked 	 val: 2b5 cc 319 590
+  DWORD name: RecentFrameAlignment 	val: 8000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-149
+ REG Open /Root/Workspace/BasePane-149 ro: true
+        found: BasePane-149
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-150
+ REG Open /Root/Workspace/Pane-150 ro: true
+        found: Pane-150
+
+  int name: ID 	val: 96
+  DWORD name: ID 	val: 96
+Rect name: RectRecentFloat 	 val: e6 d0 1ae 198
+Rect name: RectRecentDocked 	 val: 30 4c8 2b1 590
+  DWORD name: RecentFrameAlignment 	val: 4000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-150
+ REG Open /Root/Workspace/BasePane-150 ro: true
+        found: BasePane-150
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 1
+makepath: /Root/Workspace/Pane-159
+ REG Open /Root/Workspace/Pane-159 ro: true
+        found: Pane-159
+
+  int name: ID 	val: 9f
+  DWORD name: ID 	val: 9f
+Rect name: RectRecentFloat 	 val: a a 6e 6e
+Rect name: RectRecentDocked 	 val: 0 0 11d c9
+  DWORD name: RecentFrameAlignment 	val: 4000
+  int name: RecentRowIndex 	val: 0
+  DWORD name: RecentRowIndex 	val: 0
+  int name: IsFloating 	val: 0
+  DWORD name: IsFloating 	val: 0
+  int name: MRUWidth 	val: 7fff
+  DWORD name: MRUWidth 	val: 7fff
+  int name: PinState 	val: 0
+  DWORD name: PinState 	val: 0
+makepath: /Root/Workspace/BasePane-159
+ REG Open /Root/Workspace/BasePane-159 ro: true
+        found: BasePane-159
+
+  int name: IsVisible 	val: 0
+  DWORD name: IsVisible 	val: 0
+makepath: /Root/Workspace/DockingManager-128
+ REG Open /Root/Workspace/DockingManager-128 ro: true
+        found: DockingManager-128
+
+  BYTE name: DockingPaneAndPaneDividers 	CNT: 28f tf: true loc: 0xa6b468
+makepath: /Root/Workspace/WindowPlacement
+ REG Open /Root/Workspace/WindowPlacement ro: true
+        found: WindowPlacement
+
+Rect name: MainWindowRect 	 val: c8 c8 41a 668
+  int name: Flags 	val: 0
+  DWORD name: Flags 	val: 0
+  int name: ShowCmd 	val: 1
+  DWORD name: ShowCmd 	val: 1
+makepath: Control Panel\Desktop
+makepath: /Root/Workspace/MFCToolBar-077
+ REG Open /Root/Workspace/MFCToolBar-077 ro: true
+        found: 
+
+makepath: /Root/Workspace/MFCToolBar-0ae
+ REG Open /Root/Workspace/MFCToolBar-0ae ro: true
+        found: 
+
+makepath: /Root/Workspace/Keyboard-128
+ REG Open /Root/Workspace/Keyboard-128 ro: false
+        found: Keyboard-128
+
+  BYTE name: Accelerators 	CNT: 5a tf: true loc: 0x2e26b8
+Keyboard-128 ---close
+
+makepath: /Root/Workspace/Keyboard-0
+ REG Open /Root/Workspace/Keyboard-0 ro: false
+        found: Keyboard-0
+
+  BYTE name: Accelerators 	CNT: 5a tf: true loc: 0x2e26b8
+Keyboard-0 ---close
+
+makepath: /Root/Workspace/ControlBarVersion
+makepath: /Root/Workspace/MFCToolBarParameters
+MFCToolBarParameters ---close
+
+makepath: /Root/Workspace/CommandManager
+CommandManager ---close
+
+CommandManager ---close
+
+CommandManager ---close
+
+CommandManager ---close
+
+makepath: /Root/Workspace/Pane-59393
+makepath: /Root/Workspace/BasePane-59393
+BasePane-59393 ---close
+
+BasePane-59393 ---close
+
+makepath: /Root/Workspace/Pane--1
+makepath: /Root/Workspace/BasePane--1
+BasePane--1 ---close
+
+BasePane--1 ---close
+
+makepath: /Root/Workspace/Pane-133
+makepath: /Root/Workspace/BasePane-133
+BasePane-133 ---close
+
+BasePane-133 ---close
+
+makepath: /Root/Workspace/Pane-134
+makepath: /Root/Workspace/BasePane-134
+BasePane-134 ---close
+
+BasePane-134 ---close
+
+makepath: /Root/Workspace/Pane-134
+makepath: /Root/Workspace/BasePane-134
+BasePane-134 ---close
+
+BasePane-134 ---close
+
+makepath: /Root/Workspace/Pane-149
+makepath: /Root/Workspace/BasePane-149
+BasePane-149 ---close
+
+BasePane-149 ---close
+
+makepath: /Root/Workspace/Pane-150
+makepath: /Root/Workspace/BasePane-150
+BasePane-150 ---close
+
+BasePane-150 ---close
+
+makepath: /Root/Workspace/Pane-159
+makepath: /Root/Workspace/BasePane-159
+BasePane-159 ---close
+
+BasePane-159 ---close
+
+makepath: /Root/Workspace/DockingManager-128
+DockingManager-128 ---close
+
+makepath: /Root/Workspace/MFCToolBar-5939880
+MFCToolBar-5939880 ---close
+
+makepath: /Root/Workspace/Pane-5939880
+makepath: /Root/Workspace/BasePane-5939880
+BasePane-5939880 ---close
+
+BasePane-5939880 ---close
+
+makepath: /Root/Workspace/MFCToolBar-593980
+MFCToolBar-593980 ---close
+
+makepath: /Root/Workspace/Pane-593980
+makepath: /Root/Workspace/BasePane-593980
+BasePane-593980 ---close
+
+BasePane-593980 ---close
+
+makepath: /Root/Workspace/MFCToolBar-59392
+MFCToolBar-59392 ---close
+
+makepath: /Root/Workspace/Pane-59392
+makepath: /Root/Workspace/BasePane-59392
+BasePane-59392 ---close
+
+BasePane-59392 ---close
+
+makepath: /Root/Workspace/MFCToolBar-169
+MFCToolBar-169 ---close
+
+makepath: /Root/Workspace/Pane-169
+makepath: /Root/Workspace/BasePane-169
+BasePane-169 ---close
+
+BasePane-169 ---close
+
+makepath: /Root/Workspace/MFCToolBar-171
+MFCToolBar-171 ---close
+
+makepath: /Root/Workspace/Pane-171
+makepath: /Root/Workspace/BasePane-171
+BasePane-171 ---close
+
+BasePane-171 ---close
+
+makepath: /Root/Workspace/MFCToolBar-169
+MFCToolBar-169 ---close
+
+makepath: /Root/Workspace/Pane-169
+makepath: /Root/Workspace/BasePane-169
+BasePane-169 ---close
+
+BasePane-169 ---close
+
+makepath: /Root/Workspace/MFCToolBar-183
+MFCToolBar-183 ---close
+
+makepath: /Root/Workspace/Pane-183
+makepath: /Root/Workspace/BasePane-183
+BasePane-183 ---close
+
+BasePane-183 ---close
+
+BasePane-183 ---close
+
+makepath: /Root/Workspace/WindowPlacement
+WindowPlacement ---close
+
+makepath: /Root/Workspace/Keyboard-128
+Keyboard-128 ---close
+
+makepath: /Root/Workspace/Keyboard-0
+Keyboard-0 ---close
+
+Keyboard-0 ---close
+
+makepath: /Root/Workspace/WindowPlacement
+WindowPlacement ---close
+

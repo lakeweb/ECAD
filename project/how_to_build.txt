@@ -1,0 +1,23 @@
+
+You will need boost. I'm not sure how far back will be fine, 1_54? I'm using 1_61.
+The environment variable BOOST_ROOT is just about as standard as I've seen.
+If you are already using it all should be good with the headers.
+I also have the variable BOOST_LIB on my system. What I will do is include the
+libs I'm using in this package. (A TODO). But this will have to be dealt with.
+
+So if you don't set a BOOST_LIB environment variable, or use another path,
+in the gear project->properties
+Linker->General->Additional Library Directories, replace it with your boost lib path.
+
+there are two dll/library projects that have to be built the xml.dll and dxf.lib
+
+the xml project is set up to build the hexml_10d.dll. cd/open to: project\xml\xml.sln" and build
+	it should place files where needed, you should not have to do anything else
+	
+the dxf library is set to build dxfd.lib. cd/open to: project\dxflib\dxflib-3.7.5-src\dfxlib_vc\dfxlib_vc.sln and build
+	it should place files where needed, you should not have to do anything else
+
+You can close those solutions and probably will not need them again for a while/until you need builds for Release/updates.
+
+Now the gears project should build. If I've missed something, please let me know: zero at lakeweb dot net
+Thanks, Dan.
