@@ -32,7 +32,8 @@ protected:
 	CTreeCtrlEx* GetCtrl( ) { return &layer_tree_view; }
 
 public:
-	void LoadLayerView( layer_set_t& layers, bool bClear = true );
+	//CMainFrame::OnInfoNotify(...)
+	void LoadLayerView( sp_layer_set_type& layers, bool bClear = true );
 
 // Overrides
 public:

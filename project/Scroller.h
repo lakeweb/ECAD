@@ -17,6 +17,8 @@ class WinScroller
     CSize  scroller_screen_size;
     CSize  scroller_target_size;
     CSize  m_scrollPos;
+	bool bEnabled;
+	bool bInit;
 
 public:
 // ............................................................................
@@ -25,6 +27,8 @@ public:
 		,scroller_screen_size( 0, 0 )
 		,scroller_target_size( 0, 0 )
 		,m_scrollPos( 0, 0 )
+		, bEnabled(true)
+		, bInit(true)
 	{ }
 
 	~WinScroller( ) { DetachWnd( ); }

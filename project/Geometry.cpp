@@ -11,8 +11,8 @@
 bg_point get_point(std::string& in)
 {
 	bg_point point;
-	std::tstring::size_type pos = in.find(L',');
-	assert(pos != std::tstring::npos);
+	std::wstring::size_type pos = in.find(L',');
+	assert(pos != std::wstring::npos);
 
 	point.set_x(boost::lexical_cast< GEO_NUM >(std::string(in.begin(), in.begin() + pos)));
 	point.set_y(boost::lexical_cast< GEO_NUM >(std::string(in.begin() + pos + 1, in.end())));

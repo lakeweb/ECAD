@@ -158,7 +158,7 @@ void TinyLibView::OnFileOpen()
 	//int bytes = GetModuleFileNameA(NULL, buf, 555);
 	auto cur = wndTinyLibTreeView.GetSelectedItem();
 	DocNotifyObject ndr;
-	ndr.nmHdr.code = ID_LIB_TREE_SELECTED;
+	ndr.nmHdr.code = ID_LAYERTREE_CHANGED;
 	ndr.nmHdr.hwndFrom = GetSafeHwnd();
 	ndr.nmHdr.idFrom = 37;// (DWORD)(HTREEITEM)cur;
 	ndr.id = (uint64_t)(HTREEITEM)cur;
@@ -243,7 +243,7 @@ void TinyLibView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	assert(false);
 	DocNotifyObject ndr;
-	ndr.nmHdr.code = ID_LIB_TREE_SELECTED;
+	ndr.nmHdr.code = ID_LAYERTREE_CHANGED;
 	ndr.nmHdr.hwndFrom = GetSafeHwnd();
 	ndr.nmHdr.idFrom = 37;
 	AfxGetMainWnd()->SendMessageToDescendants(WM_NOTIFY, (WPARAM)&ndr);

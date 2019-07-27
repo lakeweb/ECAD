@@ -105,12 +105,13 @@ BOOST_FUSION_ADAPT_STRUCT(Bridge::ScPin,
 BOOST_FUSION_ADAPT_STRUCT(Bridge::Layer,
 	id,
 	name,
-	type
+	type,
+	hide
 )
 
 BOOST_FUSION_ADAPT_STRUCT(Bridge::PcPad
 	, number
-	, name
+, name
 )
 
 BOOST_FUSION_ADAPT_STRUCT(Bridge::KiPad
@@ -171,6 +172,25 @@ BOOST_FUSION_ADAPT_STRUCT(Bridge::Segment
 	, line.net
 )
 
+//BOOST_FUSION_ADAPT_STRUCT_NAMED(Bridge::CompText, GR_TEXT
+//	, text
+//	, pos
+//	, layer
+//	, text
+//	, size
+//	, thick
+//)
+//
+
+BOOST_FUSION_ADAPT_STRUCT(Bridge::GRText
+	, text
+	, pos
+	, layer
+	, size
+	, thick
+	, just
+)
+
 BOOST_FUSION_ADAPT_STRUCT(Bridge::KiAssemLine
 	, a.x
 	, a.y
@@ -184,7 +204,14 @@ BOOST_FUSION_ADAPT_STRUCT(Bridge::KiAssemLine
 BOOST_FUSION_ADAPT_STRUCT(Bridge::Zone
 	, net
 	, desig_poly
-	, fill_poly
+	, fill_polys
+)
+
+BOOST_FUSION_ADAPT_STRUCT(Bridge::KiVia
+	, at
+	, size
+	, layers
+	, net
 )
 
 BOOST_FUSION_ADAPT_STRUCT(Bridge::Assembly
@@ -218,7 +245,7 @@ namespace boost {namespace spirit {	namespace x3 {	namespace traits {
 	struct container_value<Bridge::PcSubComp> {	using type = kicomp_subs; };
 	template<>
 	struct push_back_container<Bridge::PcSubComp> {
-		using type = boost::variant<Bridge::CompText, Bridge::Line, Bridge::KiPad, Bridge::KiArc>;
+		using type = kicomp_subs;
 		template <typename V>
 		static bool call(Bridge::PcSubComp& comp, V&& v) {
 			struct {
@@ -232,7 +259,7 @@ namespace boost {namespace spirit {	namespace x3 {	namespace traits {
 			return true;
 		}
 	};
-	using type_kiboard = boost::variant<Bridge::Line, Bridge::KiArc, Bridge::Segment, Bridge::Zone>;
+	using type_kiboard = boost::variant<Bridge::Line, Bridge::KiArc, Bridge::Segment, Bridge::Zone, Bridge::GRText, Bridge::KiVia>;
 	template<>
 	struct container_value<Bridge::KiBoardItems> { using type = type_kiboard; };
 	template<>
@@ -246,6 +273,8 @@ namespace boost {namespace spirit {	namespace x3 {	namespace traits {
 				void operator()(Bridge::KiArc const& v) const { _r.lineset.push_back(v.get_SP()); }
 				void operator()(Bridge::Segment const& v) const { _r.segments.push_back(v); }
 				void operator()(Bridge::Zone const& v) const { _r.zones.push_back(v); }
+				void operator()(Bridge::GRText const& v) const { _r.texts.push_back(v); }
+				void operator()(Bridge::KiVia const& v) const { _r.vias.push_back(v); }
 			} vis{ comp };
 			boost::apply_visitor(vis, v);
 			return true;
@@ -267,6 +296,14 @@ namespace Bridge {
 		}
 	}const true_false;
 
+	struct hide_table : x3::symbols<bool> {
+		hide_table() {
+			add("", false)
+				("hide", true)
+				;
+		}
+	}const hide;
+
 	//not used yet?
 	struct justify_table : x3::symbols<JUSTIFY> {
 		justify_table() {
@@ -279,44 +316,35 @@ namespace Bridge {
 				("UpperRight", JUSTIFY::ejUpperRight)
 				("LowerLeft", JUSTIFY::ejLowerLeft)
 				("LowerRight", JUSTIFY::ejLowerRight)
+				("mirror", JUSTIFY::ejMirror)
 				;
 		}
 	}const justify;
 
-	auto const bare_word
-		= lexeme[+char_("a-zA-Z0-9.,/_+:^*-")];
-	//		= lexeme[+char_("\\80-\\ffa-zA-Z0-9.,/_+*-")];
+	auto const bare_word = lexeme[+char_("a-zA-Z0-9.,/_+:^*-")];
 
-	//auto const quoted_string = '"' >> lexeme[*(~char_('"'))] >> '"';
 	static auto const quoted_string = rule<struct _, std::string>("quoted_string") = '"' >> lexeme[*(~char_('"'))] >> '"';
-
-	//(Attr "Type" "")
-	auto const complex_string = quoted_string;
-
 	auto const prin_word = "(" >> bare_word;
 	auto const prin_skip = omit[*(char_ - ')') >> ')'];
-
-	// ..........
+	//auto const hide = rule<struct _, bool>("hide_true_false") = lit("hide");
 	//temp for nestled skiping.....
 	//https://stackoverflow.com/questions/48392993/how-to-make-a-recursive-rule-in-boost-spirit-x3-in-vs2017
-	x3::rule<struct foo_class> const foo = "foo";
-	x3::rule<struct bar_class> const bar = "bar";
-	auto bar_def = *((x3::char_ - '(') - ')') >> *(foo > *((x3::char_ - '(') - ')'));
-	auto foo_def = '(' > bar > ')';
-	BOOST_SPIRIT_DEFINE(foo)
-	BOOST_SPIRIT_DEFINE(bar)
-	// ......................................................................................................
+	rule<struct foo_class> const foo = "foo";
+	rule<struct bar_class> const bar = "bar";
+	auto bar_def = omit[*~char_("()")] >> -*foo;
+	auto foo_def = '(' >> bar >> ')';
+	BOOST_SPIRIT_DEFINE(foo);
+	BOOST_SPIRIT_DEFINE(bar);
 
+	// ......................................................................................................
 	DEF_RULE(at_pos_rot, PointEx) = "(at" >> double_ >> double_ >> -double_ >> ')';
 	DEF_RULE(size, Point) = "(size" >> double_ >> double_ >> ')';
 
 	auto skip_atr = lit('(') >> omit[*(char_ - char_(')'))] >> lit(')');
-
 	auto const omit_prin_word = omit['(' >> bare_word];
-
 	auto const rect = rule<_, Rect>("rect") = omit_prin_word >> double_ >> double_ >> double_ >> double_ >> ')';
-
-	auto const layer = rule<struct Layer_def, Layer>("layer") = '(' >> int_ >> bare_word >> bare_word >> ')';
+	auto const list_layer = rule<struct Layer_def, Layer>("layer") = '(' >> int_ >> bare_word >> bare_word >> -hide >> ')';
+	auto optional = rule<_, int>() = int_ | ("\"\"");//?? or int won[t initialize to '0' on quotes....
 
 	auto const comp_text = rule<struct CompText_def, CompText>("comp_text")
 		= lit("(fp_text") >> bare_word >> bare_word >> at_pos_rot
@@ -328,8 +356,8 @@ namespace Bridge {
 	// (gr_line (start 123.825 132.715) (end 168.275 132.715) (angle 90) (layer Edge.Cuts) (width 0.127)
 	auto const gr_line = rule<struct gr_line_def, KiAssemLine>("gr_line") =
 		lit("(gr_line") >> "(start" >> double_ >> double_ >> ')'
-		>> "(end" >> double_ >> double_ >> ')'
-		>> "(angle " >> double_ >> ')' >> "(layer" >> bare_word >> ')' >> "(width" >> double_ >> "))";
+		>> "(end" >> double_ >> double_ >> ')' >> "(angle " >> double_ >> ')'
+		>> "(layer" >> bare_word >> ')' >> "(width" >> double_ >> "))";
 
 	auto const ki_circle = rule<struct ki_circle_def, KiArc>("fp_circle") =
 		"(center" >> double_ >> double_ >> ')'
@@ -339,12 +367,14 @@ namespace Bridge {
 	auto const fp_circle = lit("(fp_circle") >> ki_circle;
 	auto const gr_circle = lit("(gr_circle") >> ki_circle;
 
-	auto record_number = [](auto &ctx) {
-		unsigned& n = x3::get<state_tag>(ctx);
-		n = x3::_attr(ctx);
-	};
+	// (gr_text GND (at 162.56 81.28) (layer Dessus) (effects(font(size 1.524 1.524) (thickness 0.381)))	)
+	auto const gr_text = rule<_, GRText>("gr_text") =
+		lit("(gr_text") >> (bare_word | quoted_string) >> at_pos_rot
+		>> "(layer" >> bare_word >> ')' >> "(effects" >> "(font" >> size
+		>> "(thickness" >> double_ >> "))" >> -("(justify" >> justify >> ')') >> ')' >> ')';
+
 	auto net = rule<struct net_def, net_pair>() = "(net" >> int_ >> (bare_word | quoted_string) >> ')';
-	auto optional = rule<_, int>() = int_ | ("\"\"");//?? or int won[t initialize to '0' on quotes....
+
 	auto pad = rule<struct pad_def, KiPad>("KiPad") = "(pad" >> optional//( int_ | "\"\"")
 		>> *bare_word >> at_pos_rot >> size >> -("(drill" >> double_ >> ')')
 		>> "(layers" >> *bare_word >> ')' >> -net
@@ -361,8 +391,8 @@ namespace Bridge {
 		//>> *(fp_line | fp_circle )
 		>> *foo_def >> ')'
 		;
-	//  (segment (start 115.57 86.36) (end 121.92 86.36) (width 0.25) (layer F.Cu) (net 1) (tstamp 5C151114) (status 800000))
 
+	//  (segment (start 115.57 86.36) (end 121.92 86.36) (width 0.25) (layer F.Cu) (net 1) (tstamp 5C151114) (status 800000))
 	auto seg_line = rule<struct Segment_def, Segment>("segment") =
 		lit("(segment") >> "(start" >> double_ >> double_ >> ')'
 		>> "(end" >> double_ >> double_ >> ')'
@@ -371,11 +401,18 @@ namespace Bridge {
 		>> "(net" >> int_ >> ')'
 		>> *foo_def >> ')';
 
-	auto zone = rule<struct Zone_def, Zone>("segment") =
+	//   (via (at 177.8 81.28) (size 1.778) (layers Dessus Dessous) (net 13))
+	auto via = rule<_, KiVia>("via") = 
+		lit("(via") >> at_pos_rot >> "(size" >> double_ >> ')'
+		>> "(layers" >> *bare_word >> ')' >> "(net" >> int_ >> "))";
+
+	auto zone = rule<struct Zone_def, Zone>("zone") =
 		lit("(zone") >> "(net" >> int_ >> ')' >> *(foo_def - "(polygon")//skip descriptors for now
 		>> "(polygon" >> "(pts" >> *("(xy" >> double_ >> double_ >> ')') >> ')' >> ')'
-		>> "(filled_polygon" >> "(pts" >> *("(xy" >> double_ >> double_ >> ')') >> ')' >> ')'
+		>> *(lit("(filled_polygon") >> "(pts" >> *("(xy" >> double_ >> double_ >> ')') >> ')' >> ')' ) >> ')'
 		;
+
+	auto dimension = rule<_>("unused")= lit("(dimension") >> omit[double_] >> bar >> ')';
 
 	auto kicad = rule<_, Assembly>("kicad") =
 		lit("(kicad_pcb") >> lit("(version")
@@ -384,11 +421,12 @@ namespace Bridge {
 		//assume well formed, get area from general
 		>> lit("(general") >> *(prin_skip - "(area")
 		>> rect
-		>> *(prin_skip - "(layers") >> "(layers" >> *layer
+		>> *(prin_skip - "(layers") >> "(layers" >> *list_layer
 		//for now, skip the setup and net list
 		>> *(prin_skip - "(module")
 		>> *comp
-		>> *(seg_line | gr_line | gr_circle | zone )
+		//and the stuff after comp, can't assume well formed....
+		>> *(seg_line | gr_text | gr_line | gr_circle | zone | dimension | via)
 		;
 
 } // namespace Bridge

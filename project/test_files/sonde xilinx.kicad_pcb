@@ -1410,7 +1410,7 @@
     (effects (font (size 1.524 1.524) (thickness 0.3048)))
   )
   (gr_text "Copper layer" (at 119.38 68.58) (layer Dessous)
-    (effects (font (size 1.524 1.524) (thickness 0.3048)) (justify mirror))
+    (effects (font (size 1.524 1.524) (thickness 0.3048)))
   )
   (gr_line (start 102.87 110.49) (end 102.87 106.68) (angle 90) (layer Contours.Ci) (width 0.3048))
   (gr_line (start 179.07 110.49) (end 102.87 110.49) (angle 90) (layer Contours.Ci) (width 0.3048))

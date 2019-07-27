@@ -54,14 +54,14 @@ protected:  // control bar embedded members
 	CMFCStatusBar		statusBar;
 	CMFCToolBarImages	m_UserImages;
 
-	COutputWnd			m_wndOutput;
-
 	CFileView			m_wndFileView;
 	CPropertiesWnd		m_wndProperties;
 	//
 	LayerTreeView		layer_tree_view;
 	CGearsDialog		gear_dlg;
 	TinyLibView			tinylib_yiew;
+//
+	COutputWnd			m_wndOutput;
 
 // Generated message map functions
 protected:

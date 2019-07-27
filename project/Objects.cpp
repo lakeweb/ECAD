@@ -317,7 +317,7 @@ std::ostream& operator << (std::ostream& os, const SP_BaseItem& in)
 		os << "Poly "<< item.get_x() << "," << item.get_y() << "; "; },
 
 	[&](const TextItem& pa) {
-		os << "Text: " << pugi::as_utf8(pa.val); },
+		os << "Text: " << to_utf8(pa.val); },
 
 	[&](const ItemSet& pa) {
 		os << "Set: " << pa.size() << "\n";
@@ -325,6 +325,10 @@ std::ostream& operator << (std::ostream& os, const SP_BaseItem& in)
 			os << "  " << *item;}
 	);//typecase
 
+	//if (in->GetStyleLine())
+	//	os << " cl: " << in->GetStyleLine()->line_color << " ";
+	//if (in->GetStyleFill())
+	//	os << " fcl: " << in->GetStyleFill()->line_color << " ";
 	return os;
 }
 

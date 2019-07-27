@@ -9,10 +9,12 @@
 #include "CAD.h"
 
 // ..............................................................................
-enum layer_img_id {
-	eye_on,
-	eye_off,
-};
+namespace {
+	enum layer_img_id {
+		eye_on,
+		eye_off,
+	};
+}
 
 // ..............................................................................
 class LayerViewMenuButton : public CMFCToolBarMenuButton
@@ -99,17 +101,18 @@ void LayerTreeView::OnLVNLButtonDown( NMHDR *pNMHDR, LRESULT *pResult )
 			tc.SetImage( eye_on, eye_on );
 			ndr.bVal = true;
 		}
-		ndr.nmHdr.code = ID_LIB_TREE_SELECTED;
+		ndr.nmHdr.code = ID_LAYERTREE_CHANGED;
 		ndr.nmHdr.hwndFrom = GetSafeHwnd();
 		ndr.nmHdr.idFrom = 37;// (DWORD)(HTREEITEM)cur;
 		ndr.id = (uint32_t)(HTREEITEM)tc;
 		AfxGetMainWnd()->SendMessage(WM_NOTIFY, 1, (WPARAM)&ndr);
 
-		//*pResult = 1;
-		dock_notify_t note(dock_notify_t::layer, tc.GetData(), (uint32_t)(HTREEITEM)tc);
-		TRACE("the message: %d\n", CMD_TEST);
-		AfxGetMainWnd()->SendMessage(WM_NOTIFY, 2, (WPARAM)&ndr);
-		::SendMessage(*AfxGetMainWnd(), CMD_TEST, (WPARAM)&note, NULL);
+		*pResult = 1;
+
+		//dock_notify_type note(dock_notify_type::layer, tc.GetData(), (uint32_t)(HTREEITEM)tc);
+		//TRACE("the message: %d\n", CMD_TEST);
+		//AfxGetMainWnd()->SendMessage(WM_NOTIFY, 2, (WPARAM)&ndr);
+		//::SendMessage(*AfxGetMainWnd(), CMD_TEST, (WPARAM)&note, NULL);
 	}
 
 	TRACE( "OnLButtonDown: %s, %x\n", tc.GetText( ) );
@@ -195,7 +198,7 @@ void LayerTreeView::OnLvnItemchangedEventlist( NMHDR *pNMHDR, LRESULT *pResult )
 }
 
 // ..............................................................................
-void LayerTreeView::LoadLayerView( layer_set_t& layers, bool bClear)
+void LayerTreeView::LoadLayerView( sp_layer_set_type& layers, bool bClear)
 {
 	if(bClear)
 		layer_tree_view.DeleteAllItems( );
@@ -207,7 +210,8 @@ void LayerTreeView::LoadLayerView( layer_set_t& layers, bool bClear)
 		layer_img_id img= layer.enabled ? eye_on : eye_off;
 		CTreeCursor child( cur.AddTail( layer.label.c_str( ), img, img ) );
 		child.SetData( layer.id );// Hmmmmmmmm... so.
-		const_cast<cad_layer&>(layer).tree_id = (uint32_t)(HTREEITEM)child;
+//		const_cast<cad_layer&>(layer).tree_id = (uint32_t)(HTREEITEM)child;
+		layer.tree_id = (uint32_t)(HTREEITEM)child;
 	}
 	cur.Expand( );
 }

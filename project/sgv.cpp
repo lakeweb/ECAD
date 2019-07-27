@@ -42,7 +42,7 @@ void svg_stream( std::ostream& os, const SP_BaseItem& in )
 }
 
 // ......................................................................
-void SVG_WriteFile( bfs::path& path, DrawingObects& draw )
+void SVG_WriteFile( bfs::path& path, DrawingObect& draw )
 {
 	CXML xml;
 	xml.Open(path);

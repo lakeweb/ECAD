@@ -9,8 +9,8 @@ protected:
 	CGearsDoc( );
 	DECLARE_DYNCREATE( CGearsDoc )
 
-	//layer_set_t layers;
- //   DrawingObects drawobj;
+	//sp_layer_set_type layers;
+ //   DrawingObect drawobj;
 
 	bool bAnimate;
 
@@ -18,19 +18,19 @@ protected:
 //	gc_process gc;
 
 	std::string gear_info;
-	DrawingObects export_drawobj;
+	DrawingObect export_drawobj;
 
 	//void gear( );
 	void test( );
 	void test( pgear_params_t pg );
-	virtual DrawingObects& GetExportDrawObject( );
+	virtual DrawingObect& GetExportDrawObject( );
 
 	void gear_org( );
 
 public:
-	DrawingObects& GetDrawingObjects( ) { return drawobj; }
+	DrawingObect& GetDrawingObjects( ) { return drawobj; }
 	const std::string& GetInfoStr( ) const { return gear_info; }
-	const layer_set_t& GetLayers( ) const { return layers; }
+//	const sp_layer_set_type& GetLayers( ) const { return layers; }
 public:
 	virtual ~CGearsDoc( );
 	virtual BOOL OnNewDocument( );

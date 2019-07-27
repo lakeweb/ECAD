@@ -41,6 +41,9 @@ public:
 public:
 	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
 	virtual BOOL PreCreateWindow( CREATESTRUCT& cs );
+	//ours
+	virtual void SaveXML(XMLNODE node);
+	virtual void ReadXML(XMLNODE node);
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);

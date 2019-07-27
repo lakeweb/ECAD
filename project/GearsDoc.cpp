@@ -63,7 +63,7 @@ BOOL CGearsDoc::OnCmdMsg( UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CDocument::OnCmdMsg( nID, nCode, pExtra, pHandlerInfo );
 }
 
-DrawingObects& CGearsDoc::GetExportDrawObject( )
+DrawingObect& CGearsDoc::GetExportDrawObject( )
 {
 	export_drawobj.get_set( ).clear( );
 	export_drawobj.push_back( drawobj.get_set( ).front( ) );
@@ -73,7 +73,7 @@ DrawingObects& CGearsDoc::GetExportDrawObject( )
 // ..........................................................................
 CGearsDoc::CGearsDoc( )
 	:bAnimate( false )
-	,export_drawobj( layers )
+	//,export_drawobj( layers )
 {
 }
 
@@ -137,8 +137,8 @@ void CGearsDoc::test( pgear_params_t pg )
 	drawobj.push_back( gear2 );
 
 	// working ..........................................
-	layers.insert(cad_layer( 0, L"Zero Layer" ) );
-	layers.insert(cad_layer( 1, L"Milling" ) );
+	//layers.insert(cad_layer( 0, L"Zero Layer" ) );
+	//layers.insert(cad_layer( 1, L"Milling" ) );
 
 	test( );
 }
@@ -187,7 +187,7 @@ void CGearsDoc::OnFileExport( )
 	if( ! drawobj.size( ) )
 		return;
 
-	//DrawingObects a_gear( layers );
+	//DrawingObect a_gear( layers );
 	auto& a_gear= GetExportDrawObject( );//.get_set( ).push_back( ItemSet( drawobj.get_set( ).front( ) ) );
 
 	CFileDialog dlg( TRUE, NULL, NULL,

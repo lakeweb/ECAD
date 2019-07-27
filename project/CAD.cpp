@@ -124,7 +124,8 @@ BOOL CADApp::InitInstance()
 		IDR_MAINFRAME,
 		RUNTIME_CLASS(TestCADDoc),
 		RUNTIME_CLASS(CADFrame),
-		RUNTIME_CLASS(TestCADView) //changed from CADView to TestCADView for testing
+		RUNTIME_CLASS(CADView)
+		//RUNTIME_CLASS(TestCADView) //changed from CADView to TestCADView for testing
 	);
 	if (!pDocTemplate)
 		return FALSE;
@@ -176,9 +177,10 @@ BOOL CADApp::InitInstance()
 		delete pMainFrame;
 		return FALSE;
 	}
+	std::wcout << GetRegistryBase() << std::endl;
 	m_pMainWnd = pMainFrame;
 
-	switch (3)
+	switch (2)
 	{
 	case 0:
 		//the testing doc, will open TestCADView....
@@ -186,15 +188,15 @@ BOOL CADApp::InitInstance()
 		break;
 	case 1:
 		//Open a BXL file.
-		OpenDocumentFile(L"C:\\cpp\\TinyBXL\\project\\test_files\\MSP430G2253_PW_20.bxl");
+		OpenDocumentFile(L".\\test_files\\MSP430G2253_PW_20.bxl");
 		break;
 	case 2:
-		//Open a TinyCAD lib symbol
-		OpenDocumentFile(LR"("C:\cpp\TinyBXL\project\test_files\TinyCAD\DISCRETE.TCLib")");
+		//Open a TinyCAD lib/symbol
+		OpenDocumentFile(LR"(".\test_files\TinyCAD\DISCRETE.TCLib")");
 		break;
 	case 3:
-		//Open a TinyCAD lib symbol
-//		OpenDocumentFile(LR"("..\KiCAD_project\test.kicad_pcb")");
+		//Open a KiCAD PCB description
+//		OpenDocumentFile(LR"(".\test_files\KiCAD_project\test.kicad_pcb")");
 //		OpenDocumentFile(LR"(".\test_files\sonde xilinx.kicad_pcb")");
 		OpenDocumentFile(LR"(".\test_files\ecc83-pp.kicad_pcb")");
 		break;
@@ -213,7 +215,8 @@ BOOL CADApp::InitInstance()
 // ............................................................................
 int CADApp::ExitInstance()
 {
-	//TODO: handle additional resources you may have added
+	//TODO: handle additional resources you may have added'
+
 	AfxOleTerm(FALSE);
 
 	return HEWinApp::ExitInstance();
@@ -266,52 +269,58 @@ void CADApp::OnAppAbout( )
 // .......................................................................
 // .......................................................................
 
-void CADApp::OnFileOpenbxlfile( )
+///removed bxl header dependency, using BXL_Reader.lib
+void CADApp::OnFileOpenbxlfile()
 {
-	bfs::path path( "C:\\cpp\\TinyBXL\\project\\test_files\\MSP430G2253_PW_20.bxl" );
-	auto the_parser = Bridge::bxl;
-
-	std::ifstream in(path.wstring(), std::ios::binary);
-	std::string bxl_text;
-
-	//decompress the bxl file
-	{
-		BXLReader::Buffer reader( in );
-		std::string result = reader.decode_stream( );
-
-		//visual dump
-		std::ofstream os("./bxl_output.txt");
-		os.write(result.c_str(), result.size());
-
-		bxl_text = result;
-	}
-
-	//std::cout << "\n\n" << "parse the BXL\n\n";
-
-	using namespace boost::spirit::x3;
-	typedef std::string::const_iterator iterator_type;
-
-	Component::ComponentStore comp;
-	iterator_type begin = bxl_text.begin();
-	iterator_type end = bxl_text.end();
-	bool r = phrase_parse(begin, end, the_parser, space, comp);
-	//std::cout << std::boolalpha << "pass: " << r << std::endl;
-
-	//POSITION pos = m_pDocManager->GetFirstDocTemplatePosition();
-	//CDocTemplate* pTemplate;
-
-	CDocTemplate* pTemplate = m_pDocManager->GetBestTemplate(L"dummy.bxl");
-	pTemplate->OpenDocumentFile(path.wstring().c_str());
-	//for (;;)
-	//{
-	//	POSITION pos;
-	//	pos = m_pDocManager->GetFirstDocTemplatePosition();
-	//	pTemplate = m_pDocManager->GetNextDocTemplate(pos);
-	//	if (pTemplate->
-	//}
-	//CDocTemplate* pTemplate = m_pDocManager->GetNextDocTemplate(pos);
-	//pTemplate->OpenDocumentFile(NULL);
 }
+
+//void CADApp::OnFileOpenbxlfile( )
+//{
+//	//"C:\cpp\ECAD\project\test_files\DS1000H308.bxl"
+//	bfs::path path( ".\\test_files\\DS1000H308.bxl" );
+//	auto the_parser = Bridge::bxl;
+//
+//	std::ifstream in(path.wstring(), std::ios::binary);
+//	std::string bxl_text;
+//
+//	//decompress the bxl file
+//	{
+//		BXLReader::Buffer reader( in );
+//		std::string result = reader.decode_stream( );
+//
+//		//visual dump
+//		std::ofstream os("./bxl_output.txt");
+//		os.write(result.c_str(), result.size());
+//
+//		bxl_text = result;
+//	}
+//
+//	//std::cout << "\n\n" << "parse the BXL\n\n";
+//
+//	using namespace boost::spirit::x3;
+//	typedef std::string::const_iterator iterator_type;
+//
+//	Component::ComponentStore comp;
+//	iterator_type begin = bxl_text.begin();
+//	iterator_type end = bxl_text.end();
+//	bool r = phrase_parse(begin, end, the_parser, space, comp);
+//	//std::cout << std::boolalpha << "pass: " << r << std::endl;
+//
+//	//POSITION pos = m_pDocManager->GetFirstDocTemplatePosition();
+//	//CDocTemplate* pTemplate;
+//
+//	CDocTemplate* pTemplate = m_pDocManager->GetBestTemplate(L"dummy.bxl");
+//	pTemplate->OpenDocumentFile(path.wstring().c_str());
+//	//for (;;)
+//	//{
+//	//	POSITION pos;
+//	//	pos = m_pDocManager->GetFirstDocTemplatePosition();
+//	//	pTemplate = m_pDocManager->GetNextDocTemplate(pos);
+//	//	if (pTemplate->
+//	//}
+//	//CDocTemplate* pTemplate = m_pDocManager->GetNextDocTemplate(pos);
+//	//pTemplate->OpenDocumentFile(NULL);
+//}
 
 // .......................................................................
 // .......................................................................

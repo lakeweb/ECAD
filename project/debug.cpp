@@ -7,6 +7,7 @@
          BG_WHITE   = BACKGROUND_INTENSITY+BG_GREY,
 */
 
+/*
 void Create_STD_OUT_Console( )
 {
 //create a console for standard output
@@ -18,4 +19,5 @@ void Create_STD_OUT_Console( )
     freopen_s( &stream, "CON", "wt", stdout );
 	SetConsoleTextAttribute( con, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY );
 }
+*/
 

@@ -19,7 +19,7 @@ Drawing.h
 
 
 
-DrawingObects : top level container for drawing
+DrawingObect : top level container for drawing
 	wrapper for object_set_t called only ItemSet for now.
 
 ItemSet
@@ -45,3 +45,9 @@ So each polygon is stored on a ItemSet.
 			//geometry does not support curves in a linestring so....
 
 
+Note that CppSQLite3U is rather unusable. The only reason it is in here is for tinylib
+	it will be updated.....
+
+On the local system, symlinks are set for:
+folder: <include/xml.h>
+file: <BXLReader/BXL_Component.h>

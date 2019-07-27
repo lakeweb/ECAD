@@ -1,12 +1,7 @@
 
 
-//todo: after creating this class I got a couple of memory leaks..
+//HeWinApp.cpp
 
-//TODO !!!!!! BIG ONE this memory was allocated in the xml dll; Must destroy there!
-//and better yet, use a smart pointer that does so
-
-
-//#include "../include/xml.h"
 #include "stdafx.h"
 #include "../stdafx.h"
 #include <debug.h>
@@ -62,7 +57,7 @@ bool XMLSettingsStore::OpenXML( LPCTSTR psPathFile )
 
 	*sp_currentNode= sp_xml->get_current_node( );
 	SWLOG(L"OpenXML: " << psPathFile << " " << sp_currentNode->name( ) )
-	SRLOG("OpenXML: " << pugi::as_utf8(psPathFile) << " " << sp_currentNode->name())
+	SRLOG("OpenXML: " << to_utf8(psPathFile) << " " << sp_currentNode->name())
 	return *sp_currentNode;// ->IsValid();
 }
 
@@ -86,7 +81,7 @@ XMLSettingsStore::XMLSettingsStore(BOOL bAdmin, BOOL bReadOnly)
 // .................................................................
 void XMLSettingsStore::SetCurrentNode( LPCTSTR psNode )
 {
-	*sp_currentNode = sp_xml->GetNode(pugi::as_utf8(psNode),m_bReadOnly);
+	*sp_currentNode = sp_xml->GetNode(to_utf8(psNode),m_bReadOnly);
 }
 
 // .................................................................
@@ -122,7 +117,7 @@ bool XMLSettingsStore::MakePath( LPCTSTR psIn, CString& strIn )
 	}
 	strIn = strT;
 	SWLOG( L"makepath: " << (LPCTSTR)strT )
-	SRLOG( "makepath: " << pugi::as_utf8( (LPCTSTR)strT ) )
+	SRLOG( "makepath: " << to_utf8( (LPCTSTR)strT ) )
 	return bNoDummy;
 }
 
@@ -134,8 +129,8 @@ BOOL XMLSettingsStore::Open( LPCTSTR lpszPath )
 		return FALSE;
 
 	SWLOG(L" REG Open " << (LPCTSTR)strT << " ro: " << (m_bReadOnly ? _T("true") : _T("false")));
-	SRLOG( " REG Open " << pugi::as_utf8(strT) << " ro: " << (m_bReadOnly ? "true" : "false"));
-	auto check= *sp_currentNode = sp_xml->GetNode(pugi::as_utf8(strT), ! m_bReadOnly);
+	SRLOG( " REG Open " << to_utf8(strT) << " ro: " << (m_bReadOnly ? "true" : "false"));
+	auto check= *sp_currentNode = sp_xml->GetNode(to_utf8(strT), ! m_bReadOnly);
 	SRLOG( "        found: " << check.name() << std::endl)
 	return !! *sp_currentNode;
 }
@@ -152,7 +147,7 @@ BOOL XMLSettingsStore::CreateKey( LPCTSTR lpszPath )
 		ASSERT( FALSE );
 		return FALSE;
 	}
-	*sp_currentNode = sp_xml->GetNode(pugi::as_utf8(strT), ! m_bReadOnly);//testing
+	*sp_currentNode = sp_xml->GetNode(to_utf8(strT), ! m_bReadOnly);//testing
 	SWLOG( L" makekey: " << (LPCTSTR)strT );
 	return !! *sp_currentNode;
 }
@@ -170,15 +165,15 @@ void XMLSettingsStore::Close( )
 // .................................................................
 BOOL XMLSettingsStore::Read(LPCTSTR lpszValueName, int& nValue)
 {
-	SRLOG("  int name: " << pugi::as_utf8(lpszValueName) << " \tval: " << nValue)
+	SRLOG("  int name: " << to_utf8(lpszValueName) << " \tval: " << nValue)
 		return Read(lpszValueName, (DWORD&)nValue);
 }
 
 // .................................................................
 BOOL XMLSettingsStore::Read(LPCTSTR lpszValueName, DWORD& dwValue)
 {
-	auto node= sp_currentNode->GetElement(pugi::as_utf8(lpszValueName), dwValue, ! m_bReadOnly);
-	SRLOG( "  DWORD name: " << pugi::as_utf8(lpszValueName) << " \tval: " << dwValue )
+	auto node= sp_currentNode->GetElement(to_utf8(lpszValueName), dwValue, ! m_bReadOnly);
+	SRLOG( "  DWORD name: " << to_utf8(lpszValueName) << " \tval: " << dwValue )
 	return node ? TRUE : FALSE;
 }
 
@@ -190,9 +185,9 @@ BOOL XMLSettingsStore::Read(LPCTSTR lpszValueName, CString& strValue)
 	strValue.Empty( );
 
 	std::string sval;
-	auto node= sp_currentNode->GetElement(pugi::as_utf8(lpszValueName), sval, ! m_bReadOnly);
+	auto node= sp_currentNode->GetElement(to_utf8(lpszValueName), sval, ! m_bReadOnly);
 
-	SRLOG( "  string name: " << pugi::as_utf8(lpszValueName) 
+	SRLOG( "  string name: " << to_utf8(lpszValueName)
 		<< " \tval: " << sval 
 		<< " tf: " << (node ? "true" : "false") )
 
@@ -209,12 +204,12 @@ BOOL XMLSettingsStore::Read(LPCTSTR lpszValueName, BYTE** ppData, UINT* pcbData)
 	*ppData = NULL;
 	*pcbData = 0;
 
-	if( m_bReadOnly && ! sp_currentNode->GetElement(pugi::as_utf8(lpszValueName).c_str()))
+	if( m_bReadOnly && ! sp_currentNode->GetElement(to_utf8(lpszValueName).c_str()))
 		return FALSE;
 
-	auto node = sp_currentNode->GetElementArray(pugi::as_utf8(lpszValueName).c_str(), ppData, pcbData);
+	auto node = sp_currentNode->GetElementArray(to_utf8(lpszValueName).c_str(), ppData, pcbData);
 
-	SRLOG("  BYTE name: " << pugi::as_utf8(lpszValueName) << " \tCNT: " << *pcbData
+	SRLOG("  BYTE name: " << to_utf8(lpszValueName) << " \tCNT: " << *pcbData
 		<< " tf: " << (node ? "true" : "false") << " loc: " << std::hex << "0x" << (unsigned long)*ppData );
 
 	return node ? TRUE : FALSE;
@@ -255,7 +250,7 @@ BOOL XMLSettingsStore::Read( LPCTSTR lpszValueName, CObject& obj )
 		SRLOG("CArchiveException exception in XMLSettingsStore::Read()!\n");
 	}
 
-	SRLOG( "  Object name: " << pugi::as_utf8( lpszValueName ) << " \tSIZE: " << uDataSize )
+	SRLOG( "  Object name: " << to_utf8( lpszValueName ) << " \tSIZE: " << uDataSize )
 	delete [] pData;
 	return bSucess;
 }
@@ -295,7 +290,7 @@ BOOL XMLSettingsStore::Read( LPCTSTR lpszValueName, CObject*& pObj )
 		SRLOG("CArchiveException exception in XMLSettingsStore::Read()!\n");
 	}
 
-	SRLOG( "  Object name: " << pugi::as_utf8( lpszValueName ) << " \tPTR SIZE: " << uDataSize )
+	SRLOG( "  Object name: " << to_utf8( lpszValueName ) << " \tPTR SIZE: " << uDataSize )
 	delete [] pData;
 	return bSucess;
 }
@@ -307,7 +302,7 @@ BOOL XMLSettingsStore::Read( LPCTSTR lpszValueName, CRect& rect )
 
 	size_t check;
 	DWORD* ptr;
-	XMLNODE child = sp_currentNode->GetElementArray(pugi::as_utf8(lpszValueName).c_str(), &ptr, &check);
+	XMLNODE child = sp_currentNode->GetElementArray(to_utf8(lpszValueName).c_str(), &ptr, &check);
 	if (!child)
 	{
 		SRLOG(" read rect return FALSE");
@@ -316,7 +311,7 @@ BOOL XMLSettingsStore::Read( LPCTSTR lpszValueName, CRect& rect )
 	assert(check == 4);
 	memcpy((void*)((LPCRECT)rect), ptr, sizeof(RECT));
 	delete[]ptr;
-	SRLOG( "Rect name: " << pugi::as_utf8( lpszValueName )\
+	SRLOG( "Rect name: " << to_utf8( lpszValueName )\
 		<< " \t val: " << rect.top << " " << rect.left << " " << rect.bottom << " " << rect.right )
 	return TRUE;
 }
@@ -352,7 +347,7 @@ BOOL XMLSettingsStore::Write(LPCTSTR lpszValueName, LPCTSTR lpszData)
 		return FALSE;
 	}
 	SWLOG( L"  str: " << lpszValueName << L" d: " << lpszData );
-	sp_currentNode->SetElement(pugi::as_utf8(lpszValueName), pugi::as_utf8(lpszData));
+	sp_currentNode->SetElement(to_utf8(lpszValueName), to_utf8(lpszData));
 	return TRUE;
 }
 
@@ -574,7 +569,9 @@ void HEWinApp::MRU_ReadXML( XMLNODE& node )
 	size_t j = 0;
 	for( auto& item : node )
 		if ( std::string("projMRU") == item.name())
-			m_pRecentFileList->m_arrNames[ j++ ]= item.first_child().value();
+			//12/21/18 till upgrade of recent file list? check if exist...
+			if(bfs::exists(item.first_child().value()))
+				m_pRecentFileList->m_arrNames[ j++ ]= item.first_child().value();
 }
 
 // .......................................................................
@@ -604,7 +601,7 @@ UINT HEWinApp::GetProfileInt(LPCTSTR lpszSection, LPCTSTR lpszEntry, int nDefaul
 	strT.Replace( _T('\\'), _T('/') );
 	CSettingsStoreSP regSP;
 	XMLSettingsStore* pReg = dynamic_cast< XMLSettingsStore* >( &regSP.Create( FALSE, TRUE ) );
-	XMLNODE node= pReg->sp_xml->GetNode( pugi::as_utf8(strT) );
+	XMLNODE node= pReg->sp_xml->GetNode(to_utf8(strT));
 	if( ! node )
 		return nDefault;
 	node.GetElement( lpszEntry, nDefault );
@@ -619,7 +616,7 @@ BOOL HEWinApp::WriteProfileInt(LPCTSTR lpszSection, LPCTSTR lpszEntry, int nValu
 	strT.Replace( _T('\\'), _T('/') );
 	CSettingsStoreSP regSP;
 	XMLSettingsStore* pReg = dynamic_cast< XMLSettingsStore* >( &regSP.Create( FALSE, FALSE ) );
-	XMLNODE node= pReg->sp_xml->GetNode(pugi::as_utf8(strT));
+	XMLNODE node= pReg->sp_xml->GetNode(to_utf8(strT));
 	if( ! node )
 		return FALSE;
 	return !! node.SetElement( lpszEntry, nValue );
@@ -646,54 +643,4 @@ void HEWinApp::SaveCustomState( )
 void HEWinApp::XMLSaveState( CFrameImpl* pFrame )
 {
 }
-
-//////////////////////////////////////////////////////////////////////////////
-// XMLSettingsStoreSP - Helper class that manages "safe" XMLSettingsStore pointer
-/*
-CRuntimeClass* XMLSettingsStoreSP::m_pRTIDefault = NULL;
-
-BOOL __stdcall XMLSettingsStoreSP::SetRuntimeClass(CRuntimeClass* pRTI)
-{
-	if (pRTI != NULL &&
-		!pRTI->IsDerivedFrom(RUNTIME_CLASS(XMLSettingsStore)))
-	{
-		ASSERT(FALSE);
-		return FALSE;
-	}
-
-	m_pRTIDefault = pRTI;
-	return TRUE;
-}
-
-XMLSettingsStore& XMLSettingsStoreSP::Create(BOOL bAdmin, BOOL bReadOnly)
-{
-	if (m_pRegistry != NULL)
-	{
-		ASSERT(FALSE);
-		ASSERT_VALID(m_pRegistry);
-		return *m_pRegistry;
-	}
-
-	if (m_pRTIDefault == NULL)
-	{
-		m_pRegistry = new XMLSettingsStore;
-	}
-	else
-	{
-		ASSERT(m_pRTIDefault->IsDerivedFrom(RUNTIME_CLASS(XMLSettingsStore)));
-		m_pRegistry = DYNAMIC_DOWNCAST(XMLSettingsStore, m_pRTIDefault->CreateObject());
-	}
-
-	ASSERT_VALID(m_pRegistry);
-
-	m_pRegistry->m_bReadOnly = bReadOnly;
-	m_pRegistry->m_bAdmin = bAdmin;
-	m_pRegistry->m_reg.m_hKey = bAdmin ? HKEY_LOCAL_MACHINE : HKEY_CURRENT_USER;
-	m_pRegistry->m_dwUserData = m_dwUserData;
-
-	return *m_pRegistry;
-}
-
-
-*/
 

@@ -6,12 +6,12 @@
 #include "ECAD.h"
 
 // ...................................................................
-//DrawingObects  BXL_to_CAD(const bfs::path& path )
+//DrawingObect  BXL_to_CAD(const bfs::path& path )
 //{
 //	auto store = GetBXLStoreFromPath(path);
 //
-//	layer_set_t layers;
-//	DrawingObects objs( layers );
+//	sp_layer_set_type layers;
+//	DrawingObect objs( layers );
 //
 //	//convert the BXL object to our CAD
 //

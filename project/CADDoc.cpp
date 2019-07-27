@@ -6,8 +6,13 @@
 
 #include "cad_full.h"
 #include "CADDoc.h"
+
+//so as to save view state
+#include "Scroller.h"
+#include "CADView.h"
+
 #include "dxf.h"
-#include "CADParse.h"
+//#include "CADParse.h"
 
 // ..........................................................................
 IMPLEMENT_DYNCREATE( CADDoc, CDocument )
@@ -19,6 +24,29 @@ END_MESSAGE_MAP( )
 // ..........................................................................
 BOOL CADDoc::OnCmdMsg( UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo )
 {
+	auto cmd = LOWORD(nCode);
+	if (HIWORD(nCode) == WM_NOTIFY)
+	{
+		DocNotifyObject* pHdr = (DocNotifyObject*)((AFX_NOTIFY*)pExtra)->pNMHDR;
+		switch (cmd)
+		{
+		case ID_LAYERTREE_CHANGED:
+		{
+			pHdr->id;
+			auto it = std::find_if(GetLayers().begin(), GetLayers().end(),
+				[&pHdr](const cad_layer& layer) {return layer.tree_id == pHdr->id; });
+			if (it != GetLayers().end())
+			{
+				const_cast<cad_layer&>(*it).enabled = pHdr->bVal;
+				UpdateAllViews(nullptr, ID_INVALIDATE);
+			}
+			return TRUE;
+			break;
+		}
+		default:
+			break;
+		}
+	}
 	//if ( HIWORD(nCode) == WM_NOTIFY )
 	//{
 	//	LPNMHDR pHdr= ((AFX_NOTIFY*)pExtra)->pNMHDR;
@@ -37,7 +65,7 @@ BOOL CADDoc::OnCmdMsg( UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pH
 
 // ..........................................................................
 CADDoc::CADDoc( )
-	:drawobj( layers )
+//	:drawobj( layers )
 {
 }
 
@@ -88,6 +116,52 @@ BOOL CADDoc::OnNewDocument( )
 	test( );
 
 	return TRUE;
+}
+
+// ..........................................................................
+void CADDoc::OnCloseDocument()
+{
+	CXML xml;
+	xml.Open(get_user_folder()/"test_view_state.xml");//same as create new doc
+
+	//Though the doc may not be modified, the state of the view(s) will be....
+	auto pos = GetFirstViewPosition();
+	for (; pos; )
+	{
+		CADView* pv = dynamic_cast<CADView*>(GetNextView(pos));
+		ASSERT_VALID(pv);
+		pv->SaveXML(xml.GetNode("/root"));
+	}
+	xml.Close();
+	CDocument::OnCloseDocument();
+}
+
+// ..........................................................................
+BOOL CADDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	return TRUE;
+	//Ok, so far this is not going to work
+	//too much doc/view baggage....
+	CXML xml;
+	xml.Open(get_user_folder() / "test_view_state.xml");//same as create new doc
+	//and this won't work very well
+	auto pos = GetFirstViewPosition();
+	for (; pos; )
+	{
+		CADView* pv = dynamic_cast<CADView*>(GetNextView(pos));
+		ASSERT_VALID(pv);
+		pv->ReadXML(xml.GetNode("/root"));
+	}
+		//std::ifstream in( lpszPathName, std::ios_base::in );
+		//if( ! in.is_open( ) )
+		//	assert( false );
+
+		////if( ! CadParse( in, &drawobj ) )
+		////	return FALSE;
+
+		//// TODO:  Add your specialized creation code here
+
+		return TRUE;
 }
 
 // ..........................................................................
@@ -189,21 +263,6 @@ void CADDoc::OnFileExport( )
 }
 
 // ..........................................................................
-BOOL CADDoc::OnOpenDocument( LPCTSTR lpszPathName )
-{
-	std::ifstream in( lpszPathName, std::ios_base::in );
-	if( ! in.is_open( ) )
-		assert( false );
-
-	if( ! CadParse( in, &drawobj ) )
-		return FALSE;
-
-	// TODO:  Add your specialized creation code here
-
-	return TRUE;
-}
-
-// ..........................................................................
 void CADDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
@@ -286,4 +345,5 @@ void CADDoc::SetSearchContent(const CString& value)
 }
 
 #endif // SHARED_HANDLERS
+
 

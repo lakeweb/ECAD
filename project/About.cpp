@@ -1,7 +1,7 @@
 
 #define USE_WINDOWS_EX
 #include "stdafx.h"
-#include <globals.h>
+//#include <globals.h>
 #include "resource.h"
 #include "app_share.h"
 #include "About.h"

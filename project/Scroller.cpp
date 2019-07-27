@@ -22,82 +22,72 @@ void WinScroller::SetTargetSize(int targetWidth, int targetHeight)
 }
 
 // ............................................................................
-bool WinScroller::UpdateScrollInfo( )
-{
-    if( m_attachWnd == NULL )
-        return false;
-
-    // Get the width/height of the attached wnd that includes the area
-    // covered by the scrollbars (if any). The reason we need this is
-    // because when scrollbars are present, both cx/cy and GetClientRect()
-    // when accessed from OnSize() do not include the scrollbar covered
-    // areas. In other words, their values are smaller than what you would
-    // expect.
-    CRect rect;
-    GetClientRectSB( m_attachWnd, rect );
-	scroller_screen_size.SetSize( rect.Width(),rect.Height());
-	//std::cout << "UpdateScrollInfo: " << rect
-	//	<< " target: " << scroller_target_size
-	//	<< " screen: " << scroller_screen_size << std::endl;
-    CSize windowSize( rect.Width( ), rect.Height( ) );
-
-    CSize deltaPos( 0, 0 );
-    UpdateScrollBar( SB_HORZ, windowSize.cx, scroller_target_size.cx, scroller_screen_size.cx, m_scrollPos.cx, deltaPos.cx );
-
-    UpdateScrollBar( SB_VERT, windowSize.cy, scroller_target_size.cy, scroller_screen_size.cy, m_scrollPos.cy, deltaPos.cy );
-	return false;
-}
-
-// ............................................................................
 BOOL WinScroller::OnMouseWheel(CSize ratio, CPoint ptMouse)
 {
 	if (m_attachWnd == NULL)
 		return FALSE;
 
-	//we will use move mouse cursor method
 	//TODO, should be otional to zoom on current mouse position
 	::ScreenToClient(m_attachWnd->GetSafeHwnd(), &ptMouse);
 
 	CRect rect;
 	GetClientRectSB(m_attachWnd, rect);
 
-	CPoint np(rect.Width() / 2, rect.Height() / 2);
-	CPoint new_cent(ptMouse + m_scrollPos);
-	CPoint new_spos(::MulDiv(ratio.cy, new_cent.x, ratio.cx), ::MulDiv(ratio.cy, new_cent.y, ratio.cx));
-	new_spos -= np;
-	m_scrollPos = new_spos;
-
 	CPoint new_size(::MulDiv(ratio.cy, scroller_target_size.cx, ratio.cx), ::MulDiv(ratio.cy, scroller_target_size.cy, ratio.cx));
-	scroller_target_size = new_size;
-
-	::ClientToScreen(m_attachWnd->GetSafeHwnd(), &np);
-	//SetCursorPos( np.x, np.y );
+	std::cout << "new scroll size: " << scroller_target_size << std::endl;
+	if (bEnabled)
+	{
+		scroller_target_size = new_size;
+		CPoint new_cent(ptMouse + m_scrollPos);
+		CPoint new_spos(::MulDiv(ratio.cy, new_cent.x, ratio.cx), ::MulDiv(ratio.cy, new_cent.y, ratio.cx));
+		m_scrollPos = new_spos;
+	}
+	else
+	{
+		auto x = new_size.x - scroller_target_size.cx;
+		x = ::MulDiv(x, ptMouse.x, scroller_target_size.cx);
+		m_scrollPos.cx += x;
+		auto y = new_size.y - scroller_target_size.cy;
+		y = ::MulDiv(y, ptMouse.y, scroller_target_size.cy);
+		m_scrollPos.cy += y;
+		scroller_target_size = new_size;
+	}
 
 	UpdateScrollInfo();
-
-	//CPoint center( rect.Width( ) / 2, rect.Height( ) / 2 );
-	//CPoint new_size( ::MulDiv( ratio.cy, scroller_target_size.cx, ratio.cx ), ::MulDiv( ratio.cy, scroller_target_size.cy, ratio.cx ) );
-
-	//if( true )//if fixed pointer
-	//{
-	//	CPoint new_spos(
-	//		::MulDiv( ratio.cx, new_size.x, ratio.cy ), ::MulDiv( ratio.cx, new_size.y, ratio.cy ) );
-	//	//m_scrollPos= new_spos - ptMouse;
-	//}
-	//else if( false ) //move pointer to center
-	//{
-	//	CPoint new_cent( ptMouse + m_scrollPos );
-	//	CPoint new_spos( ::MulDiv( ratio.cy, new_cent.x, ratio.cx ), ::MulDiv( ratio.cy, new_cent.y, ratio.cx ) );
-	//	new_spos-= center;
-	//	m_scrollPos= new_spos;
-	//	SetCursorPos( center.x, center.y );
-	//}
-	//scroller_target_size= new_size;
-
-	//::ClientToScreen( m_attachWnd->GetSafeHwnd( ), &np );
-
-	//UpdateScrollInfo( );
 	return TRUE;
+}
+
+// ............................................................................
+bool WinScroller::UpdateScrollInfo()
+{
+	if (m_attachWnd == NULL)
+		return false;
+
+	// Get the width/height of the attached wnd that includes the area
+	// covered by the scrollbars (if any). The reason we need this is
+	// because when scrollbars are present, both cx/cy and GetClientRect()
+	// when accessed from OnSize() do not include the scrollbar covered
+	// areas. In other words, their values are smaller than what you would
+	// expect.
+	CRect rect;
+	GetClientRectSB(m_attachWnd, rect);
+	scroller_screen_size.SetSize(rect.Width(), rect.Height());
+
+	std::cout << "UpdateScrollInfo: "
+		<< " target: " << scroller_target_size
+		<< " screen: " << scroller_screen_size
+		<< " pos: " << GetScrollPos() << std::endl;
+	CSize windowSize(rect.Width(), rect.Height());
+
+	if (!bEnabled && bInit)
+		return false;
+
+	CSize deltaPos(0, 0);
+	UpdateScrollBar(SB_HORZ, windowSize.cx, scroller_target_size.cx, scroller_screen_size.cx, m_scrollPos.cx, deltaPos.cx);
+
+	UpdateScrollBar(SB_VERT, windowSize.cy, scroller_target_size.cy, scroller_screen_size.cy, m_scrollPos.cy, deltaPos.cy);
+	bInit = true;
+	return false;
 }
 
 // ............................................................................
@@ -107,7 +97,7 @@ void WinScroller::UpdateScrollBar(int bar, int windowSize, int displaySize,
 	//std::cout << "UpdateScrollBar: " << displaySize << std::endl;
     int scrollMax= 0;
     deltaPos= 0;
-    if ( windowSize < displaySize )
+    if ( windowSize < displaySize && bEnabled )
     {
         scrollMax= displaySize - 1;
         pageSize= windowSize;

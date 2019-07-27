@@ -1,0 +1,62 @@
+CMainFrame::OnInfoNotify other
+ target box: 0 0 0 0
+ offset x: 0 y: 0
+ zoom: 1
+
+CMainFrame::OnInfoNotify other
+ target box: 0 0 0 0
+ offset x: 0 y: 0
+ zoom: 1
+
+CMainFrame::OnInfoNotify other
+ target box: 0 0 0 0
+ offset x: 0 y: 0
+ zoom: 1
+
+CMainFrame::OnInfoNotify layer
+
+CMainFrame::OnInfoNotify other
+ target box: 0 0 0 0
+ offset x: 0 y: 0
+ zoom: 1
+
+CMainFrame::OnInfoNotify output
+view size: 474 474
+page size: 0 0
+winscale: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify other
+ target box: -39 -39 435 435
+ offset x: 39 y: 39
+ zoom: 0.519685
+
+CMainFrame::OnInfoNotify output
+view size: 474 474
+page size: 0 0
+winscale: 0.519685
+

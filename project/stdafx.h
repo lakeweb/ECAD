@@ -77,12 +77,6 @@ using bfs_vect_type = std::vector<bfs::path>;
 
 #include <boost/algorithm/string.hpp>
 
-#include "../BXLReader/BXL_Component.h"
-#include "../BXLReader/BXL_Decompress.h"
-#include "../BXLReader/BXL_Spirit.h"
-
-//#include "include/recent_list.h"
-
 // BOOST GEOMETERY
 #pragma warning(push)
 #pragma warning(disable: 4244)      // we are mixing doubles and __int64
@@ -122,7 +116,7 @@ namespace ba= boost::algorithm;
 
 #include <boost/range/algorithm/find_if.hpp>
 
-#include <typeswitch.h>
+#include "typeswitch.h"
 #include <boost/variant.hpp>
 
 //server access
@@ -136,10 +130,16 @@ namespace ba= boost::algorithm;
 #define USE_WINDOWS_EX
 //#include <ctrlext.h>
 
-#include <std_share.h>
+//#include <std_share.h>
 
-#include "c:\cpp/include/xml.h"
+#include <xml/xml.h>
 using namespace XML;
+#define to_utf8 pugi::as_utf8
+
+#include <BXL_Component.h>
+//#include "../BXLReader/BXL_Decompress.h"
+//#include "../BXLReader/BXL_Spirit.h"
+
 
 #include <globals.h>
 #include "gear_gen.h"
@@ -151,8 +151,8 @@ using namespace XML;
 AFX_STATIC_DATA LPCTSTR DUMMY_REGISTRY_PATH= _T("DummyPCBRegistryPath");
 AFX_STATIC_DATA LPCTSTR USER_SETTINGS_FILENAME= _T("settings.xml");
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 inline std::ostream& operator <<(std::ostream& os, const CSize& r) { return os << r.cx << " " << r.cy; }
 inline std::ostream& operator <<(std::ostream& os, const CRect& r) { return os << r.left << " " << r.top << " " << r.right << " " << r.bottom; }
-#endif
+//#endif
 

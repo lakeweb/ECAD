@@ -16,6 +16,9 @@
 #define new DEBUG_NEW
 #endif
 
+//dealing with docking panels............
+//https://www.codeproject.com/articles/493218/understanding-cdockablepane
+
 static HWND handle_to_main_window;
 //for now just used by TinyCADDoc to populate the lib tree.......
 //note, the Tiny call expects blocking as it comes from a thread.
@@ -37,16 +40,23 @@ LRESULT CMainFrame::OnInfoNotify(WPARAM wp, LPARAM lp)
 {
 	info_notify* pNote = reinterpret_cast< info_notify* >(wp);
 	assert(pNote->sig == 1234);//only in debug build
+
+
+	BUG_OS("CMainFrame::OnInfoNotify " << dbg_call_str[ pNote->the_call] << '\n' << pNote->str << std::endl);
 	switch (pNote->the_call)
 	{
 	case info_notify::other_info:
 		m_wndOutput.SetWindowInfo(*pNote);
 		break;
 
+	case info_notify::output_info:
+		m_wndOutput.SetWindowInfo(*pNote);
+		break;
+
 	case info_notify::layer:
 	{
-		auto pLayers = reinterpret_cast<layer_set_t*>(lp);
-		assert(typeid(*pLayers) == typeid(layer_set_t));
+		auto pLayers = reinterpret_cast<sp_layer_set_type*>(lp);
+		assert(typeid(*pLayers) == typeid(sp_layer_set_type));
 		layer_tree_view.LoadLayerView(*pLayers);
 		break;
 	}
@@ -68,7 +78,7 @@ LRESULT CMainFrame::OnInfoNotify(WPARAM wp, LPARAM lp)
 	 //	break;
 
 	 //case info_notify::layer:
-	 //	layer_tree_view.LoadLayerView( *reinterpret_cast< layer_set_t* >( lp ) );
+	 //	layer_tree_view.LoadLayerView( *reinterpret_cast< sp_layer_set_type* >( lp ) );
 	 //	break;
 	 //}
 	LRESULT lres = 0;
@@ -141,6 +151,8 @@ CMainFrame::CMainFrame()
 // ............................................................................
 CMainFrame::~CMainFrame()
 {
+	//theApp.SaveState(dynamic_cast<CMDIFrameWndEx*>(this), L"TestState");
+
 }
 
 // ..........................................................................
@@ -241,23 +253,38 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
-	m_wndFileView.EnableDocking(CBRS_ALIGN_ANY);
-	DockPane(&m_wndFileView);
 	CDockablePane* pTabbedBar = NULL;
 
 	layer_tree_view.EnableDocking(CBRS_ALIGN_ANY);
 	DockPane(&layer_tree_view);
-	layer_tree_view.AttachToTabWnd(&m_wndFileView, DM_SHOW, TRUE, &pTabbedBar);
+
+	m_wndFileView.EnableDocking(CBRS_ALIGN_ANY);
+	m_wndFileView.AttachToTabWnd(&layer_tree_view, DM_SHOW, TRUE, &pTabbedBar);
+
+
+	tinylib_yiew.EnableDocking(CBRS_ALIGN_ANY);
+	tinylib_yiew.AttachToTabWnd(&layer_tree_view, DM_SHOW, TRUE, &pTabbedBar);
+
+	//
+	//layer_tree_view.EnableDocking(CBRS_ALIGN_ANY);
+	//DockPane(&layer_tree_view);
+	////layer_tree_view.AttachToTabWnd(&m_wndFileView, DM_SHOW, TRUE, &pTabbedBar);
+
+	//tinylib_yiew.EnableDocking(CBRS_ALIGN_ANY);
+	//DockPane(&tinylib_yiew);
+	//tinylib_yiew.AttachToTabWnd(&layer_tree_view, DM_SHOW, TRUE, &pTabbedBar);
+	////
+	//m_wndFileView.EnableDocking(CBRS_ALIGN_ANY);
+	//m_wndFileView.AttachToTabWnd(&layer_tree_view, DM_SHOW, TRUE, &pTabbedBar);
+
+	//DockPane(&layer_tree_view);
+	//
 
 	m_wndOutput.EnableDocking(CBRS_ALIGN_ANY);
 	DockPane(&m_wndOutput);
 
 	m_wndProperties.EnableDocking(CBRS_ALIGN_ANY);
 	DockPane(&m_wndProperties);
-	//
-	tinylib_yiew.EnableDocking(CBRS_ALIGN_ANY);
-	DockPane(&tinylib_yiew);
-	tinylib_yiew.AttachToTabWnd(&m_wndFileView, DM_SHOW, TRUE, &pTabbedBar);
 	//
 	gear_dlg.EnableDocking( CBRS_ALIGN_ANY );
 	DockPane( &gear_dlg );
@@ -325,21 +352,21 @@ BOOL CMainFrame::CreateDockingWindows()
 {
 	BOOL bNameValid;
 
-	// Create TinyLib view
-	CString strTinyLibView;
-	bNameValid = strTinyLibView.LoadString(IDS_TINY_LIB_VIEW);
-	ASSERT(bNameValid);
-	if (!tinylib_yiew.Create(strTinyLibView, this, CRect(0, 0, 200, 200), TRUE, ID_VIEW_CLASSVIEW, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
-	{
-		TRACE0("Failed to create Class View window\n");
-		return FALSE; // failed to create
-	}
-
 	// Create Layer view
 	CString strLayerView;
 	bNameValid = strLayerView.LoadString(IDS_LAYER_VIEW);
 	ASSERT(bNameValid);
 	if (!layer_tree_view.Create(strLayerView, this, CRect(0, 0, 200, 200), TRUE, ID_VIEW_CLASSVIEW, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
+	{
+		TRACE0("Failed to create Class View window\n");
+		return FALSE; // failed to create
+	}
+
+	// Create TinyLib view
+	CString strTinyLibView;
+	bNameValid = strTinyLibView.LoadString(IDS_TINY_LIB_VIEW);
+	ASSERT(bNameValid);
+	if (!tinylib_yiew.Create(strTinyLibView, this, CRect(0, 0, 200, 200), TRUE, ID_VIEW_FILEVIEW, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | CBRS_LEFT | CBRS_FLOAT_MULTI))
 	{
 		TRACE0("Failed to create Class View window\n");
 		return FALSE; // failed to create
@@ -391,11 +418,11 @@ BOOL CMainFrame::CreateDockingWindows()
 // ..........................................................................
 void CMainFrame::SetDockingWindowIcons(BOOL bHiColorIcons)
 {
+	HICON hClassViewIcon = (HICON) ::LoadImage(::AfxGetResourceHandle(), MAKEINTRESOURCE(bHiColorIcons ? IDI_LAYER_VIEW_HC : IDI_LAYER_VIEW), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), 0);
+	layer_tree_view.SetIcon(hClassViewIcon, FALSE);
+
 	HICON hFileViewIcon = (HICON) ::LoadImage(::AfxGetResourceHandle(), MAKEINTRESOURCE(bHiColorIcons ? IDI_FILE_VIEW_HC : IDI_FILE_VIEW), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), 0);
 	m_wndFileView.SetIcon(hFileViewIcon, FALSE);
-
-	HICON hClassViewIcon = (HICON) ::LoadImage(::AfxGetResourceHandle(), MAKEINTRESOURCE(bHiColorIcons ? IDI_CLASS_VIEW_HC : IDI_CLASS_VIEW), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), 0);
-	layer_tree_view.SetIcon(hClassViewIcon, FALSE);
 
 	HICON hOutputBarIcon = (HICON) ::LoadImage(::AfxGetResourceHandle(), MAKEINTRESOURCE(bHiColorIcons ? IDI_OUTPUT_WND_HC : IDI_OUTPUT_WND), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), 0);
 	m_wndOutput.SetIcon(hOutputBarIcon, FALSE);

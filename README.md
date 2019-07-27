@@ -8,3 +8,8 @@ XMLSettingsStore derived from CSettingsStore and the use of pugixml. Find that i
 pugixml wrapper:
 In xml.h. Previously I had been using a crusty and bloated vesrsion of an XML wrapper around TinyXML. Tiny was hiden in that implamentation. It as worked fine for me for many years, but it was time to move on. The objective of this new pugi wrapper is to keep all of pugi exposed. But to make its use as a application database much easier. The use is already sprinkled about this app. It started with the XMLSettingsStore.
 
+12/23/2018
+BXL parser moved to lib.
+Deleted old spirit::qi code.
+Made it so recent file load won't crash on bad paths.
+Found a lot of header dependencies beyond the repository fixes and depreciated std::tstring stuff.

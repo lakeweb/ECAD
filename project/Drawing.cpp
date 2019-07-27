@@ -3,7 +3,6 @@
 #include "Geometry.h"
 #include "objects.h"
 #include "shared.h"
-//#include "./include/recent_list.h"
 #include "Drawing.h"
 
 #ifdef _DEBUG
@@ -13,6 +12,8 @@
 namespace {
 		// ..................................................................
 
+#define OBJ_OS(x) {std::cout << x;}
+//#define OBJ_OS(x) __noop;
 }
 // ...................................................................
 //https://stackoverflow.com/questions/29825498/sizing-font-to-fit-in-a-rectangle
@@ -39,10 +40,11 @@ LOGFONTW default_logfont = {
 };
 
 // ............................................................................
-DrawArea::DrawArea(CDC* pInDC, /*DrawingObects& inBoard, */DrawExtent& iDraw)
+DrawArea::DrawArea(CDC* pInDC, DrawExtent& iDraw)//, const sp_layer_set_type& layers)
 	:pDC(pInDC)
 	, draw(iDraw)
-//	, font(&default_logfont)
+	//, layers(layers)
+	//	, font(&default_logfont)
 	, pCurFont(nullptr)
 	, pCurPen(nullptr)
 {
@@ -53,7 +55,7 @@ DrawArea::DrawArea(CDC* pInDC, /*DrawingObects& inBoard, */DrawExtent& iDraw)
 // ............................................................................
 void DrawArea::SetPen(COLORREF color, double width, int style)
 {
-	size_t dwidth = (size_t)(width*draw.zoom/4);
+	size_t dwidth = (size_t)(width* (draw.zoom>1?draw.zoom:1));
 	auto it = pens.insert(PCPEN(color, dwidth, style));
 	if (it.second)
 		it.first->Create();
@@ -96,28 +98,30 @@ void DrawArea::Setfont(const font_ref& font)
 	auto wsize = font.width * draw.zoom;
 	if (!wsize) wsize = 1;
 	lf.lfWidth = (long)wsize;
-	std::cout << "font h: " << lf.lfHeight << " w: " << lf.lfWidth << std::endl;
 	//don't go directly to insert so as not to needlessly create fonts.
-	PCFONT nf(lf.lfHeight);//pseudo constructor....
+	PCFONT nf(lf.lfHeight,font.color);//pseudo constructor....
 
 	auto it = font_set.find(nf);
 	if (it == font_set.end())
 	{
-		auto fit = font_set.insert(PCFONT(&lf));
+		auto fit = font_set.insert(PCFONT(&lf,font.color));
 		assert(fit.second);
 		it = fit.first;
+		//std::cout << "font h: " << lf.lfHeight << " w: " << lf.lfWidth << std::endl;
 	}
 	if (pCurFont != &*it)
 	{
+		pDC->SelectObject(*it->sp_CFont);
+		if (pDC && (!pCurFont || it->color != pCurFont->color))
+			pDC->SetTextColor(it->color);
 		pCurFont = &*it;
-		pDC->SelectObject(*pCurFont->sp_CFont);
 	}
 }
 
 //// ............................................................................
-void DrawArea::SetBrush(const style_fill* sp_fill)
+void DrawArea::SetBrush(const SP_draw_style sp_fill)
 {
-	auto it = brushes.insert(PCBRUSH(sp_fill->fill_color, sp_fill->fill_pattern));
+	auto it = brushes.insert(PCBRUSH(sp_fill->fill_color, sp_fill->fill_style));
 	if (it.second)
 		it.first->Create();
 	if (it.first->spCBrush != pCurBrush)
@@ -127,32 +131,43 @@ void DrawArea::SetBrush(const style_fill* sp_fill)
 	}
 }
 
-void DrawArea::SetStyle(const SP_style_base sp_fill)
+using namespace ObjectSpace;
+void DrawArea::SetStyle(const SP_draw_style sp_style)
 {
+	if (sp_style == sp_last_style)
+		return;
+
+	sp_last_style = sp_style;
+
+	if (sp_style->pen_style != psNull) {
+		SetPen(sp_style);
+	}
+	if( sp_style->fill_style != bsNull) {
+		SetBrush(sp_style);
+	}
 }
 
 // ............................................................................
-void DrawArea::DrawObjects( const DrawingObects& objs )
+void DrawArea::DrawObjects( const DrawingObect& objs )
 {
-	const layer_set_t& layers= objs.get_layers( );
-	for( auto bit= objs.primitives.begin( ); bit != objs.primitives.end( ); ++bit )
+//	players = &objs.get_layers();
+
+	OBJ_OS( "\nDrawObjects: " << objs.size() << std::endl);
+
+	for( auto bit : objs.primitives)
 	{
-		auto layer= layers.find(cad_layer( bit->GetLayer( ), nullptr ) );
-		if (! layer->enabled)
+		auto lit = std::find_if(objs.layers.begin(), objs.layers.end(),
+			[&bit](const cad_layer& is) { return bit.layer_id == is.id; });
+
+		if (lit != objs.layers.end() && !lit->enabled)
 			continue;
-		if (bit->GetStyleFill())
-			SetBrush(bit->GetStyleFill());
-		if (bit->GetStyleLine())
-			SetPen(bit->GetStyleLine());
-		for( auto it= bit->cbegin(); it != bit->cend(); ++it )
+
+		//OBJ_OS("  Drawing Primatives layer: " << lit->id << std::endl);
+		SetStyle(bit.sp_style);
+		for( auto it= bit.cbegin(); it != bit.cend(); ++it )
 		{
-			auto pset = dynamic_cast<ItemSet*>(it->get());
-			if (pset)
-			{
-				SetBrush(it->get()->GetStyleFill());
-				SetPen(it->get()->GetStyleLine());
-			}
 			if (!it->get()) continue;
+			auto pset = dynamic_cast<ItemSet*>(it->get());
 			if (it->get()->HasDraw())
 				(*it)->draw(*this);
 			else
@@ -163,34 +178,73 @@ void DrawArea::DrawObjects( const DrawingObects& objs )
 
 // ............................................................................
 // adapted from: http://stackoverflow.com/questions/22822836/type-switch-construct-in-c11
-void DrawArea::DrawObject( const BaseItem& obj)
+void DrawArea::DrawObject(const BaseItem& obj)
 {
+	if (auto sp_is = dynamic_cast<const ItemSet*>(&obj))
+	{
+		//if (sp_is->layer != -1)// && (layers.size() || !layers[obj.layer].enabled)
+		//	//&& !dynamic_cast<const ItemSet*>(&obj))
+		//	return;
+	}
+	auto test = dynamic_cast<const ItemSet*>(&obj);
+	if (test && test->bIsPolygon)
+		int thetest = 1;
 
-	typecase( obj,
-		[&](const PointItem& pa)	{ DrawPoint(pa.get_bg_point() ); },
-		[&](const LineItem& pa)		{ DrawLine(pa); },
-		[&](const ArcItem& pa)		{ DrawArc(pa); },
-		[&](const RectItem& pa)		{ DrawRect(pa.get_bg_box()); },
-		[&](const EllipesItem& pa)	{ DrawEllipes( pa.get_bg_box()); },
-		[&](const BezierCubeItem& pa) { DrawBezier(pa.get_point0(), pa.get_point1(), pa.get_point2(), pa.get_point3()); },
-		[&](const TextItem& pa)		{ DrawText(pa); },
-		[&](const ItemSet& pa)		{ DrawItemSet(pa); },
-		[&](const PolyItem& pa)		{ DrawPoly( pa.get_item() ); }
-	);
+	if (obj.sp_style)
+		SetStyle(obj.GetStyle());
+
+	OBJ_OS("  " << typeid(obj).name() << "  L: " << obj.layer << std::endl);
+	std::cout << obj.sp_style << std::endl;
+	
+	if (obj.fdraw)
+		obj.fdraw(*this);
+	else
+		typecase(obj,
+			[&](const PointItem& pa) { DrawPoint(pa.get_bg_point()); },
+			[&](const LineItem& pa) { DrawLine(pa); },
+			[&](const ArcItem& pa) { DrawArc(pa); },
+			[&](const RectItem& pa) { DrawRect(pa.get_bg_box()); },
+			[&](const EllipesItem& pa) { DrawEllipes(pa.get_bg_box()); },
+			[&](const BezierCubeItem& pa) { DrawBezier(pa.get_point0(), pa.get_point1(), pa.get_point2(), pa.get_point3()); },
+			[&](const TextItem& pa) { DrawText(pa); },
+			[&](const PolyItem& pa) { DrawPoly(pa.get_item()); },
+			[&](const ItemSet& pa) { if (pa.bIsPolygon) DrawPolySet(pa); else DrawItemSet(pa); }
+			);
+}
+
+void DrawArea::DrawItemSet(const ItemSet& obj)
+{
+	SetStyle(obj.GetStyle());
+	if (obj.sp_font)
+		Setfont(*obj.sp_font);
+	for (auto it = obj.cbegin(); it != obj.cend(); ++it)
+		DrawObject(*it->get());
+		//typecase(*it->get(),
+		//	[&](const PointItem& pa) { DrawPoint(pa.get_bg_point()); },
+		//	[&](const LineItem& pa) { DrawLine(pa); },
+		//	[&](const ArcItem& pa) { DrawArc(pa); },
+		//	[&](const RectItem& pa) { DrawRect(pa.get_bg_box()); },
+		//	[&](const EllipesItem& pa) { DrawEllipes(pa.get_bg_box()); },
+		//	[&](const BezierCubeItem& pa) { DrawBezier(pa.get_point0(), pa.get_point1(), pa.get_point2(), pa.get_point3()); },
+		//	[&](const TextItem& pa) { DrawText(pa); },
+		//	[&](const ItemSet& pa) { if (pa.bIsPolygon) DrawPolySet(pa); else DrawItemSet(pa); },
+		//	[&](const PolyItem& pa) { DrawPoly(pa.get_item()); }
+		//);
 }
 
 // ............................................................................
-void DrawArea::DrawItemSet(const ItemSet& set)
+void DrawArea::DrawPolySet(const ItemSet& set)
 {
 	if (!set.size())
 		return;
-	const style_fill* ss = dynamic_cast<const style_fill*>(set.GetStyleFill());
-	if (ss)
+
+	std::cout << std::boolalpha << "Drawing Polyset: " << set.bIsPolygon << " \n";
+	if (set.bIsPolygon)
 	{
-		if (ss->fill_pattern != BS_NULL)//so far, here we assume  the item is a closed polygon.
+		if (set.GetStyle()->fill_style != bsNull)//so far, here we assume  the item is a closed polygon.
 			pDC->BeginPath();
-		SetBrush(ss);
-		SetPen(ss->line_color, 1, ss->fill_pattern);
+
+		SetStyle(set.GetStyle());
 	}
 	typecase(*set.front().get(),
 		[&](const PointItem& pa) {pDC->MoveTo(GetDrawPoint(pa.get_bg_point())); },
@@ -218,7 +272,7 @@ void DrawArea::DrawItemSet(const ItemSet& set)
 			[&](const PolyItem& pa) {}
 		);
 	}
-	if (ss->fill_pattern != BS_NULL)
+	if (set.bIsPolygon && set.GetStyle()->fill_style != bsNull)
 	{
 		pDC->EndPath();
 		pDC->StrokeAndFillPath();
@@ -247,7 +301,18 @@ void DrawArea::DrawPoint( const bg_point pt ) //temp
 
 // ............................................................................
 // ............................................................................
-
+void DrawArea::DrawLine(const LineItem& line)
+{
+	//if (line.sp_style && GetFillStyle() != line.sp_style.get())
+	//	SetPen(dynamic_cast<style_fill*>(line.sp_style.get()));
+	//BUG_OS(" width: " << dynamic_cast<const SegItem&>(line).width
+	//	<< " color: " << dynamic_cast<style_fill*>(line.sp_style.get())->line_color
+	//	<< std::endl;
+	//);
+	pDC->MoveTo(GetDrawPoint(line.get_bg_line().first));
+	pDC->LineTo(GetDrawPoint(line.get_bg_line().second));
+	void DrawLine(const bg_line& line);
+}
 
 // ............................................................................
 void DrawArea::DrawGrid( )
@@ -308,7 +373,7 @@ inline bg_box GetBGRect(LPRECT pRect)
 
 //// ............................................................................
 // ............................................................................
-//#define TEXT_TESTING
+#define TEXT_TESTING
 void DrawArea::DrawText(const TextItem& text)
 {
 	//if (!text.val.size())
@@ -319,17 +384,16 @@ void DrawArea::DrawText(const TextItem& text)
 	//Need to get font params from this.
 	//size_t font_height = text.font ? text.font : 100;// phsudo default
 	//if(*text.font.face != '\0')//GetTextExtent will fail otherwise
-	Setfont(text.font);
+	if(text.sp_font)
+		Setfont(*text.sp_font);
 	auto ext = pDC->GetTextExtent(text.val.c_str(), text.val.size());
 	long tx = (long)(text.pos.get_x() * draw.zoom + draw.off_x);
 	long ty = (long)(text.pos.get_y() * draw.zoom + draw.off_y);
 	CRect rect(tx, ty, tx + ext.cx, ty + ext.cy); //default is UpperLeft
 #ifdef TEXT_TESTING
-	SetPen(RGB(0, 200, 0), 3, PS_DASH, true);
-	pDC->Rectangle(rect);
-	PopPen();
+//	SetPen(draw_style(RGB(200, 100, 100), psSolid, 2, RGB(255, 0, 0)));
 #endif
-	//std::cout << pugi::as_utf8( text.val ) << " PRE  RECT: " << rect << std::endl;
+	OBJ_OS("   " << pugi::as_utf8( text.val ) << " PRE  RECT: " << rect << std::endl);
 	switch (text.just)
 	{
 	case jLeft: // 1
@@ -358,12 +422,6 @@ void DrawArea::DrawText(const TextItem& text)
 	rect.NormalizeRect();
 	pDC->DrawText(text.val.c_str(), text.val.size(), rect, DT_NOCLIP);
 	//std::cout << font_cur->height << std::endl;
-#ifdef TEXT_TESTING
-	std::cout << "  RECT: " << rect << std::endl;
-	SetPen(RGB(200, 0, 0), 3, PS_DASH, true);
-	pDC->Rectangle(rect);
-	PopPen();
-#endif
 }
 
 // ............................................................................
@@ -403,6 +461,56 @@ void DrawArea::DrawBoardCross( bg_point const& pt, size_t size )
 }
 
 // ............................................................................
+
+void sub_dump(std::ostream& os, const ItemSet& items, std::string space) {
+	space += "   ";
+	for (auto& item : const_cast<ItemSet&>(items))
+	{
+		auto si = dynamic_cast<ItemSet*>(item.get());
+		if (si)
+		{
+			uint32_t clr = 0xffffffff;
+			if (si->GetStyle())
+				clr= si->GetStyle()->fill_color;
+			os << space << "id: " << si->id << " clr: " << clr << std::endl;
+			sub_dump(os, *si, space);
+		}
+		else if(item.get())
+			os << space << *item << std::endl;
+	}
+};
+
+void DumpDrawingObects(std::ostream& os, DrawingObect& objs) {
+	for (const auto& subs : objs)
+		sub_dump(os, subs, "");
+}
+
+void DrawExtent::SaveXML(XMLNODE node)
+{
+	auto child = node.GetElement("ExtentState");
+	child.SetAttribute("x", off_x);
+	child.SetAttribute("y", off_y);
+	child.SetAttribute("zoom", zoom);
+	child.SetElementArray("rect", (DWORD*)(LPCRECT)rect_target,4);
+}
+
+void DrawExtent::ReadXML(XMLNODE node)
+{
+	auto child = node.GetElement("ExtentState");
+	off_x = child.GetAttributeInt("x");
+	off_y = child.GetAttributeInt("y");
+	zoom = child.GetAttributeDouble("zoom");
+	DWORD* ptr;
+	size_t check;
+	auto test= child.GetElementArray("rect", &ptr, &check);
+	if (!test)
+		return;
+	rect_target = (LPCRECT)ptr;
+	delete[]ptr;
+	bInitialized = true;
+}
+
+// ............................................................................
 void PinItem::draw(DrawArea& draw)
 {
 	draw.DrawLine(this->get_bg_line());
@@ -418,31 +526,7 @@ void PinItem::draw(DrawArea& draw)
 // ............................................................................
 void SegItem::draw(DrawArea& draw)
 {
-	draw.SetPen(GetStyleLine());
+//	draw.SetPen(GetStyleLine());
 	draw.DrawLine(this->get_bg_line());
 }
 
-std::ostream& operator<<(std::ostream& os, const PinItem& pin)
-{
-	os << "pin: " << pugi::as_utf8(pin.pin.val) << " name: " << pugi::as_utf8(pin.text.val)
-		<< "\n   orient: " << pin.orient << " pin_pos: " << pin.get_bg_line()
-		<< "\n   npos: " << pin.text.pos << " " << pin.text.just;
-	return os;
-}
-
-void sub_dump(std::ostream& os, const ItemSet& items, std::string space) {
-	space += "   ";
-	for (auto& item : const_cast<ItemSet&>(items))
-	{
-		auto si = dynamic_cast<ItemSet*>(item.get());
-		if (si)
-			sub_dump(os, *si, space);
-		else if(item.get())
-			os << space << *item << std::endl;
-	}
-};
-
-void DumpDrawingObects(std::ostream& os, DrawingObects& objs) {
-	for (const auto& subs : objs)
-		sub_dump(os, subs, "");
-}

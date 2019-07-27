@@ -92,6 +92,7 @@ namespace NSAssembly
 		ejUpperRight,
 		ejLowerLeft,
 		ejLowerRight,
+		ejMirror,
 	};
 	static struct pad_shapes {
 		const char* lable;
@@ -103,6 +104,7 @@ namespace NSAssembly
 	struct TextStyle
 	{
 		//	//TextStyle "H50s3" (FontWidth 3) (FontHeight 50) (FontCharWidth 25)
+		// KiCAD -> (effects(font(size 1.524 1.524) (thickness 0.381))
 		size_t width;
 		size_t height;
 		size_t char_width;
@@ -171,6 +173,7 @@ namespace NSAssembly
 		uint32_t id;
 		std::string name;
 		std::string type;
+		bool hide;
 	};
 	using LayerSet = std::vector<Layer>;
 
@@ -186,6 +189,18 @@ namespace NSAssembly
 	using CompTextSet = std::vector<CompText>;
 
 	// ..................................................
+	// (gr_text GND (at 162.56 81.28) (layer Dessus) (effects(font(size 1.524 1.524) (thickness 0.381)))	)
+	struct GRText {
+		std::string text;
+		PointEx pos;
+		std::string layer;
+		Point size;
+		double thick;
+		JUSTIFY just;
+	};
+	using BGTextSet = std::vector<GRText>;
+
+// ..................................................
 	struct PadShape
 	{
 		std::string name;
@@ -274,27 +289,42 @@ namespace NSAssembly
 	};
 	using SegmentSet = std::vector<Segment>;
 
+	struct KiVia
+	{
+		PointEx at;
+		double size;
+		string_vect layers;
+		size_t net;
+	};
+	using KiViaSet = std::vector<KiVia>;
+
 	struct KiAssemLine : Line
 	{
 		double angle;
 	};
 
+// zone .................................................................
 	using BarePoint = std::pair<double, double>;
 	using BarePointSet = std::vector<BarePoint>;
+	using PolyFillsSet = std::vector<BarePointSet>;
+
 	struct Zone
 	{
 		size_t net;
 		std::string layer;
 		BarePointSet desig_poly;
-		BarePointSet fill_poly;
+		PolyFillsSet fill_polys;
 	};
 	using ZoneSet = std::vector<Zone>;
 
+	// ..................................................
 	struct KiBoardItems
 	{
 		DrawContainer lineset;
 		SegmentSet segments;
 		ZoneSet zones;
+		BGTextSet texts;
+		KiViaSet vias;
 	};
 
 	// ..................................................
@@ -309,7 +339,7 @@ namespace NSAssembly
 		LayerSet layers;
 		////Layer layer;
 		PcComponentSet components;
-		KiBoardItems assem_items; //segments, gr_line, gr_arc, zones...
+		KiBoardItems assem_items; //segments, gr_text, gr_line, gr_arc, zones...
 	};
 }//namespace NSAssembly
 
@@ -323,6 +353,7 @@ inline std::ostream& operator << (std::ostream& os, const NSAssembly::Assembly& 
 	return os;
 }
 
+#if 0
 // ..................................................................
 inline std::ostream& operator<<(std::ostream& os, const NSAssembly::Point& pt) { os << pt.x << "," << pt.y; return os; }
 
@@ -372,7 +403,7 @@ namespace std {// namespace spirit { namespace x3 {
 		return os << pt.name << " " << pt.layer << " " << pt.lineset;
 	}
 }//}}
-
+#endif
 
  //the lib exposed interface.
  //TODO make stream capable.....

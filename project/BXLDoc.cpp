@@ -1,10 +1,7 @@
 
 #include "stdafx.h"
 
-#include "Geometry.h"
-#include "objects.h"
-#include "shared.h"
-#include "Drawing.h"
+#include "cad_full.h"
 
 #ifndef SHARED_HANDLERS
 #include "CAD.h"
@@ -40,7 +37,7 @@ void CBXLDoc::test()
 //translate ComponentStore to our CAD
 namespace {
 	using namespace Component;
-	
+	using namespace ObjectSpace;
 	SP_BaseItem BXLDrawToCAD(BaseDraw::ptr_BaseDraw& item)
 	{
 		SP_BaseItem bi;
@@ -50,6 +47,7 @@ namespace {
 		},
 			[&](Line& pa) {
 			bi = LineItem(bg_point(pa.a.x, -pa.a.y), bg_point(pa.b.x, -pa.b.y));
+			bi->sp_style = draw_style(CLR_BLK, psSolid, pa.width);
 		});
 		return bi;
 	}
@@ -63,11 +61,14 @@ namespace {
 		TextItem nametext(item.name.name, name_text_pos);
 		pintext.just = (ObjectSpace::justify)item.designate.just;
 		nametext.just = (ObjectSpace::justify)item.name.just;
-		auto font = fonts.find(item.designate.text_style);
-		pintext.font.height = font->second.height;
-		pintext.font.width = font->second.char_width * .8;
-		nametext.font.height = font->second.height;
-		nametext.font.width = font->second.char_width * .8;
+		auto font = font_ref(26);
+		//auto font = fonts.find(item.designate.text_style);
+		//pintext.font.height = font->second.height;
+		//pintext.font.width = (int)(font->second.char_width * .8);
+		//nametext.font.height = font->second.height;
+		//nametext.font.width = (int)(font->second.char_width * .8);
+		pintext.sp_font = font;
+		nametext.sp_font = font;
 		PinItem pin(pintext, nametext);
 		pin.orient = item.rotate;
 		if (!int(item.rotate))
@@ -81,22 +82,12 @@ namespace {
 }//namespace
 
 // ..........................................................................
-//#define QUICK_BXL
 BOOL CBXLDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	//could use: Component::ComponentStore GetBXLStoreFromPath(...)
 
 	std::string str;
 
-#if defined(_DEBUG) && defined(QUICK_BXL)
-	{
-		//decompress takes a bit of time in debug.
-		std::ifstream quick("./bxl_output.txt");
-		std::stringstream strt;
-		strt << quick.rdbuf();
-		str = strt.str();
-	}
-#else
 	//open and decompress the bxl file
 	std::ifstream in(lpszPathName, std::ios::binary);
 	if (!in.is_open())
@@ -106,7 +97,6 @@ BOOL CBXLDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	std::ofstream os("./bxl_output.txt");
 	boost::replace_all(str, "\r\n", "\n");
 	os.write(str.c_str(), str.size());
-#endif
 
 	//parse the BXL
 	auto comp = ParseBXL(str);//todo, catch errors

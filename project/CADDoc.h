@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-DrawingObects
+DrawingObect
 	owns a object_set_t called primatives 
 
 object_set_t a vector of ItemSet;
@@ -17,23 +17,27 @@ protected:
 	CADDoc( );
 	DECLARE_DYNCREATE( CADDoc )
 
-	layer_set_t layers;
-	DrawingObects drawobj;
+	//sp_layer_set_type layers;
+	DrawingObect drawobj;
 
 	bg_box draw_extents;
 	//test from menu........
 
+	//const SP_cad_layer GetLayer(size_t pos) const { assert(pos >= 0 && pos < drawobj.layers.size()); return drawobj.GetLayers().at(pos);}
+
 	virtual void test( );
-	virtual DrawingObects& GetExportDrawObject( ) { return drawobj; }
+	virtual DrawingObect& GetExportDrawObject( ) { return drawobj; }
 public:
-	DrawingObects& GetDrawingObjects( ) { return drawobj; }
-	const layer_set_t& GetLayers( ) const { return layers; }
+	DrawingObect& GetDrawingObjects( ) { return drawobj; }
+	sp_layer_set_type& GetLayers() { return drawobj.GetLayers(); }
 public:
 	virtual ~CADDoc( );
 	virtual BOOL OnNewDocument( );
 	virtual void Serialize( CArchive& ar );
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
+	virtual void OnCloseDocument();
 
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent( );
@@ -49,10 +53,8 @@ public:
 #endif
 
 protected:
-	DECLARE_MESSAGE_MAP( )
+DECLARE_MESSAGE_MAP( )
 	afx_msg void OnFileExport( );
 	afx_msg void OnFileGCode( );
 	afx_msg LRESULT OnLayerEnable( WPARAM, LPARAM );
-public:
-	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 };

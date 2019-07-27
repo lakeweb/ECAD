@@ -94,7 +94,10 @@ void CADFrame::OnUpdateStatusText( CCmdUI *pCmdUI )
 {
 	pCmdUI->Enable( );
 	CADView* pView= dynamic_cast< CADView* >( GetActiveView( ) );
-	ASSERT_VALID( pView );
+	if (!pView)
+		return;//warn?
+
+	ASSERT_VALID(pView);
 	pCmdUI->SetText( pView->GetStatusInfo( ) );
 	//TRACE( "in OnUpdateStatusText\n" );
 	if( pView->d_ext.bHorz )
@@ -207,7 +210,7 @@ void FrmRuler::OnPaint( )
 	//}
 
 	int nFrom= (int)( view->offsetx / view->winScale );
-	TRACE( "FrmRuler::OnPaint nFrom: %d\n", nFrom );
+	//TRACE( "FrmRuler::OnPaint nFrom: %d\n", nFrom );
 	int pitch= 48;
 	int ticks= 6; //24 / 8
 

@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="Gears.reg" />
     <None Include="res\file_view.ico">
       <Filter>Resource Files</Filter>
     </None>
@@ -133,9 +132,6 @@
     <ClInclude Include="shared.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\std_share.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cnc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -196,43 +192,19 @@
     <ClInclude Include="sgv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="spirit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpiritParsers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CADParse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CADParseID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CAD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TinyLIB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\BXLReader\BXL_Spirit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\BXLReader\BXL_Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\BXLReader\BXL_Decompress.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ECAD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BXLDoc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SQLite\CppSQLite3U.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SQLite\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TinyCADDoc.h">
@@ -259,13 +231,22 @@
     <ClInclude Include="..\KiCAD_parse\KiCADStore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\pugixml.hpp">
+    <ClInclude Include="project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\pugixpath.hpp">
+    <ClInclude Include="include\xml\xml.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\xml.h">
+    <ClInclude Include="include\xml\pugixml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\xml\pugixpath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLite\CppSQLite3U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLite\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -349,34 +330,16 @@
     <ClCompile Include="app_share.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpiritParsersBridge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CADParse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="spirit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CAD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TinyLIB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\BXLReader\BXL_Spirit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ECAD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BXLDoc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SQLite\CppSQLite3U.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TinyCADDoc.cpp">
@@ -397,7 +360,13 @@
     <ClCompile Include="KiCADDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\pugixml.cpp">
+    <ClCompile Include="project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\xml\pugixml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\SQLite\CppSQLite3U.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -405,5 +374,8 @@
     <ResourceCompile Include="Gears.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dev.txt" />
   </ItemGroup>
 </Project>

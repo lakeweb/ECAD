@@ -43,10 +43,10 @@ void TestCADView::OnDraw(CDC* poDC)
 	if (!pDoc)
 		return;
 
-	layer_set_t layers;
+	sp_layer_set_type layers;
 	cad_layer layer(0,L"layer");
 
-	layers.insert(layer);
+	layers.push_back(layer);
 
 	offsetx = -scroller.GetScrollPos().cx - d_ext.rect_target.left;
 	offsety = -scroller.GetScrollPos().cy - d_ext.rect_target.top;
@@ -79,10 +79,10 @@ void TestCADView::OnDraw(CDC* poDC)
 	poly.push_back(sub);
 
 	//the drawer....................
-	DrawingObects objects(layers);
+	DrawingObect objects;
 	objects.push_back(poly);
 
-	DrawArea drawer(pDC, d_ext);
+	DrawArea drawer(pDC, d_ext);//, layers);
 	//CBrush brush;
 	//brush.CreateSolidBrush(RGB(20, 122, 255));
 	//pDC->SelectObject(brush);

@@ -42,7 +42,9 @@ BEGIN_MESSAGE_MAP( CADView, CView )
 	ON_WM_HSCROLL( )
 	ON_WM_SIZE( )
 	ON_WM_CREATE()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP( )
+
 
 // ..................................................................
 void CADView::OnToolsAnimate()
@@ -69,28 +71,36 @@ CADView::CADView( )
 }
 
 // ..................................................................
+void CADView::SaveXML(XMLNODE node)
+{
+	d_ext.SaveXML(node);
+}
+
+// ..................................................................
+void CADView::ReadXML(XMLNODE node)
+{
+	d_ext.ReadXML(node);
+}
+
+// ..................................................................
 CADView::~CADView( )
 {
 }
 
 LRESULT CADView::OnFrmNotify( WPARAM wp, LPARAM lp )
 {
-	typedef dock_notify_t dn;
-	dock_notify_t& note= *reinterpret_cast< dock_notify_t* >( wp );
+	using dn = dock_notify_type;
+	dn& note= *reinterpret_cast< dn* >( wp );
 
 	switch( note.the_docker )
 	{
 	case dn::layer:
 	{
-		layer_set_t& ls= GetDocument( )->layers;
-		auto it= ls.find(cad_layer( note.info, NULL ) );
-		if( it != ls.end( ) )
-		{
-			cad_layer t= *it;
-			ls.erase( it );
-			t.enabled= ! t.enabled;
-			ls.insert( t );
-		}
+		sp_layer_set_type& ls= GetDocument()->GetLayers();
+		auto it = std::find_if(ls.begin(), ls.end(),
+			[&note](const cad_layer& layer) { return layer.tree_id == note.info; });
+		if (it != ls.end())
+			it->enabled = !it->enabled;
 		Invalidate( );
 		break;
 	}
@@ -129,9 +139,14 @@ void CADView::OnDraw( CDC* poDC )
 	GetClientRect( crect );
 
 	//the drawer....................
-	const DrawingObects& objs= pDoc->GetDrawingObjects( );
-	DrawArea drawer(pDC, d_ext);
+	const DrawingObect& objs= pDoc->GetDrawingObjects( );
+	DrawArea drawer(pDC, d_ext);// , objs.GetLayers());
 	drawer.SetFonts(objs.get_fontset());
+	//background color
+	CRect rect;
+	GetClientRect(rect);
+	pDC->FillSolidRect(rect, objs.GetBackgroundColor());
+
 	drawer.DrawObjects( objs );
 
 #ifdef _DEBUG
@@ -223,6 +238,7 @@ void CADView::OnUpdate( CView* pSender, LPARAM hint, CObject* pHint )
 	{
 		//while testing.......................... TODO
 		GetParentFrame()->ShowWindow(SW_MAXIMIZE);
+
 		//The window is valid here but the scroller may not be up to date.
 		//as 'fit' will draw without scrollbars...........
 		bg_box& targ= GetDocument( )->draw_extents;
@@ -230,17 +246,20 @@ void CADView::OnUpdate( CView* pSender, LPARAM hint, CObject* pHint )
 
 		double ast = aspect(targ);
 		double ass = aspect(screen);
-		if (ast > ass)
-		{
-			auto tw = width(targ);
-			winScale = width(screen) / tw * .8;
+		if (!d_ext.bInitialized)
+			if (ast > ass)	{
+				auto tw = width(targ);
+				winScale = width(screen) / tw * .8;
+			}
+			else {
+				auto tw = width(targ);
+				winScale = height(screen) / tw * .8;
+			}
+		else {
+			scroller.UpdateScrollInfo();
+			scroller.OffsetScrollPos(CSize(d_ext.off_x, d_ext.off_y));
 		}
-		else
-		{
-			auto tw = width(targ);
-			winScale = height(screen) / tw * .8;
-		}
-		CRect displayRect( (int)(targ.min_corner().get_x()*winScale),
+		CRect displayRect(  (int)(targ.min_corner().get_x()*winScale),
 			(int)(targ.min_corner().get_y()*winScale),
 			(int)(targ.max_corner().get_x()*winScale),
 			(int)(targ.max_corner().get_y()*winScale));
@@ -248,7 +267,6 @@ void CADView::OnUpdate( CView* pSender, LPARAM hint, CObject* pHint )
 		//testing TODO
 		//displayRect.InflateRect(100, 100);
 		SetTargetSize(displayRect);
-
 		d_ext.rect_target = displayRect;
 	}
 	}//switch( .. )
@@ -331,6 +349,8 @@ BOOL CADView::PreCreateWindow(CREATESTRUCT& cs)
 	Create_STD_OUT_Console();
 #endif
 	cs.style |= WS_HSCROLL | WS_VSCROLL;
+	cs.style |= WS_CLIPCHILDREN;
+
 	scroller.AttachWnd(this);
 
 	return CView::PreCreateWindow(cs);
@@ -363,15 +383,13 @@ CADDoc* CADView::GetDocument( ) const // non-debug version is inline
 BOOL CADView::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
 	//auto cmd = LOWORD(nCode);
-	//assert(cmd != ID_LIB_TREE_SELECTED);
 	//if (HIWORD(nCode) == WM_NOTIFY)
 	//{
 	//	std::cout << "** " << "Got WM_NOTIFY\n";
 	//	LPNMHDR pHdr = ((AFX_NOTIFY*)pExtra)->pNMHDR;
 	//	std::cout << "    ** " << pHdr->code << " " << pHdr->idFrom << " " << pHdr->hwndFrom << std::endl << std::endl;
 	//	auto cmd = LOWORD(nCode);
-	//	assert(cmd != ID_LIB_TREE_SELECTED);
-	//	//	switch( LOWORD( nCode ) )
+//	//	switch( LOWORD( nCode ) )
 	//	//	{
 	//	//	case ID_GEAR_PARAM_CHANGED:
 	//	//		auto pg= ( pgear_params_t )((PNMHDROBJECT)pHdr)->pObject;

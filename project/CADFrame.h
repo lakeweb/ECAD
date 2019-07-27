@@ -74,5 +74,6 @@ public:
 	afx_msg int OnCreate( LPCREATESTRUCT lpCreateStruct );
 	afx_msg LRESULT OnViewPost( WPARAM pos, LPARAM );
 	afx_msg void OnUpdateStatusText( CCmdUI *pCmdUI );
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC) { return FALSE; }
 };
 

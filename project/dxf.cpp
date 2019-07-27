@@ -173,8 +173,8 @@ bool EndDXF_write( DL_Dxf* dxf, DL_WriterA* dw )
 	return true;
 }
 
-void DXF_Stream( std::wofstream& os, DrawingObects& drawobj, DL_Dxf* dxf, DL_WriterA* dw );
-void DXF_WriteFile( bfs::path& pathname,  DrawingObects& drawobj )
+void DXF_Stream( std::wofstream& os, DrawingObect& drawobj, DL_Dxf* dxf, DL_WriterA* dw );
+void DXF_WriteFile( bfs::path& pathname,  DrawingObect& drawobj )
 {
 	std::wofstream output( bfs::path( pathname / _T(".log") ).wstring( ) );
 	DL_Dxf* dxf= new DL_Dxf( );
@@ -187,7 +187,7 @@ void DXF_WriteFile( bfs::path& pathname,  DrawingObects& drawobj )
 	EndDXF_write( dxf, dw );
 }
 
-void DXF_Stream( std::wofstream& os, DrawingObects& drawobj, DL_Dxf* dxf, DL_WriterA* dw )
+void DXF_Stream( std::wofstream& os, DrawingObect& drawobj, DL_Dxf* dxf, DL_WriterA* dw )
 {
 	//DL_Codes::version exportVersion= DL_Codes::AC1015;
 
@@ -207,6 +207,9 @@ void DXF_Stream( std::wofstream& os, DrawingObects& drawobj, DL_Dxf* dxf, DL_Wri
 			//if( item->GetMill( ) )
 		{
 			//TODO use typecase(...) here...
+			//and.......
+			if(!(&item)->get())
+				continue;
 			typecase( *item,
 
 				[ & ]( LineItem& pa ) {

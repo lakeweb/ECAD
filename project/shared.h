@@ -1,9 +1,13 @@
 
 #pragma once
 
+//#define SET_OSFLOAT std::fixed << std::setw( 7 ) << std::setprecision( 3 ) << std::setfill( L' ' )
+
 // ..............................................................
-struct cad_layer
+struct cad_layer : public boost::enable_shared_from_this< cad_layer >
 {
+	using SP_cad_layer = boost::shared_ptr<cad_layer>;
+	//alternate id
 	size_t id;
 	uint32_t tree_id;
 	std::wstring label;
@@ -20,13 +24,15 @@ struct cad_layer
 		, label(str.size() ? pugi::as_wide(str.c_str()) : L"")
 		, enabled(enabled)
 	{ }
+	virtual SP_cad_layer get_SP() { return boost::make_shared< cad_layer >(*this); }
+	operator SP_cad_layer() { return get_SP(); }
+
 	void SetColor(uint32_t in) const { *const_cast<uint32_t*>(&color) = in; }
 	bool operator < ( const cad_layer& a ) const { return id < a.id; }
 	operator size_t ( ) const { return id; }
-
 };
-
-typedef std::set< cad_layer > layer_set_t;
+using SP_cad_layer = boost::shared_ptr<cad_layer>;
+using sp_layer_set_type = std::vector< cad_layer >;
 
 // ..............................................................
 // TODO these are no longer active, depreciate???? or upgrade like the tiny stuff?
@@ -34,6 +40,14 @@ typedef std::set< cad_layer > layer_set_t;
 #define VIEW_INFO_NOTIFY ( WM_USER + 101 )
 
 //for messaging between views for update notifications...........
+#ifdef _DEBUG
+static const char* dbg_call_str[] = {
+	"output",
+	"other",
+	"find",
+	"layer",
+};
+#endif
 struct info_notify
 {
 	enum call
@@ -54,26 +68,24 @@ struct info_notify
 		:the_call( which )
 		,bClear( false )
 	{ }
-
 };
 
 // ..............................................................
-typedef struct _dock_notify
+struct dock_notify_type
 {
 	enum docker {
 		layer,
 	};
-
 	docker the_docker;
 	size_t info;
 	uint32_t tree_id;
 
-	_dock_notify( docker d, size_t i= 0, uint32_t id = 0 )
+	dock_notify_type( docker d, size_t i= 0, uint32_t id = 0 )
 		:the_docker( d )
 		,info( i )
 		,tree_id(id)
 	{ }
-} dock_notify_t;
+};
 
 // ..............................................................
 // ..............................................................
@@ -83,7 +95,6 @@ typedef struct _dock_notify
 
 #define MSG_LAYER_ENABLE				( MSG_APP_BEGIN + 1 )
 #define CMD_TEST						( MSG_APP_BEGIN + 2 )
-
 
 //for sending notifications to CDocument Objects
 //https://www.codeproject.com/articles/14706/notifying-the-document
@@ -95,8 +106,10 @@ typedef struct tagNMHDROBJECT
 
 inline double TO_RAD(double x) { return x * PI / 180; }
 
+// ..............................................................
 //some structures have attributes, like TinyCAD, FONT,STYLE,FILL
 //This is a try at generics.....
+// ..............................................................
 
 struct base_info : boost::enable_shared_from_this< base_info > {
 	using sp_info = boost::shared_ptr< base_info >;
@@ -106,6 +119,8 @@ struct base_info : boost::enable_shared_from_this< base_info > {
 	operator sp_info() { return get_sp(); }
 };
 using sp_info = boost::shared_ptr< base_info >;
+using  setof_info = std::vector<sp_info>;
+using  setof_info_iter = std::vector<sp_info>::iterator;
 
 struct font_info : base_info {
 	size_t height;
@@ -114,6 +129,7 @@ struct font_info : base_info {
 	bool bStrikeout;
 	bool bUnderline;
 	std::string face_name;
+	font_info() : height(0), weight(0), bItalic(false), bStrikeout(false), bUnderline(false) {}
 	virtual sp_info get_sp() { return boost::make_shared<font_info>(*this); }
 };
 
@@ -124,6 +140,8 @@ struct style_info : base_info { //could also be used for fill?????
 	style_info():color(-1), width(1), pattern(BS_NULL){}
 	virtual sp_info get_sp() { return boost::make_shared<style_info>(*this); }
 };
+using sp_style_info = boost::shared_ptr< style_info >;
+
 /*
 //* Brush Styles
 #define BS_SOLID            0
@@ -177,4 +195,3 @@ struct style_info : base_info { //could also be used for fill?????
 #define AD_CLOCKWISE        2
 
 */
-using  setof_info = std::vector<sp_info>;

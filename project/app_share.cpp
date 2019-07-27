@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "CAD.h"
-#include "std_share.h"
+//#include "std_share.h"
 
 profile_t& get_user_profile( ) { return theApp.profile; }
 

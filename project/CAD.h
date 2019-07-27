@@ -11,7 +11,16 @@
 #include "HEWinApp.h"
 #include "app_share.h"
 
-#pragma comment(lib, "./lib/KiCAD_parse.lib")
+//TODO use release/debug builds
+#ifdef _DEBUG
+#pragma comment(lib, "KiCAD_parsed.lib")
+#pragma comment(lib, "BXL_Reader-x86-d.lib")
+#else
+#pragma comment(lib, "KiCAD_parse.lib")
+#pragma comment(lib, "BXL_Reader-x86.lib")
+#endif
+
+#pragma comment(lib, "sqlite3.lib")
 
 class CADApp : public HEWinApp
 {

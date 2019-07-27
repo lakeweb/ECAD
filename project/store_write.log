@@ -37,18 +37,18 @@ makepath: /Root/Workspace/Pane-59392
  REG Open /Root/Workspace/Pane-59392 ro: true
 makepath: /Root/Workspace/BasePane-59392
  REG Open /Root/Workspace/BasePane-59392 ro: true
-makepath: /Root/Workspace/MFCToolBar-169
- REG Open /Root/Workspace/MFCToolBar-169 ro: true
-makepath: /Root/Workspace/Pane-169
- REG Open /Root/Workspace/Pane-169 ro: true
-makepath: /Root/Workspace/BasePane-169
- REG Open /Root/Workspace/BasePane-169 ro: true
 makepath: /Root/Workspace/MFCToolBar-171
  REG Open /Root/Workspace/MFCToolBar-171 ro: true
 makepath: /Root/Workspace/Pane-171
  REG Open /Root/Workspace/Pane-171 ro: true
 makepath: /Root/Workspace/BasePane-171
  REG Open /Root/Workspace/BasePane-171 ro: true
+makepath: /Root/Workspace/MFCToolBar-169
+ REG Open /Root/Workspace/MFCToolBar-169 ro: true
+makepath: /Root/Workspace/Pane-169
+ REG Open /Root/Workspace/Pane-169 ro: true
+makepath: /Root/Workspace/BasePane-169
+ REG Open /Root/Workspace/BasePane-169 ro: true
 makepath: /Root/Workspace/MFCToolBar-169
  REG Open /Root/Workspace/MFCToolBar-169 ro: true
 makepath: /Root/Workspace/Pane-169
@@ -91,18 +91,18 @@ makepath: /Root/Workspace/Pane--1
  REG Open /Root/Workspace/Pane--1 ro: true
 makepath: /Root/Workspace/BasePane--1
  REG Open /Root/Workspace/BasePane--1 ro: true
+makepath: /Root/Workspace/Pane-134
+ REG Open /Root/Workspace/Pane-134 ro: true
+makepath: /Root/Workspace/BasePane-134
+ REG Open /Root/Workspace/BasePane-134 ro: true
 makepath: /Root/Workspace/Pane-133
  REG Open /Root/Workspace/Pane-133 ro: true
 makepath: /Root/Workspace/BasePane-133
  REG Open /Root/Workspace/BasePane-133 ro: true
-makepath: /Root/Workspace/Pane-134
- REG Open /Root/Workspace/Pane-134 ro: true
-makepath: /Root/Workspace/BasePane-134
- REG Open /Root/Workspace/BasePane-134 ro: true
-makepath: /Root/Workspace/Pane-134
- REG Open /Root/Workspace/Pane-134 ro: true
-makepath: /Root/Workspace/BasePane-134
- REG Open /Root/Workspace/BasePane-134 ro: true
+makepath: /Root/Workspace/Pane-133
+ REG Open /Root/Workspace/Pane-133 ro: true
+makepath: /Root/Workspace/BasePane-133
+ REG Open /Root/Workspace/BasePane-133 ro: true
 makepath: /Root/Workspace/Pane-149
  REG Open /Root/Workspace/Pane-149 ro: true
 makepath: /Root/Workspace/BasePane-149
@@ -136,8 +136,8 @@ makepath: /Root/Workspace/ControlBarVersion
  makekey: /Root/Workspace/ControlBarVersion
   int_val: Major v: 14
   dword: Major v: 14
-  int_val: Minor v: 15
-  dword: Minor v: 15
+  int_val: Minor v: 22
+  dword: Minor v: 22
 makepath: /Root/Workspace/MFCToolBarParameters
  makekey: /Root/Workspace/MFCToolBarParameters
   int_val: Tooltips v: 1
@@ -199,7 +199,7 @@ makepath: /Root/Workspace/Pane--1
  makekey: /Root/Workspace/Pane--1
   int_val: ID v: -1
   dword: ID v: 4294967295
-  rect: RectRecentFloat t 278 r 408 b 1023 l 208
+  rect: RectRecentFloat t 253 r 404 b 998 l 204
   rect: RectRecentDocked t 48 r 200 b 793 l 0
   dword: RecentFrameAlignment v: 4096
   int_val: RecentRowIndex v: 0
@@ -218,11 +218,34 @@ BasePane--1 ---close
 
 BasePane--1 ---close
 
+makepath: /Root/Workspace/Pane-134
+ makekey: /Root/Workspace/Pane-134
+  int_val: ID v: 134
+  dword: ID v: 134
+  rect: RectRecentFloat t 280 r 458 b 480 l 258
+  rect: RectRecentDocked t 72 r 196 b 767 l 4
+  dword: RecentFrameAlignment v: 4096
+  int_val: RecentRowIndex v: 0
+  dword: RecentRowIndex v: 0
+  int_val: IsFloating v: 0
+  dword: IsFloating v: 0
+  int_val: MRUWidth v: 32767
+  dword: MRUWidth v: 32767
+  int_val: PinState v: 0
+  dword: PinState v: 0
+makepath: /Root/Workspace/BasePane-134
+ makekey: /Root/Workspace/BasePane-134
+  int_val: IsVisible v: 1
+  dword: IsVisible v: 1
+BasePane-134 ---close
+
+BasePane-134 ---close
+
 makepath: /Root/Workspace/Pane-133
  makekey: /Root/Workspace/Pane-133
   int_val: ID v: 133
   dword: ID v: 133
-  rect: RectRecentFloat t 230 r 408 b 430 l 208
+  rect: RectRecentFloat t 280 r 458 b 480 l 258
   rect: RectRecentDocked t 72 r 196 b 767 l 4
   dword: RecentFrameAlignment v: 4096
   int_val: RecentRowIndex v: 0
@@ -241,11 +264,11 @@ BasePane-133 ---close
 
 BasePane-133 ---close
 
-makepath: /Root/Workspace/Pane-134
- makekey: /Root/Workspace/Pane-134
-  int_val: ID v: 134
-  dword: ID v: 134
-  rect: RectRecentFloat t 230 r 408 b 430 l 208
+makepath: /Root/Workspace/Pane-133
+ makekey: /Root/Workspace/Pane-133
+  int_val: ID v: 133
+  dword: ID v: 133
+  rect: RectRecentFloat t 280 r 458 b 480 l 258
   rect: RectRecentDocked t 72 r 196 b 767 l 4
   dword: RecentFrameAlignment v: 4096
   int_val: RecentRowIndex v: 0
@@ -256,42 +279,19 @@ makepath: /Root/Workspace/Pane-134
   dword: MRUWidth v: 32767
   int_val: PinState v: 0
   dword: PinState v: 0
-makepath: /Root/Workspace/BasePane-134
- makekey: /Root/Workspace/BasePane-134
+makepath: /Root/Workspace/BasePane-133
+ makekey: /Root/Workspace/BasePane-133
   int_val: IsVisible v: 1
   dword: IsVisible v: 1
-BasePane-134 ---close
+BasePane-133 ---close
 
-BasePane-134 ---close
-
-makepath: /Root/Workspace/Pane-134
- makekey: /Root/Workspace/Pane-134
-  int_val: ID v: 134
-  dword: ID v: 134
-  rect: RectRecentFloat t 230 r 408 b 430 l 208
-  rect: RectRecentDocked t 72 r 196 b 767 l 4
-  dword: RecentFrameAlignment v: 4096
-  int_val: RecentRowIndex v: 0
-  dword: RecentRowIndex v: 0
-  int_val: IsFloating v: 0
-  dword: IsFloating v: 0
-  int_val: MRUWidth v: 32767
-  dword: MRUWidth v: 32767
-  int_val: PinState v: 0
-  dword: PinState v: 0
-makepath: /Root/Workspace/BasePane-134
- makekey: /Root/Workspace/BasePane-134
-  int_val: IsVisible v: 1
-  dword: IsVisible v: 1
-BasePane-134 ---close
-
-BasePane-134 ---close
+BasePane-133 ---close
 
 makepath: /Root/Workspace/Pane-149
  makekey: /Root/Workspace/Pane-149
   int_val: ID v: 149
   dword: ID v: 149
-  rect: RectRecentFloat t 230 r 308 b 330 l 208
+  rect: RectRecentFloat t 280 r 358 b 380 l 258
   rect: RectRecentDocked t 693 r 1424 b 793 l 204
   dword: RecentFrameAlignment v: 32768
   int_val: RecentRowIndex v: 0
@@ -314,7 +314,7 @@ makepath: /Root/Workspace/Pane-150
  makekey: /Root/Workspace/Pane-150
   int_val: ID v: 150
   dword: ID v: 150
-  rect: RectRecentFloat t 230 r 408 b 430 l 208
+  rect: RectRecentFloat t 280 r 458 b 480 l 258
   rect: RectRecentDocked t 48 r 1424 b 689 l 1224
   dword: RecentFrameAlignment v: 16384
   int_val: RecentRowIndex v: 0
@@ -358,7 +358,7 @@ BasePane-159 ---close
 
 makepath: /Root/Workspace/DockingManager-128
  makekey: /Root/Workspace/DockingManager-128
-  dword: DockingPaneAndPaneDividers l: 655
+  dword: DockingPaneAndPaneDividers l: 649
 DockingManager-128 ---close
 
 makepath: /Root/Workspace/MFCToolBar-5939880
@@ -456,39 +456,6 @@ BasePane-59392 ---close
 
 BasePane-59392 ---close
 
-makepath: /Root/Workspace/MFCToolBar-169
- makekey: /Root/Workspace/MFCToolBar-169
-  str: Name d: 
-  dword: Buttons l: 8
-  dword: OriginalItems l: 61
-  obj: OriginalItemsclass CObList
-  dword: OrigResetItems l: 61
-  obj: OrigResetItemsclass CObList
-MFCToolBar-169 ---close
-
-makepath: /Root/Workspace/Pane-169
- makekey: /Root/Workspace/Pane-169
-  int_val: ID v: 169
-  dword: ID v: 169
-  rect: RectRecentFloat t 10 r 110 b 110 l 10
-  rect: RectRecentDocked t 72 r 196 b 95 l 4
-  dword: RecentFrameAlignment v: 4096
-  int_val: RecentRowIndex v: 0
-  dword: RecentRowIndex v: 0
-  int_val: IsFloating v: 0
-  dword: IsFloating v: 0
-  int_val: MRUWidth v: 32767
-  dword: MRUWidth v: 32767
-  int_val: PinState v: 0
-  dword: PinState v: 0
-makepath: /Root/Workspace/BasePane-169
- makekey: /Root/Workspace/BasePane-169
-  int_val: IsVisible v: 1
-  dword: IsVisible v: 1
-BasePane-169 ---close
-
-BasePane-169 ---close
-
 makepath: /Root/Workspace/MFCToolBar-171
  makekey: /Root/Workspace/MFCToolBar-171
   str: Name d: 
@@ -521,6 +488,39 @@ makepath: /Root/Workspace/BasePane-171
 BasePane-171 ---close
 
 BasePane-171 ---close
+
+makepath: /Root/Workspace/MFCToolBar-169
+ makekey: /Root/Workspace/MFCToolBar-169
+  str: Name d: 
+  dword: Buttons l: 8
+  dword: OriginalItems l: 61
+  obj: OriginalItemsclass CObList
+  dword: OrigResetItems l: 61
+  obj: OrigResetItemsclass CObList
+MFCToolBar-169 ---close
+
+makepath: /Root/Workspace/Pane-169
+ makekey: /Root/Workspace/Pane-169
+  int_val: ID v: 169
+  dword: ID v: 169
+  rect: RectRecentFloat t 10 r 110 b 110 l 10
+  rect: RectRecentDocked t 72 r 196 b 95 l 4
+  dword: RecentFrameAlignment v: 4096
+  int_val: RecentRowIndex v: 0
+  dword: RecentRowIndex v: 0
+  int_val: IsFloating v: 0
+  dword: IsFloating v: 0
+  int_val: MRUWidth v: 32767
+  dword: MRUWidth v: 32767
+  int_val: PinState v: 0
+  dword: PinState v: 0
+makepath: /Root/Workspace/BasePane-169
+ makekey: /Root/Workspace/BasePane-169
+  int_val: IsVisible v: 1
+  dword: IsVisible v: 1
+BasePane-169 ---close
+
+BasePane-169 ---close
 
 makepath: /Root/Workspace/MFCToolBar-169
  makekey: /Root/Workspace/MFCToolBar-169
@@ -592,7 +592,7 @@ BasePane-183 ---close
 
 makepath: /Root/Workspace/WindowPlacement
  makekey: /Root/Workspace/WindowPlacement
-  rect: MainWindowRect t 200 r 1640 b 1050 l 200
+  rect: MainWindowRect t 175 r 1636 b 1025 l 196
   int_val: Flags v: 0
   dword: Flags v: 0
   int_val: ShowCmd v: 1
@@ -613,7 +613,7 @@ Keyboard-0 ---close
 
 makepath: /Root/Workspace/WindowPlacement
  makekey: /Root/Workspace/WindowPlacement
-  rect: MainWindowRect t 200 r 1640 b 1050 l 200
+  rect: MainWindowRect t 175 r 1636 b 1025 l 196
   int_val: Flags v: 0
   dword: Flags v: 0
   int_val: ShowCmd v: 1

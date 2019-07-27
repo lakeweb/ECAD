@@ -17,4 +17,4 @@ private:
 	const SP_BaseItem& obj;
 };
 
-void SVG_WriteFile( bfs::path& path, DrawingObects& draw );
+void SVG_WriteFile( bfs::path& path, DrawingObect& draw );

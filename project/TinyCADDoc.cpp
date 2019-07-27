@@ -5,7 +5,7 @@
 #include "CAD.h"
 #endif
 
-#include "TinyCAD/SQLite/CppSQLite3U.h"
+#include <SQLite/CppSQLite3U.h>
 #include "cad_full.h"
 #include "app_share.h"
 #include "CADDoc.h"
@@ -18,7 +18,9 @@
 #define new DEBUG_NEW
 #endif
 //C:\\cpp\\Tiny_CAD\\Tiny_CAD\\TinyCAD\\trunk\\libs
-void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects);
+void GetRenderTiny(pugi::xml_node& xml, DrawingObect& objects, sp_layer_set_type& layers);
+
+using namespace ObjectSpace;
 
 // ..........................................................................
 IMPLEMENT_DYNCREATE(TinyCADDoc, CADDoc)
@@ -33,18 +35,20 @@ TinyCADDoc::TinyCADDoc()
 void TinyCADDoc::DisplaySymbol(tinylib_item& item)
 {
 	XML::CXML test_xml;
-	test_xml.load_string(pugi::as_utf8(item.symbol.c_str()).c_str());
+	test_xml.load_string(to_utf8(item.symbol.c_str()).c_str());
+#ifdef _DEBUG
+	test_xml.save_file("test.xml");
+#endif
 	drawobj.clear();
-	GetRenderTiny(XMLNODE(test_xml.root()), drawobj);
+	GetRenderTiny(XMLNODE(test_xml.root()), drawobj, GetLayers());
 	bg_box bound(get_bound_rect(drawobj.get_objects_set()));
 	inflate(bound, (bound.max_corner().get_x() - bound.min_corner().get_x()) / 10);
-	style_fill fill;
+	draw_style fill;
 
-	RectItem ri(bound);
-
-	ItemSet set;
-	set.push_back(ri);
-	drawobj.push_back(set);
+	//RectItem ri(bound);
+	//ItemSet set;
+	//set.push_back(ri);
+	//drawobj.push_back(set);
 	draw_extents = bound;
 	UpdateAllViews(nullptr);
 }
@@ -53,13 +57,13 @@ void TinyCADDoc::DisplaySymbol(tinylib_item& item)
 tinylib_item TinyCADDoc::OpenTinyLib(uint64_t id)
 {
 	auto it = std::find_if(lib_list.begin(), lib_list.end(),
-		[id](const doc_lib_item& dl) {return dl.id == id; });
+		[id](const doc_list_item& dl) {return dl.id == id; });
 
 	std::wstring symble;
 	if (it != lib_list.end() && it->parent)
 	{
-		auto lib = get_tinylib_data(it->parent->pathname);
-		auto item = lib.get_by_name(it->pathname);
+		auto lib = get_tinylib_data(it->parent->listname);
+		auto item = lib.get_by_name(it->listname);
 		if (item != lib.end())
 		{
 			item->symbol = lib.load_symble(item);
@@ -82,14 +86,14 @@ void tree_thread(tread_info* sema, doc_lib_list* plib_list) {
 		//std::cout << path << std::endl;
 		//this needs to block. So if MFC, use SendMessage not Post.
 		AddTreeViewNode(&tv);
-		plib_list->push_back(doc_lib_item(path.wstring(), tv.id));
+		plib_list->push_back(doc_list_item(path.wstring(), tv.id));
 		auto parent = &plib_list->back();
 		auto lib = get_tinylib_data(path);
 		uint64_t th = tv.id;
 		tv.icon_pos = 2;
 		for (auto& item : lib)
 		{
-			//std::cout << pugi::as_utf8(item.name) << std::endl;
+			//std::cout << to_utf8(item.name) << std::endl;
 			if (sema->bBreak)
 			{
 				//std::cout << "s true\n" << std::endl;;
@@ -100,7 +104,7 @@ void tree_thread(tread_info* sema, doc_lib_list* plib_list) {
 			tv.label = item.name.c_str();
 			//blocking...
 			AddTreeViewNode(&tv);
-			plib_list->push_back(doc_lib_item(item.name.c_str(), tv.id, parent));
+			plib_list->push_back(doc_list_item(item.name.c_str(), tv.id, parent));
 		}
 	}
 	sema->bDone = true;
@@ -108,6 +112,7 @@ void tree_thread(tread_info* sema, doc_lib_list* plib_list) {
 
 // ..........................................................................
 extern char* test_symbol;
+//this is the one
 extern char* test_symbol2;
 extern char* test_symbol_Bezier;
 extern char* test_MSP430F2012;
@@ -121,12 +126,16 @@ BOOL TinyCADDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	XML::CXML test_xml;
 	test_xml.load_string(test_symbol2);
 
-	GetRenderTiny(XMLNODE(test_xml.root()), drawobj);
+	GetRenderTiny(XMLNODE(test_xml.root()), drawobj, GetLayers());
 	bg_box bound(get_bound_rect(drawobj.get_objects_set()));
 	inflate(bound, (bound.max_corner().get_x() - bound.min_corner().get_x())/10);
 	draw_extents = bound;
 	UpdateAllViews( nullptr, ID_UPDATE_VIEW_TOFIT );
 	//DumpDrawingObects(std::cout, drawobj);
+
+	info_notify notice(info_notify::layer);
+	SetInfoWnd(notice, &GetLayers());
+
 	return TRUE;
 }
 
@@ -143,15 +152,15 @@ void TinyCADDoc::OnCloseDocument()
 // ..........................................................................
 BOOL TinyCADDoc::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
+	return CADDoc::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 	auto cmd = LOWORD(nCode);
-	//assert(cmd != ID_LIB_TREE_SELECTED);
 	if ( HIWORD(nCode) == WM_NOTIFY )
 	{
 		DocNotifyObject* pHdr = (DocNotifyObject*)((AFX_NOTIFY*)pExtra)->pNMHDR;
 
 		switch (cmd)
 		{
-		case ID_LIB_TREE_SELECTED:
+		case ID_LAYERTREE_CHANGED:
 		{
 			auto sym = OpenTinyLib(pHdr->id);
 			std::wofstream os(L"test.xml");
@@ -180,6 +189,9 @@ namespace {
 		tenFont,
 		tenStyle,
 		tenFill,
+		tenText,
+		tenJunction,
+		tenWire,
 	};
 
 	static const char* labelTinyRend[] = {
@@ -191,6 +203,9 @@ namespace {
 		"FONT",
 		"STYLE",
 		"FILL",
+		"TEXT",
+		"JUNCTION",
+		"WIRE",
 	};
 
 	enum en_tiny_layers
@@ -226,43 +241,79 @@ namespace {
 #else
 #define BUG __noop
 #endif;
+
+namespace {
+	//generic for reading other styles...
+	setof_info font_infoset;
+	setof_info style_infoset;
+	setof_info fill_infoset;
+
+	//should be a setof_info method??
+	auto get_font = [](size_t id) {
+		auto it = std::find_if(font_infoset.begin(), font_infoset.end(),
+			[&id](sp_info info) {return info->id == id; });
+		return it == font_infoset.end() ? font_info().get_sp() : *it; };
+
+	auto get_style = [](size_t id) {
+		return std::find_if(style_infoset.begin(), style_infoset.end(),
+			[&id](sp_info info) {return info->id == id; }); };
+
+	auto get_fill = [](size_t id) {
+		return std::find_if(fill_infoset.begin(), fill_infoset.end(),
+			[&id](sp_info info) {return info->id == id; }); };
+
+	auto get_tiny_fill_style(int32_t pattern) {
+		switch (pattern) {
+		case -1:
+			return bsNull;
+		case 0:
+			return bsSolid;
+		}
+		return bsNull;
+	}
+}
+
+SP_draw_style GetTinyStyle(int style_index, int fill_index)
+{
+	//translate the tiny  style to ECAD
+	auto p_style = get_style(style_index);
+	auto p_fill = get_fill(fill_index);
+	if ( p_style == style_infoset.end() || p_fill == fill_infoset.end())
+		return draw_style();//sanity
+
+	auto& style = *dynamic_cast<style_info*>(p_style->get());
+	auto& fill = *dynamic_cast<style_info*>(p_fill->get());
+	draw_style ds;
+	ds.fill_color = fill.color;
+	ds.fill_style = get_tiny_fill_style(fill.pattern);
+	ds.line_color = style.color;
+	ds.pen_style = psSolid;
+	ds.width = style.width;
+	std::cout << ds << std::endl;
+	return ds;
+}
+
 // ...........................................................................
 #define TINY_FACT 25.4 //we will convert from mm to inches....
 SP_BaseItem GetTinyArc(const bg_point& a, const bg_point& b, size_t arc);
-void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
+void GetRenderTiny(pugi::xml_node& xml, DrawingObect& objects, sp_layer_set_type& layers)
 {
+	objects.clear();
+	using namespace ObjectSpace;
 	// READ: Notes in ReadMe.txt !!!!!!!!!!!!!!!
-	layer_set_t& layers = const_cast<layer_set_t&>(objects.get_layers());
-	layers.insert(layer_draw);
-	layers.insert(layer_pins);
-	layers.insert(layer_other);
-
+	if (!layers.size())
+	{
+		layers.push_back(cad_layer(layer_draw, "draw"));
+		layers.push_back(cad_layer(layer_pins, "pins"));
+		layers.push_back(cad_layer(layer_other, "other"));
+	}
 	ItemSet items(layer_draw.id);
 	ItemSet pins(layer_pins.id);
-
-	setof_info infoset; //generic for reading other styles...
-	auto get_base = [&infoset](size_t id) {
-		return std::find_if(infoset.begin(), infoset.end(),
-			[&](const sp_info info) {return info->id == id; }); };
-
-	auto get_fill = [&](size_t id) {
-		auto it = get_base(id);
-		style_info* p;
-		style_info fill; fill = it == infoset.end() ? style_info() : (
-			p= dynamic_cast<style_info*>(it->get()), p ? *p : style_info());
-		return fill; };
-
-	auto get_width = [&](size_t id) {
-		auto it = get_base(id);
-		style_info* p;
-		size_t w = it == infoset.end() ? 1 : (
-			p = dynamic_cast<style_info*>(it->get()), p ? p->width : 1);
-		return w; };
 
 	XMLNODE node = xml.child("TinyCAD").first_child();
 	for (; node; node = node.next_sibling())
 	{
-		//will assune the infos are read first........
+		//will assune the infos are always read first........
 		auto r_type = TinyRendSet.GetFlags(node.name());
 		switch (r_type)
 		{
@@ -272,10 +323,11 @@ void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
 			info.height = node.GetElementValueInt("HEIGHT");
 			info.weight = node.GetElementValueInt("WEIGHT");
 			info.bItalic = !!node.GetElementValue("ITALIC");
-			info.bUnderline = !!node.GetElementValue("UNDERLINE");
+//			info.bUnderline = !!node.GetElementValue("UNDERLINE"); testing, just one for now....
+			info.bUnderline = node.GetElementValueBool("UNDERLINE");
 			info.bStrikeout = !!node.GetElementValue("STRIKEOUT");
 			info.face_name = node.GetElementValue("FACENAME");
-			infoset.push_back(info);
+			font_infoset.push_back(info);
 			continue;
 		}
 		case tenStyle:{
@@ -284,27 +336,35 @@ void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
 			info.color = node.GetElementValueInt("COLOR");
 			info.width = node.GetElementValueInt("THICKNESS");
 			info.pattern= node.GetElementValueInt("STYLE");
-			infoset.push_back(info);
+			style_infoset.push_back(info);
 			continue;
 		}
 		case tenFill:{
 			style_info info;
 			info.id = node.GetAttributeInt("id");
 			info.color = node.GetElementValueInt("COLOR");
-			info.width = 1;
 			info.pattern = node.GetElementValueInt("INDEX");//??
-			infoset.push_back(info);
+			fill_infoset.push_back(info);
 			continue;
+		}
+		case tenWire:
+			//	<WIRE a = "21.40000,23.00000" b = "21.40000,22.00000" / >
+		case tenJunction:
+			//	<JUNCTION pos="58.00000,31.00000" /> ?????????????
+			break;
+
+		case tenText: {
+			//	<TEXT pos="26.80000,26.60000" direction="3" font="3" color="000000">M</TEXT>
+			TextItem text(std::string(node.GetValue()), get_point(node.GetAttribute("pos"))*TINY_FACT);
+			items.push_back(text);
+				break;
 		}
 		case tenPoly:{
 			ItemSet poly(layer_draw.id);
 			bg_point pos(get_point(node.GetAttribute("pos"))*TINY_FACT);
-			auto& fill_info = get_fill(node.GetAttributeInt("fill"));
-			style_fill fill;
-			fill.fill_color = fill_info.color;
-			fill.fill_pattern = fill_info.pattern == -1 ? BS_HOLLOW : BS_SOLID;
-			fill.width = get_width(node.GetAttributeInt("style"));
-			poly.sp_style = fill;
+			poly.sp_style = GetTinyStyle(node.GetAttributeInt("style"), node.GetAttributeInt("fill"));
+			poly.bIsPolygon = poly.sp_style->fill_style != bsHollow;
+
 			auto it = node.begin();
 			XMLNODE child(*it);//TOTO XML wrapper handle iterators...
 			assert(std::string(child.name()) == "POINT");
@@ -335,6 +395,26 @@ void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
 			items.push_back(poly);
 			break;
 		}
+		case tenElip: {
+			bg_point a(get_point(node.GetAttribute("a"))*TINY_FACT);
+			bg_point b(get_point(node.GetAttribute("b"))*TINY_FACT);
+			bg_box abox(a, b);
+			//tiny may not have a normalized box.
+			normal_bg_box(abox);
+
+			ArcItem cir(abox);
+			//cir.SetColor(RGB(0, 255, 0));
+			items.push_back(cir);
+			break;
+		}
+		case tenRect: {
+			bg_point a(get_point(node.GetAttribute("a"))*TINY_FACT);
+			bg_point b(get_point(node.GetAttribute("b"))*TINY_FACT);
+			RectItem rect(a, b);
+			rect.sp_style = GetTinyStyle(node.GetAttributeInt("style"), node.GetAttributeInt("fill"));
+			items.push_back(rect);
+			break;
+		}
 		case tenPin:{
 			//<PIN pos='81.00000,8.00000' which='4' elec='0' direction='1'
 			//	part='0' number='8' show='3' length='30' number_pos='0' centre_name='1'>+5</PIN>
@@ -347,9 +427,10 @@ void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
 			std::string spin(node.GetAttribute("number"));
 			std::string sname(node.GetValue());
 
+			auto font = font_ref(2);
 			PinItem the_pin(TextItem(spin, pos), TextItem(sname, pos));
-			the_pin.text.font = 75;
-			the_pin.pin.font = 75;
+			the_pin.text.sp_font = font;
+			the_pin.pin.sp_font = font;
 			switch (rdir)
 			{
 			case 0:	{ //down
@@ -385,34 +466,10 @@ void GetRenderTiny(pugi::xml_node& xml, DrawingObects& objects)
 			pins.push_back(the_pin);
 			break;
 		}
-		case tenElip:{
-			bg_point a(get_point(node.GetAttribute("a"))*TINY_FACT);
-			bg_point b(get_point(node.GetAttribute("b"))*TINY_FACT);
-			bg_box abox(a, b);
-			//tiny may not have a normalized box.
-			normal_bg_box(abox);
-
-			ArcItem cir(abox);
-			//cir.SetColor(RGB(0, 255, 0));
-			items.push_back(cir);
-			break;
-		}
-		case tenRect:{
-			bg_point a(get_point(node.GetAttribute("a"))*TINY_FACT);
-			bg_point b(get_point(node.GetAttribute("b"))*TINY_FACT);
-			RectItem rect(a, b);
-			auto& fill_info = get_fill(node.GetAttributeInt("fill"));
-			style_fill sfill;
-			sfill.fill_color = fill_info.color;
-			sfill.fill_pattern = fill_info.pattern == -1 ? BS_HOLLOW : BS_SOLID;
-			sfill.width = get_width(node.GetAttributeInt("style"));
-			rect.sp_style = sfill;
-			items.push_back(rect);
-			break;
-		}
 		default:
-			;
+			assert(false);
 		}//switch( tiny rend enum )
+
 	}//for all XML
 
 	objects.push_back(items);
@@ -453,6 +510,95 @@ SP_BaseItem GetTinyArc(const bg_point& a, const bg_point& b, size_t arc)
 	//std::cout << bz << std::endl;
 	return bz;
 }
+
+//Tiny Lib Stufff.............................................................
+
+// ...........................................................................
+void get_tinylib_item_data(const CppSQLite3DB& lib)
+{
+}
+
+using namespace TinyLIB;
+
+// ...........................................................................
+//this will load the whole library by file name, it does not load the item blobs
+tinylib_set get_tinylib_data(const bfs::path& path)
+{
+	CppSQLite3DB m_database;
+	m_database.open(path.wstring().c_str());
+
+	std::wstring sql(L"SELECT * FROM [Name]");
+	CppSQLite3Query q = m_database.execQuery(sql.c_str());
+
+	tinylib_set lib;
+	lib.full_path = path;
+	auto& items = lib.cur_lib_set;
+
+	for (; !q.eof(); )
+	{
+		tinylib_item item;
+		CSymbolRecord& r = item;
+		r.name = q.getStringField(_T("Name"));
+		r.NameID = q.getIntField(_T("NameID"));
+		r.reference = q.getStringField(_T("Reference"));
+		r.description = q.getStringField(_T("Description"));
+		r.name_type = static_cast<SymbolFieldType> (q.getIntField(_T("ShowName")));
+		r.ref_type = static_cast<SymbolFieldType> (q.getIntField(_T("ShowRef")));
+
+		std::wstring asql(L"SELECT * FROM [Attribute] WHERE [NameID]=");
+		asql += boost::lexical_cast< std::wstring >(r.NameID);
+		CppSQLite3Query aq = m_database.execQuery(asql.c_str());
+
+		r.fields.erase(r.fields.begin(), r.fields.end());
+		for (; !aq.eof(); )
+		{
+			CSymbolField field;
+			field.field_name = aq.getStringField(L"AttName");
+			field.field_value = aq.getStringField(L"AttValue");
+			field.field_type = static_cast<SymbolFieldType> (aq.getIntField(L"ShowAtt"));
+			aq.nextRow();
+		}
+
+		r.fields_loaded = TRUE;
+		items.push_back(item);
+		q.nextRow();
+	}
+	return lib;
+}
+
+// ...........................................................................
+//load the blob of one lib item
+std::wstring get_tinylib_symbol(const bfs::path& path, size_t index)
+{
+	std::wstring data;
+	CppSQLite3DB m_database;
+	m_database.open(path.wstring().c_str());
+
+	std::wstring ssql(L"SELECT * FROM [Symbol] WHERE SymbolID=");
+	ssql += boost::lexical_cast< std::wstring >(index);
+	CppSQLite3Query qs = m_database.execQuery(ssql.c_str());
+	if (!qs.eof())
+	{
+		int len;
+		data = pugi::as_wide((char *)qs.getBlobField(L"Data", len));
+		//		if( data.size( ) )
+		{
+			//item.symbol= ch;
+			boost::replace_all(data, "\r\n", "\n");
+			BUG_OS("in: get_tinylib_symbol\n" << to_utf8(data) << std::endl);
+		}
+	}
+	return data;
+}
+
+// ...........................................................................
+std::wstring tinylib_set::load_symble(tinylib_set::iterator it)
+{
+	return get_tinylib_symbol(full_path, it->NameID);
+}
+
+// TEST STUFF ......................................................................
+// TEST STUFF ......................................................................
 
 // .............................................................
 char* test_symbol = R"(<?xml version="1.0" encoding="UTF-8"?>

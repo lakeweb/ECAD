@@ -14,7 +14,7 @@
     <ProjectGuid>{97755426-7310-43DE-A013-39336227DB54}</ProjectGuid>
     <RootNamespace>Gears</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>CAD</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -23,7 +23,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -31,7 +31,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -55,15 +55,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_ROOT);./include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT);./include;../include</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm255 /MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;./lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;../lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Link>
@@ -86,16 +87,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_ROOT);./include</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm255 -MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT);./include;../include</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm255 /MP %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;./lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>dxf.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;../lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <Midl>
@@ -110,7 +114,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Gears.reg" />
     <None Include="ReadMe.txt" />
     <None Include="res\classview.bmp" />
     <None Include="res\classview_hc.bmp" />
@@ -141,15 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\BXLReader\BXL_Component.h" />
-    <ClInclude Include="..\BXLReader\BXL_Decompress.h" />
-    <ClInclude Include="..\BXLReader\BXL_Spirit.h" />
+    <ClInclude Include="..\include\SQLite\CppSQLite3U.h" />
+    <ClInclude Include="..\include\SQLite\sqlite3.h" />
     <ClInclude Include="..\KiCAD_parse\KiCADStore.h" />
     <ClInclude Include="About.h" />
     <ClInclude Include="app_share.h" />
     <ClInclude Include="BXLDoc.h" />
     <ClInclude Include="CADDoc.h" />
-    <ClInclude Include="CADParse.h" />
-    <ClInclude Include="CADParseID.h" />
     <ClInclude Include="CADView.h" />
     <ClInclude Include="cad_full.h" />
     <ClInclude Include="cnc.h" />
@@ -169,26 +170,22 @@
     <ClInclude Include="include\dxflib\dl_writer_ascii.h" />
     <ClInclude Include="include\globals.h" />
     <ClInclude Include="include\HEWinApp.h" />
-    <ClInclude Include="include\pugixml.hpp" />
-    <ClInclude Include="include\pugixpath.hpp" />
-    <ClInclude Include="include\std_share.h" />
     <ClInclude Include="include\typeswitch.h" />
-    <ClInclude Include="include\xml.h" />
+    <ClInclude Include="include\xml\pugixml.hpp" />
+    <ClInclude Include="include\xml\pugixpath.hpp" />
+    <ClInclude Include="include\xml\xml.h" />
     <ClInclude Include="KiCADDoc.h" />
     <ClInclude Include="LayerView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MemDC.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="OutputWnd.h" />
+    <ClInclude Include="project.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scroller.h" />
     <ClInclude Include="sgv.h" />
     <ClInclude Include="shared.h" />
-    <ClInclude Include="spirit.h" />
-    <ClInclude Include="SpiritParsers.h" />
-    <ClInclude Include="SQLite\CppSQLite3U.h" />
-    <ClInclude Include="SQLite\sqlite3.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestCADDoc.h" />
@@ -199,12 +196,15 @@
     <ClInclude Include="view_share.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\BXLReader\BXL_Spirit.cpp" />
+    <ClCompile Include="..\include\SQLite\CppSQLite3U.cpp" />
+    <ClCompile Include="..\include\xml\pugixml.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="About.cpp" />
     <ClCompile Include="app_share.cpp" />
     <ClCompile Include="BXLDoc.cpp" />
     <ClCompile Include="CADDoc.cpp" />
-    <ClCompile Include="CADParse.cpp" />
     <ClCompile Include="CADView.cpp" />
     <ClCompile Include="cnc.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
@@ -228,6 +228,7 @@
     </ClCompile>
     <ClCompile Include="CAD.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="GearsDoc.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
@@ -242,9 +243,6 @@
     <ClCompile Include="Globals.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="include\pugixml.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="KiCADDoc.cpp" />
     <ClCompile Include="LayerView.cpp">
@@ -264,6 +262,7 @@
     <ClCompile Include="OutputWnd.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
+    <ClCompile Include="project.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -275,21 +274,6 @@
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="source\HEWinApp.cpp" />
-    <ClCompile Include="spirit.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">spirit.h</PrecompiledHeaderFile>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">spirit.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">./Debug/spirit.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">./Release/spirit.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="SpiritParsersBridge.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">spirit.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)spirit.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">spirit.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)spirit.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="SQLite\CppSQLite3U.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -299,7 +283,6 @@
     <ClCompile Include="TestCADView.cpp" />
     <ClCompile Include="TinyCADDoc.cpp" />
     <ClCompile Include="TinyCADView.cpp" />
-    <ClCompile Include="TinyLIB.cpp" />
     <ClCompile Include="ViewTree.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -307,6 +290,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Gears.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dev.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

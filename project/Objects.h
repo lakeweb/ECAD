@@ -36,56 +36,78 @@ namespace ObjectSpace {
     HS_HORIZONTAL Horizontal hatch
     HS_VERTICAL Vertical hatch
 	*/
+	enum pens {
+		psNull = PS_NULL,
+		psSolid = PS_SOLID,
+		psDash = PS_DASH,
+		psDot = PS_DOT,
+		psEndRound = PS_ENDCAP_ROUND,
+	};
+	enum brushes {
+		bsNull = BS_NULL,
+		bsSolid = BS_SOLID,
+		bsHollow = BS_HOLLOW,
+		bsHatched = BS_HATCHED,
+	};
 }//namespace
 
- // ..........................................................................
-struct style_base : boost::enable_shared_from_this<style_base> {
-	typedef boost::shared_ptr<style_base> SP_style_base;
-	virtual SP_style_base get_SP() { return boost::make_shared<style_base>(*this); }
-	operator SP_style_base () {return get_SP();}
-};
-using SP_style_base = boost::shared_ptr<style_base>;
-
 // ..........................................................................
-struct style_line : style_base
-{
-	uint32_t line_color;
-	uint32_t pen_style;
-	size_t   width; //boarder lines of polys/rects
-	virtual SP_style_base get_SP() { return boost::make_shared<style_line>(*this); }
-	operator SP_style_base() { return get_SP(); }
-};
-
-// ..........................................................................
-struct style_fill : style_base
+struct draw_style : boost::enable_shared_from_this<draw_style>
 {
 	//see info in shared.h for fill and pen styles..............
 	uint32_t line_color;
-	uint32_t pen_style;
-	size_t   width; //boarder lines of polys/rects
+	ObjectSpace::pens pen_style;
+	double   width; //boarder lines of polys/rects
 	uint32_t fill_color;
-	uint64_t fill_pattern;//will use Windows GDI flags for now.
+	ObjectSpace::brushes fill_style;//will use Windows GDI flags for now.
+	using SP_draw_style = boost::shared_ptr<draw_style>;
 
-	style_fill(const COLORREF col, const int brsh, const COLORREF coll, const size_t wdth)
-		:fill_color(col), fill_pattern(brsh), line_color(coll), width(wdth) {}
+	//pen first then the fill is optional
+	draw_style(const COLORREF line_color, const uint32_t pen_style, const double pen_width,
+		const COLORREF fill_color= 0, uint32_t brush_style= ObjectSpace::bsHollow, const size_t wdth= 0)
+		:line_color(line_color)
+		, pen_style((ObjectSpace::pens)pen_style)
+		, width(pen_width)
+		, fill_color(fill_color)
+		, fill_style((ObjectSpace::brushes)brush_style) {}
 
-	style_fill()
-		: fill_color(RGB(255,255,255)), fill_pattern(BS_NULL), line_color(RGB(0,0,0)), width(1) {}
+	draw_style()
+		: fill_color(RGB(255,255,255)), fill_style(ObjectSpace::bsHollow), line_color(RGB(0,0,0)), width(1) {}
 
-	virtual SP_style_base get_SP() { return boost::make_shared<style_fill>(*this); }
+	virtual SP_draw_style get_SP() { return boost::make_shared<draw_style>(*this); }
+	operator SP_draw_style() { return get_SP(); }
 };
-static const style_fill default_fill = { RGB(255,255,255),BS_NULL,RGB(0,0,0),1 };
+using SP_draw_style = draw_style::SP_draw_style;
+static draw_style default_fill = { RGB(255,255,255),ObjectSpace::bsHollow,RGB(0,0,0),ObjectSpace::psSolid };
+
+inline std::ostream& operator <<(std::ostream& os, const SP_draw_style pds)
+{
+	if (!pds)
+		return os << "NULL style";
+	auto ds = *pds;
+	return os << std::hex << " width: " << ds.width << " line color: " << ds.line_color
+		<< " fill color: " << ds.fill_color
+		<< "\n pen: " << ds.pen_style
+		<< " fill: " << ds.fill_style;
+}
 
 // ..........................................................................
-struct font_ref
+struct font_ref : boost::enable_shared_from_this<font_ref>
 {
-	font_ref(size_t ref, size_t height= 100, size_t width = 50) :ref(ref), height(height), width(width) {} //for lookup
+	font_ref(size_t ref, size_t height= 100, size_t width = 50, COLORREF col= RGB(0,0,0))
+		:ref(ref), height(height), width(width), color(col){} //for lookup
 	size_t ref;
 	std::string face;
 	size_t height;
 	size_t width;
+	COLORREF color;
 	friend bool operator <(const font_ref& a, const font_ref& b){return a.ref < b.ref;}
+
+	using SP_text_style = boost::shared_ptr<font_ref>;
+	virtual SP_text_style get_SP() { return boost::make_shared<font_ref>(*this); }
+	operator SP_text_style() { return get_SP(); }
 };
+using SP_text_style = boost::shared_ptr<font_ref>;
 const static font_ref default_font_ref(10);
 using font_ref_set = std::set<font_ref>;
 
@@ -94,24 +116,26 @@ class DrawArea;
 struct BaseItem
 	:public boost::enable_shared_from_this< BaseItem >// and works for all derived
 {
-	SP_style_base sp_style;
+	SP_draw_style sp_style;
 	//double width;
 	size_t layer;
 	bool bHasDraw;
+	bool bHasAttributes;
 //	COLORREF color;
 
 	virtual ~BaseItem() { }
 	BaseItem()
-		: layer(0)
-		, sp_style(style_base().get_SP())
+		: layer(-1)
+		, sp_style(nullptr)//default_fill.get_SP())
 		, bHasDraw(false)
+		, bHasAttributes(false)
 	{ }
 	BaseItem(const BaseItem& o)
 		: layer(o.layer)
 		, sp_style(o.sp_style)
 		, bHasDraw(o.bHasDraw)
 	{ }
-	BaseItem(size_t layer, SP_style_base ins)
+	BaseItem(size_t layer, SP_draw_style ins)
 		: layer(layer)
 		, sp_style(ins)
 		, bHasDraw(false)
@@ -123,10 +147,9 @@ struct BaseItem
 	operator SP_BaseItem() { return get_SP(); }
 	size_t GetLayer()const { return layer; }
 	void SetLayer(size_t i) { layer = i; }
-	const style_line* GetStyleLine() const { return dynamic_cast<style_line*>(sp_style.get()); }
-	const style_fill* GetStyleFill() const { return dynamic_cast<style_fill*>(sp_style.get()); }
+	const draw_style* GetStyle() const { return sp_style.get(); }
 	bool HasDraw() { return bHasDraw; }
-	SP_style_base GetStyle() const { return sp_style; }
+	std::function<void(DrawArea&)> fdraw; //???????>>>>>>>>>>>>
 	virtual void draw(DrawArea&) { assert(false); }
 	virtual void operator +=(const bg_point& pt) { assert(false); }
 	virtual void rotate(const bg_point& pos, double angle) { assert(false); }
@@ -234,11 +257,11 @@ struct RectItem : public BaseItem
 
 	RectItem( const bg_point& a, const bg_point& b )
 		:box( a, b )
-		,BaseItem(0, style_fill(default_fill).get_SP())
+		,BaseItem(0, default_fill.get_SP())
 	{ }
 	RectItem( const bg_box& a )
 		:box( a )
-		, BaseItem(0, style_fill(default_fill).get_SP())
+		, BaseItem(0, default_fill.get_SP())
 	{ }
 	virtual SP_BaseItem get_SP() { return boost::make_shared< RectItem >(*this); }
 	const bg_box& get_bg_box( ) const { return box; }
@@ -247,7 +270,7 @@ struct RectItem : public BaseItem
 
 	bg_point& get_min_point( ) { return box.min_corner( ); }
 	bg_point& get_max_point( ) { return box.max_corner( ); }
-	void SetFill(const SP_style_base infill) { sp_style = infill; }
+	void SetStyle(const SP_draw_style infill) { sp_style = infill; }
 	virtual void operator +=(const bg_point& pt) { box.min_corner() += pt; box.max_corner() += pt; }
 };
 typedef boost::shared_ptr< RectItem > SP_RectItem;
@@ -263,6 +286,10 @@ struct EllipesItem : public BaseItem
 
 	EllipesItem( bg_point& at, const double diameter )
 		:box(at - diameter / 2, at + diameter / 2 )
+	{ }
+
+	EllipesItem(const bg_box& in)
+		:box(in)
 	{ }
 
 	EllipesItem( )
@@ -307,7 +334,7 @@ struct BezierCubeItem : public BaseItem
 typedef boost::shared_ptr< BezierCubeItem > SP_BezierCubeItem;
 
 // ..........................................................................
-struct PolyItem : public BaseItem
+struct PolyItem : public BaseItem //is a line string, depretiate and just use ItemSet as poly
 {
 	bg_linestring_t ls;
 	using iter = bg_linestring_t::const_iterator;
@@ -334,15 +361,15 @@ struct TextItem : BaseItem
 	bg_point pos;
 	double orient;
 	ObjectSpace::justify just;
-	font_ref font;
+	SP_text_style sp_font;
 //	size_t font;
 
-	TextItem(const std::string& inval, const bg_point& pos, const font_ref& fr= default_font_ref, const ObjectSpace::justify just= ObjectSpace::jRight)
+	TextItem(const std::string& inval, const bg_point& pos, const SP_text_style fr= nullptr, const ObjectSpace::justify just= ObjectSpace::jRight)
 		:val(pugi::as_wide(inval))
 		,pos(pos)
 		,orient(0)
 		,just(just)
-		,font(fr)
+		,sp_font(fr)
 	{}
 	virtual SP_BaseItem get_SP() { return boost::make_shared< TextItem >(*this); }
 };
@@ -352,22 +379,29 @@ typedef boost::shared_ptr< TextItem > SP_TextItem;
 //wrapper for sp_obj_vect_type
 //ItemSet is a special case of a primative
 //	can be a filled polygon or a concrete description of... or anything as it can be full of more ItemSet's
+//3/20/19 now the layers are managed with ItemSet as associated with layer.
 struct ItemSet : public BaseItem
 {
 	sp_obj_vect_type set;
 	typedef sp_obj_vect_type::iterator iterator;
 	typedef sp_obj_vect_type::const_iterator citerator;
+	size_t layer_id;
 	size_t id;
+	bool bIsPolygon;
+	SP_text_style sp_font;
 	//offset TODO not used yet........
 	bg_point offset;
 
 	ItemSet( )
 		:id( 0 )
-		, BaseItem(0, style_fill(default_fill).get_SP())
+		, BaseItem(0, default_fill.get_SP())
+		, bIsPolygon(false)
 	{ }
 	ItemSet( size_t layer )
 		: id(0)
-		, BaseItem(0, style_fill(default_fill).get_SP())
+		, layer_id(layer)
+		, BaseItem(0, default_fill.get_SP())
+		, bIsPolygon(false)
 	{ }
 	void push_back( SP_BaseItem spi ) { set.push_back( spi ); }
 	iterator begin() { return set.begin(); }
@@ -386,6 +420,7 @@ struct ItemSet : public BaseItem
 	size_t size() const { return set.size(); }
 	SP_BaseItem back() { return set.back(); }
 	SP_BaseItem front() const { return set.front(); }
+	SP_BaseItem at(size_t i) { return set.at(i); }
 };
 typedef boost::shared_ptr< ItemSet > SP_ItemSet;
 //using a list so the objects won't move around on addition/deletion
